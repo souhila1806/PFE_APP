@@ -2,25 +2,7 @@ from cdta_ui import Ui_MainWindow
 from degradationpage import DegPage
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
-from PyQt5.QtGui import QPixmap,QRegExpValidator
-from PyQt5.uic import loadUi
-'''
-class ImageLabel(QtWidgets.QLabel):
-    def __init__(self,text):
-        super().__init__()
 
-        self.setAlignment(QtCore.Qt.AlignCenter)
-        self.setText(f'\n\n {text} \n\n')
-        self.setStyleSheet("
-            QLabel{
-                border: 4px dashed #aaa;
-                color:white;
-                font: 14pt "Georgia";
-            }")
-        self.resize(50,50)
-    def setPixmap(self, image):
-        super().setPixmap(image)
-        '''
 
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self):
@@ -29,10 +11,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         self.setFixedSize(1400, 900)
 
-        deg= DegPage(self)
+        deg = DegPage(self)
         # PAGES
         self.initStackedWidget()
-        #settings
+        # settings
         deg.initCheckBoxes()
         # Image viewers
         deg.initImageViewers()
