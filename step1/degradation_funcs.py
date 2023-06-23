@@ -10,9 +10,6 @@ def generate_noise(image,mean,var):
     # rows, cols, channels= image.shape
     rows, cols, channels = image.shape
     noise = np.random.normal(int(mean), int(var), (rows, cols, channels)).astype('uint8')
-    #noise = np.zeros(image.shape, np.uint8)
-    #cv2.randn(noise, mean, var)
-    # noise = np.random.normal(int(mean), int(var), (rows, cols, channels)).astype('uint8')
     img_noise = cv2.add(image, noise)
     return img_noise
 

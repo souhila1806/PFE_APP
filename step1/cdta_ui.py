@@ -198,8 +198,16 @@ class Ui_MainWindow(object):
         self.label_5.setObjectName("label_5")
         self.horizontalLayout_3.addWidget(self.label_5)
         self.verticalLayout_5.addLayout(self.horizontalLayout_3)
-        spacerItem2 = QtWidgets.QSpacerItem(20, 30, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        spacerItem2 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout_5.addItem(spacerItem2)
+        self.label_9 = QtWidgets.QLabel(self.right_menu_deg)
+        self.label_9.setStyleSheet("background-color: \"transparent\";\n"
+"color: rgb(255, 255, 255);\n"
+"font: 12pt \"Georgia\";\n"
+"padding-top:20px")
+        self.label_9.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_9.setObjectName("label_9")
+        self.verticalLayout_5.addWidget(self.label_9)
         self.noisecheckBox = QtWidgets.QCheckBox(self.right_menu_deg)
         self.noisecheckBox.setStyleSheet("background-color: \"transparent\";\n"
 "color: rgb(255, 255, 255);\n"
@@ -311,12 +319,13 @@ class Ui_MainWindow(object):
         self.horizontalLayout_6.addWidget(self.lowresvalue)
         self.verticalLayout_5.addLayout(self.horizontalLayout_6)
         self.compressioncheckbox = QtWidgets.QCheckBox(self.right_menu_deg)
-        self.compressioncheckbox.setEnabled(False)
+        self.compressioncheckbox.setEnabled(True)
         self.compressioncheckbox.setStyleSheet("background-color: \"transparent\";\n"
 "color: rgb(255, 255, 255);\n"
 "font: 12pt \"Georgia\";\n"
 "padding-top:20px\n"
 "")
+        self.compressioncheckbox.setCheckable(True)
         self.compressioncheckbox.setObjectName("compressioncheckbox")
         self.verticalLayout_5.addWidget(self.compressioncheckbox)
         self.horizontalLayout_8 = QtWidgets.QHBoxLayout()
@@ -335,7 +344,53 @@ class Ui_MainWindow(object):
         self.compressionvalue.setObjectName("compressionvalue")
         self.horizontalLayout_8.addWidget(self.compressionvalue)
         self.verticalLayout_5.addLayout(self.horizontalLayout_8)
-        spacerItem3 = QtWidgets.QSpacerItem(20, 300, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Maximum)
+        self.label_10 = QtWidgets.QLabel(self.right_menu_deg)
+        self.label_10.setStyleSheet("background-color: \"transparent\";\n"
+"color: rgb(255, 255, 255);\n"
+"font: 12pt \"Georgia\";\n"
+"padding-top:20px")
+        self.label_10.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_10.setObjectName("label_10")
+        self.verticalLayout_5.addWidget(self.label_10)
+        self.detectcheckBox = QtWidgets.QCheckBox(self.right_menu_deg)
+        self.detectcheckBox.setStyleSheet("background-color: \"transparent\";\n"
+"color: rgb(255, 255, 255);\n"
+"font: 12pt \"Georgia\";\n"
+"padding-top:20px")
+        self.detectcheckBox.setObjectName("detectcheckBox")
+        self.verticalLayout_5.addWidget(self.detectcheckBox)
+        self.detectcomboBox = QtWidgets.QComboBox(self.right_menu_deg)
+        self.detectcomboBox.setEnabled(False)
+        self.detectcomboBox.setStyleSheet(" QComboBox {\n"
+"        background-color: white;\n"
+"        font: 12pt \"Georgia\";\n"
+"        padding-bottom: 8px;\n"
+"        padding-left: 5px;\n"
+"        border-radius: 10px;\n"
+"    }\n"
+"    \n"
+"    QComboBox::down-arrow {\n"
+"        subcontrol-origin: padding;\n"
+"        subcontrol-position: bottom right;\n"
+"        border-radius: 10px;\n"
+"        text-align: center;\n"
+"        image: url(:/icons/fleche-vers-le-bas.png);\n"
+"        border:none\n"
+"    }\n"
+"    \n"
+"    QComboBox QAbstractItemView {\n"
+"        background-color: white;\n"
+"    }\n"
+"    \n"
+"    QComboBox QAbstractItemView::item:hover {\n"
+"        background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 rgba(90, 255, 231, 255), stop:1 rgba(21, 205, 202, 255));\n"
+"        color: white;\n"
+"    }")
+        self.detectcomboBox.setObjectName("detectcomboBox")
+        self.detectcomboBox.addItem("")
+        self.detectcomboBox.addItem("")
+        self.verticalLayout_5.addWidget(self.detectcomboBox)
+        spacerItem3 = QtWidgets.QSpacerItem(20, 230, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Maximum)
         self.verticalLayout_5.addItem(spacerItem3)
         self.verticalLayoutWidget = QtWidgets.QWidget(self.degradationpage)
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 0, 999, 851))
@@ -502,6 +557,7 @@ class Ui_MainWindow(object):
         self.pairs_verif_btn.setText(_translate("MainWindow", "Pairs"))
         self.folds_verif_btn.setText(_translate("MainWindow", "Folds"))
         self.label_5.setText(_translate("MainWindow", "Settings"))
+        self.label_9.setText(_translate("MainWindow", "Degradations"))
         self.noisecheckBox.setText(_translate("MainWindow", "Noise"))
         self.label_6.setText(_translate("MainWindow", "mean"))
         self.label_3.setText(_translate("MainWindow", "std"))
@@ -511,6 +567,10 @@ class Ui_MainWindow(object):
         self.label_8.setText(_translate("MainWindow", "scale"))
         self.compressioncheckbox.setText(_translate("MainWindow", "Compression"))
         self.label_4.setText(_translate("MainWindow", "quality"))
+        self.label_10.setText(_translate("MainWindow", "Detection"))
+        self.detectcheckBox.setText(_translate("MainWindow", "Detect Faces"))
+        self.detectcomboBox.setItemText(0, _translate("MainWindow", "RetinaFace"))
+        self.detectcomboBox.setItemText(1, _translate("MainWindow", "MTCNN"))
         self.deglabel.setText(_translate("MainWindow", "Drop an image from your computer or click on select a random image"))
         self.select_random_deg_btn.setText(_translate("MainWindow", "select a random image"))
         self.apply_deg_btn.setText(_translate("MainWindow", "apply"))

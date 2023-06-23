@@ -467,10 +467,26 @@ padding-right:20px</string>
                     <property name="sizeHint" stdset="0">
                      <size>
                       <width>20</width>
-                      <height>30</height>
+                      <height>40</height>
                      </size>
                     </property>
                    </spacer>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="label_9">
+                    <property name="styleSheet">
+                     <string notr="true">background-color: &quot;transparent&quot;;
+color: rgb(255, 255, 255);
+font: 12pt &quot;Georgia&quot;;
+padding-top:20px</string>
+                    </property>
+                    <property name="text">
+                     <string>Degradations</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                   </widget>
                   </item>
                   <item>
                    <widget class="QCheckBox" name="noisecheckBox">
@@ -737,7 +753,7 @@ padding-top:20px</string>
                   <item>
                    <widget class="QCheckBox" name="compressioncheckbox">
                     <property name="enabled">
-                     <bool>false</bool>
+                     <bool>true</bool>
                     </property>
                     <property name="styleSheet">
                      <string notr="true">background-color: &quot;transparent&quot;;
@@ -748,6 +764,9 @@ padding-top:20px
                     </property>
                     <property name="text">
                      <string>Compression</string>
+                    </property>
+                    <property name="checkable">
+                     <bool>true</bool>
                     </property>
                    </widget>
                   </item>
@@ -797,6 +816,79 @@ padding-top:20px
                    </layout>
                   </item>
                   <item>
+                   <widget class="QLabel" name="label_10">
+                    <property name="styleSheet">
+                     <string notr="true">background-color: &quot;transparent&quot;;
+color: rgb(255, 255, 255);
+font: 12pt &quot;Georgia&quot;;
+padding-top:20px</string>
+                    </property>
+                    <property name="text">
+                     <string>Detection</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QCheckBox" name="detectcheckBox">
+                    <property name="styleSheet">
+                     <string notr="true">background-color: &quot;transparent&quot;;
+color: rgb(255, 255, 255);
+font: 12pt &quot;Georgia&quot;;
+padding-top:20px</string>
+                    </property>
+                    <property name="text">
+                     <string>Detect Faces</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QComboBox" name="detectcomboBox">
+                    <property name="enabled">
+                     <bool>false</bool>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true"> QComboBox {
+        background-color: white;
+        font: 12pt &quot;Georgia&quot;;
+        padding-bottom: 8px;
+        padding-left: 5px;
+        border-radius: 10px;
+    }
+    
+    QComboBox::down-arrow {
+        subcontrol-origin: padding;
+        subcontrol-position: bottom right;
+        border-radius: 10px;
+        text-align: center;
+		image: url(:/icons/fleche-vers-le-bas.png);
+		border:none
+    }
+    
+    QComboBox QAbstractItemView {
+        background-color: white;
+    }
+    
+    QComboBox QAbstractItemView::item:hover {
+        background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 rgba(90, 255, 231, 255), stop:1 rgba(21, 205, 202, 255));
+        color: white;
+    }</string>
+                    </property>
+                    <item>
+                     <property name="text">
+                      <string>RetinaFace</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>MTCNN</string>
+                     </property>
+                    </item>
+                   </widget>
+                  </item>
+                  <item>
                    <spacer name="verticalSpacer_3">
                     <property name="orientation">
                      <enum>Qt::Vertical</enum>
@@ -807,7 +899,7 @@ padding-top:20px
                     <property name="sizeHint" stdset="0">
                      <size>
                       <width>20</width>
-                      <height>300</height>
+                      <height>230</height>
                      </size>
                     </property>
                    </spacer>

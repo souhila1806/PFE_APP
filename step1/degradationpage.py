@@ -2,6 +2,7 @@ import numpy as np
 import cv2
 import os
 import random
+from utils import detect_face
 from degradation_funcs import generate_noise, generate_blur,generate_lowresolution,generate_compression_artifact
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QPixmap,QRegExpValidator,QImage
@@ -113,8 +114,10 @@ class DegPage(QtWidgets.QMainWindow):
         return allImages[random.randint(0, len(allImages) - 1)]
 
     def apply_deg(self):
+        detection=False
         # get image path from imageviewer input
-        inputimage=cv2.imread(self.main_app.photoViewerInput.imagePath)
+        input_path=self.main_app.photoViewerInput.imagePath
+        inputimage=cv2.imread(input_path)
         degraded_image = inputimage
 
         #handle noise degradation
@@ -145,9 +148,27 @@ class DegPage(QtWidgets.QMainWindow):
             degraded_image= generate_lowresolution(degraded_image,percentage)
 
         cv2.imwrite("degraded.jpg", degraded_image)
-        image = QImage("degraded.jpg")
-        pixmap = QPixmap.fromImage(image)
-        self.main_app.photoViewerOutput.setPixmap(pixmap)
+
+        if self.main_app.ui.detectcheckBox.isChecked():
+            detector=self.main_app.ui.detectcomboBox.currentText()
+            inputimage= detect_face(input_path,detector)
+            cv2.imwrite("input_detected.jpg", inputimage)
+            outputimage=detect_face("degraded.jpg",detector)
+            cv2.imwrite("output_detected.jpg", outputimage)
+            #set detected input image
+            inp_image = QImage("input_detected.jpg")
+            pixmap = QPixmap.fromImage(inp_image)
+            self.main_app.photoViewerInput.setPixmap(pixmap)
+            # set detected output img
+            out_image = QImage("output_detected.jpg")
+            pixmap = QPixmap.fromImage(out_image)
+            self.main_app.photoViewerOutput.setPixmap(pixmap)
+            detection=True
+
+        if detection== False:
+            image = QImage("degraded.jpg")
+            pixmap = QPixmap.fromImage(image)
+            self.main_app.photoViewerOutput.setPixmap(pixmap)
 
 
 
@@ -184,7 +205,7 @@ class DegPage(QtWidgets.QMainWindow):
         self.main_app.ui.blurcheckbox.clicked.connect(lambda: self.handleCheckBox(self.main_app.ui.blurcheckbox))
         self.main_app.ui.lrcheckbox.clicked.connect(lambda: self.handleCheckBox(self.main_app.ui.lrcheckbox))
         self.main_app.ui.compressioncheckbox.clicked.connect(lambda: self.handleCheckBox(self.main_app.ui.compressioncheckbox))
-
+        self.main_app.ui.detectcheckBox.clicked.connect(lambda: self.handleCheckBox(self.main_app.ui.detectcheckBox))
     #################################################################
     # function to initialize image viewers
     def initImageViewers(self):
@@ -240,6 +261,12 @@ class DegPage(QtWidgets.QMainWindow):
                 self.main_app.ui.compressionvalue.setEnabled(False)
                 if self.main_app.ui.noisecheckBox.isChecked()==False and self.main_app.ui.blurcheckbox.isChecked()==False and self.main_app.ui.lrcheckbox.isChecked()==False:
                     self.disableApplyFunc()
+        elif checkbox==self.main_app.ui.detectcheckBox:
+            if self.main_app.ui.detectcheckBox.isChecked():
+                self.main_app.ui.detectcomboBox.setEnabled(True)
+            else:
+                self.main_app.ui.detectcomboBox.setEnabled(False)
+
 
 
     ##############################################################################
