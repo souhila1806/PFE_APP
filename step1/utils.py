@@ -4,13 +4,16 @@ import os
 from retinaface import RetinaFace
 from mtcnn import MTCNN
 
+
+
+
 def detect_face(img_path,det):
     detected=False
     image = cv2.imread(img_path)
     if det== "RetinaFace":
         obj = RetinaFace.detect_faces(img_path)
         print(len(obj))
-        if (len(obj) > 1):
+        if (len(obj) > 0):
             x = obj['face_1']['facial_area'][0]
             y = obj['face_1']['facial_area'][1]
             w = obj['face_1']['facial_area'][2]-x

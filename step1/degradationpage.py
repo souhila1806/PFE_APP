@@ -5,7 +5,8 @@ import random
 from utils import detect_face
 from degradation_funcs import generate_noise, generate_blur,generate_lowresolution,generate_compression_artifact
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtGui import QPixmap,QRegExpValidator,QImage
+from PyQt5.QtCore import Qt,QTimer
+from PyQt5.QtGui import QPixmap,QRegExpValidator,QImage, QMovie
 
 
 class ImageLabel(QtWidgets.QLabel):
@@ -51,12 +52,13 @@ class ImageLabel(QtWidgets.QLabel):
         else:
             event.ignore()
 
-    def set_image(self, file_path):
+    def set_image(self, file_path, change_path=True):
         desired_width = 400
         desired_height = 400
 
-        self.imagePath = file_path
-        print(file_path)
+        if change_path:
+            self.imagePath = file_path
+            print(file_path)
         image = QImage(file_path)
 
         # Get the original image size
@@ -85,8 +87,45 @@ class ImageLabel(QtWidgets.QLabel):
             pixmap = QPixmap.fromImage(image)
         # Create a QPixmap and resize it
         #pixmap = QPixmap.fromImage(image).scaled(desired_width, desired_height)
-        self.main_app.photoViewerInput.setPixmap(pixmap)
+        self.setPixmap(pixmap)
 
+
+# class for loading
+class LoadingScreen(QtWidgets.QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setFixedSize(200, 200)
+
+        self.setWindowFlags(Qt.WindowStaysOnTopHint | Qt.CustomizeWindowHint)
+        #self.setAttribute(Qt.WA_TranslucentBackground,on=True)
+        self.loading_animation = QtWidgets.QLabel(self)
+        self.loading_animation.setText("helloooo")
+
+
+        #self.movie = QMovie(r"C:\Users\HP\PycharmProjects\pythonProject\step1\images\loading2.gif")
+        #self.loading_animation.setFixedSize(self.movie.currentPixmap().size())
+        #self.loading_animation.setMovie(self.movie)
+        # self.loading_animation.setVisible(True)
+
+        #self.loading_animation.setStyleSheet("background-color: blue;")
+
+        # Create the "loading..." label
+        #self.loading_label = QtWidgets.QLabel("Loading...", self)
+        #self.loading_label.setAlignment(Qt.AlignCenter)
+
+        # Create a vertical layout and add the QLabel widgets
+        layout = QtWidgets.QVBoxLayout(self)
+        layout.addWidget(self.loading_animation)
+        #layout.addWidget(self.loading_label)
+        self.setLayout(layout)
+        self.show()
+
+    def startLoading(self):
+        self.show()
+        #self.movie.start()
+    def stopLoading(self):
+        #self.movie.stop()
+        self.close()
 
 
 class DegPage(QtWidgets.QMainWindow):
@@ -97,6 +136,9 @@ class DegPage(QtWidgets.QMainWindow):
         self.main_app.ui.select_random_deg_btn.clicked.connect(self.random_deg_image)
 
 
+
+
+# functions to add a random image to image viewer input
     def random_deg_image(self):
         directory = r"C:\Users\HP\PycharmProjects\pythonProject\step1\randomCompleteLQImages"
         imagePath=os.path.join(directory,self.random_image(directory))
@@ -113,6 +155,8 @@ class DegPage(QtWidgets.QMainWindow):
             allImages.append(img)
         return allImages[random.randint(0, len(allImages) - 1)]
 
+
+# function to apply degradation
     def apply_deg(self):
         detection=False
         # get image path from imageviewer input
@@ -150,25 +194,24 @@ class DegPage(QtWidgets.QMainWindow):
         cv2.imwrite("degraded.jpg", degraded_image)
 
         if self.main_app.ui.detectcheckBox.isChecked():
+            loading=LoadingScreen()
+            loading.startLoading()
+
             detector=self.main_app.ui.detectcomboBox.currentText()
             inputimage= detect_face(input_path,detector)
             cv2.imwrite("input_detected.jpg", inputimage)
             outputimage=detect_face("degraded.jpg",detector)
             cv2.imwrite("output_detected.jpg", outputimage)
+            
             #set detected input image
-            inp_image = QImage("input_detected.jpg")
-            pixmap = QPixmap.fromImage(inp_image)
-            self.main_app.photoViewerInput.setPixmap(pixmap)
+            self.main_app.photoViewerInput.set_image("input_detected.jpg", False)
             # set detected output img
-            out_image = QImage("output_detected.jpg")
-            pixmap = QPixmap.fromImage(out_image)
-            self.main_app.photoViewerOutput.setPixmap(pixmap)
+            self.main_app.photoViewerOutput.set_image("output_detected.jpg", True)
             detection=True
+            loading.stopLoading()
 
         if detection== False:
-            image = QImage("degraded.jpg")
-            pixmap = QPixmap.fromImage(image)
-            self.main_app.photoViewerOutput.setPixmap(pixmap)
+            self.main_app.photoViewerOutput.set_image("degraded.jpg", True)
 
 
 
@@ -212,6 +255,8 @@ class DegPage(QtWidgets.QMainWindow):
         self.main_app.setAcceptDrops(True)
         self.main_app.photoViewerInput = ImageLabel("Drop your face image here",self.main_app)
         self.main_app.photoViewerOutput = ImageLabel("Click apply!\nThe result will appear here",self.main_app)
+        self.main_app.photoViewerInput.setFixedSize(400,400)
+        self.main_app.photoViewerOutput.setFixedSize(400, 400)
         self.main_app.ui.imagesspace.addWidget(self.main_app.photoViewerInput)
         self.main_app.ui.imagesspace.addWidget(self.main_app.photoViewerOutput)
     ###################################################################################
