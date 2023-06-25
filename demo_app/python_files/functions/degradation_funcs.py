@@ -31,21 +31,21 @@ def generate_lowresolution(image, scale_percent):
 
 def generate_compression_artifact(image,quality):
     # Save the image with the specified quality
-    cv2.imwrite("resolution.jpg", image, [cv2.IMWRITE_JPEG_QUALITY, quality])
+    cv2.imwrite(r"C:\Users\HP\PycharmProjects\pythonProject\demo_app\images\degradation_results\resolution.jpg", image, [cv2.IMWRITE_JPEG_QUALITY, quality])
     # Read the compressed image back using OpenCV
-    image = cv2.imread("resolution.jpg")
+    image = cv2.imread(r"C:\Users\HP\PycharmProjects\pythonProject\demo_app\images\degradation_resultsresolution.jpg")
 
     return image
 
 
 
 if __name__ == '__main__':
-    image = cv2.imread("randomCompleteLQImages\Laura_Bush_0007.jpg")
-    directory = (r'C:\Users\HP\PycharmProjects\pythonProject\step1\degradedImages')
+    image = cv2.imread(r"C:\Users\HP\PycharmProjects\pythonProject\demo_app\data\images\XQLFW\Laura_Bush_0007.jpg")
+    directory = (r'C:\Users\HP\PycharmProjects\pythonProject\demo_app\images\degradation_results')
     os.chdir(directory)
     filename = "degraded.jpg"
     #noisy = generate_noise(image,0,100)
-    #blurred=generate_blur(image,7)
+    blurred=generate_blur(image,101)
     #lr=generate_lowresolution(image,40)
-    comp=generate_compression_artifact(image,500)
-    cv2.imwrite(filename, comp)
+    #comp=generate_compression_artifact(image,500)
+    cv2.imwrite(filename, blurred)

@@ -1,6 +1,6 @@
-from cdta_ui import Ui_MainWindow
-from degradationpage import DegPage
-from PyQt5 import QtCore, QtGui, QtWidgets
+from demo_app.uis.cdta_ui import Ui_MainWindow
+from demo_app.python_files.pages.degradationpage import DegPage
+from PyQt5 import QtWidgets
 import sys
 
 

@@ -658,7 +658,6 @@ class Ui_MainWindow(object):
         self.pairsrestlabel.setText(_translate("MainWindow", "Pairs Restoration Page"))
         self.foldrestlabel.setText(_translate("MainWindow", "Folds Restoration Page"))
         self.foldsveriflabel.setText(_translate("MainWindow", "Folds verification Page"))
-import ressources_rc
 
 
 if __name__ == "__main__":

@@ -1,0 +1,13 @@
+<RCC>
+  <qresource prefix="icons">
+    <file>images/ajouter (1).png</file>
+    <file>images/Correct.png</file>
+    <file>images/fleche-vers-le-bas.png</file>
+    <file>images/identifiant-du-visage 1.png</file>
+    <file>images/Logo.png</file>
+    <file>images/reglages.png</file>
+  </qresource>
+  <qresource prefix="images">
+    <file>Logo.png</file>
+  </qresource>
+</RCC>
