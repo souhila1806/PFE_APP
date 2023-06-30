@@ -1,5 +1,6 @@
 from demo_app.uis.cdta_ui import Ui_MainWindow
 from demo_app.python_files.pages.degradationpage import DegPage
+from demo_app.python_files.pages.pairsverifpage import PairsVerificationClass
 from PyQt5 import QtWidgets
 import sys
 
@@ -47,23 +48,24 @@ class MainWindow(QtWidgets.QMainWindow):
     def activate_btn_menu(self):
         active_ss="background-color:rgb(28, 142, 178);color: rgb(255, 255, 255);font-size:8pt; font-weight:bold;font-family: Georama;border:none; height: 30px"
         unactive_ss="background-color:rgb(36, 40, 59);color: rgb(255, 255, 255);font-size:8pt; font-weight:bold;font-family: Georama;border:none; height: 30px"
-        current_page=self.ui.stackedWidget.currentWidget()
+        current_page=self.ui.stackedWidget.currentWidget().objectName()
+        print(current_page)
 
-        if current_page == self.ui.degradationpage:
+        if current_page == "degradationpage":
             #activate
             self.ui.degradation_btn.setStyleSheet(active_ss)
             #unactivate
             self.ui.restoration_btn.setStyleSheet(unactive_ss)
             self.ui.verification.setStyleSheet(unactive_ss)
 
-        elif current_page==self.ui.pairrestorationpage or current_page== self.ui.foldsrestorationpage:
+        elif current_page=="pairrestorationpage" or current_page== "foldsrestorationpage":
             # activate
             self.ui.restoration_btn.setStyleSheet(active_ss)
             # unactivate
             self.ui.degradation_btn.setStyleSheet(unactive_ss)
             self.ui.verification.setStyleSheet(unactive_ss)
 
-        elif current_page==self.ui.pairsverifpage or current_page== self.ui.foldsverifpage:
+        elif current_page=="pairsVerifPage" or current_page== "foldsverifpage":
             # activate
             self.ui.verification.setStyleSheet(active_ss)
             # unactivate
@@ -97,7 +99,9 @@ class MainWindow(QtWidgets.QMainWindow):
 "QPushButton:hover{background-color:rgb(28, 142, 178);")
 
     def pairs_verif_fun(self):
-        self.ui.stackedWidget.setCurrentWidget(self.ui.pairsverifpage)
+        page = PairsVerificationClass()
+        self.ui.stackedWidget.addWidget(page)
+        self.ui.stackedWidget.setCurrentWidget(page)
         self.activate_btn_menu()
         self.ui.pairs_verif_btn.setStyleSheet(
             "color: white;font-size:8pt; font-weight:bold;font-family: Georama;border:none; height: 30px}\n"
@@ -105,6 +109,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.folds_verif_btn.setStyleSheet(
             "color: grey;font-size:8pt; font-weight:bold;font-family: Georama;border:none; height: 30px}\n"
             "QPushButton:hover{background-color:rgb(28, 142, 178);")
+
 
     def folds_verif_fun(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.foldsverifpage)
