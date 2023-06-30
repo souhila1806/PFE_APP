@@ -401,7 +401,7 @@ QPushButton:hover{background-color:rgb(28, 142, 178);}</string>
                 <string notr="true">background-color: rgb(35, 33, 40);</string>
                </property>
                <property name="currentIndex">
-                <number>3</number>
+                <number>0</number>
                </property>
                <widget class="QWidget" name="degradationpage">
                 <property name="sizePolicy">
@@ -462,8 +462,32 @@ QPushButton:hover{background-color:rgb(28, 142, 178);}</string>
                   <enum>QFrame::Raised</enum>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_5">
+                  <property name="leftMargin">
+                   <number>10</number>
+                  </property>
+                  <property name="topMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="bottomMargin">
+                   <number>0</number>
+                  </property>
                   <item>
-                   <widget class="QFrame" name="">
+                   <widget class="QFrame" name="frame">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>200</width>
+                      <height>80</height>
+                     </size>
+                    </property>
                     <layout class="QHBoxLayout" name="horizontalLayout_3">
                      <item>
                       <widget class="QLabel" name="label_2">
@@ -471,7 +495,7 @@ QPushButton:hover{background-color:rgb(28, 142, 178);}</string>
                         <string/>
                        </property>
                        <property name="pixmap">
-                        <pixmap resource="ressources.qrc">:/icons/images/reglages.png</pixmap>
+                        <pixmap>:/icons/images/reglages.png</pixmap>
                        </property>
                        <property name="alignment">
                         <set>Qt::AlignCenter</set>
@@ -540,7 +564,7 @@ padding-top:20px</string>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QFrame" name="">
+                   <widget class="QFrame" name="frame">
                     <layout class="QHBoxLayout" name="horizontalLayout_4">
                      <item>
                       <widget class="QLabel" name="label_6">
@@ -597,7 +621,7 @@ padding-top:20px</string>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QFrame" name="">
+                   <widget class="QFrame" name="frame">
                     <layout class="QHBoxLayout" name="horizontalLayout_7">
                      <item>
                       <widget class="QLabel" name="label_3">
@@ -667,7 +691,7 @@ padding-top:20px</string>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QFrame" name="">
+                   <widget class="QFrame" name="frame">
                     <layout class="QHBoxLayout" name="horizontalLayout_5">
                      <item>
                       <widget class="QLabel" name="label_7">
@@ -737,7 +761,7 @@ padding-top:20px</string>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QFrame" name="">
+                   <widget class="QFrame" name="frame">
                     <layout class="QHBoxLayout" name="horizontalLayout_6">
                      <item>
                       <widget class="QLabel" name="label_8">
@@ -817,7 +841,7 @@ padding-top:20px
                    </widget>
                   </item>
                   <item>
-                   <widget class="QFrame" name="">
+                   <widget class="QFrame" name="frame">
                     <layout class="QHBoxLayout" name="horizontalLayout_8">
                      <item>
                       <widget class="QLabel" name="label_4">
@@ -1038,7 +1062,7 @@ padding-top:20px</string>
                         <string/>
                        </property>
                        <property name="pixmap">
-                        <pixmap resource="ressources.qrc">:/icons/images/identifiant-du-visage 1.png</pixmap>
+                        <pixmap>:/icons/images/identifiant-du-visage 1.png</pixmap>
                        </property>
                        <property name="alignment">
                         <set>Qt::AlignCenter</set>
@@ -1297,20 +1321,6 @@ font: 75 24pt &quot;Georgia&quot;;</string>
                  </property>
                 </widget>
                </widget>
-               <widget class="QWidget" name="pairsverifpage">
-                <property name="minimumSize">
-                 <size>
-                  <width>600</width>
-                  <height>450</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>1200</width>
-                  <height>900</height>
-                 </size>
-                </property>
-               </widget>
                <widget class="QWidget" name="foldsverifpage">
                 <widget class="QLabel" name="foldsveriflabel">
                  <property name="geometry">
@@ -1361,7 +1371,8 @@ font: 75 24pt &quot;Georgia&quot;;</string>
   </widget>
  </widget>
  <resources>
-  <include location="ressources.qrc"/>
+  <include location="../../step1/ressources.qrc"/>
+  <include location="../../../../.designer/backup/ressources.qrc"/>
  </resources>
  <connections>
   <connection>
