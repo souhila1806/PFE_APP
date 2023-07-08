@@ -1,13 +1,14 @@
 import pandas as pd
 
-from demo_app.python_files.utils import get_name_num_from_img, calcul_threshold_acc
+from python_files.utils import get_name_num_from_img, calcul_threshold_acc
 
 def verif_pair(dataset,path_img1,path_img2,rec_model,rest=None):
-    data=pd.read_csv(rf"C:\Users\HP\PycharmProjects\pythonProject\demo_app\data\files\{dataset.lower()}_scores.csv")
+    data=pd.read_csv(rf"demo_app\data\files\{dataset.lower()}_scores.csv")
     data['image1'] = data['image1'].astype(int)
     data['image2'] = data['image2'].astype(int)
     name1, img1 = get_name_num_from_img(path_img1)
     name2, img2 = get_name_num_from_img(path_img2)
+    print(name1,name2,img1,img2)
     if rest == None:
         col=rec_model.lower()
     else:
@@ -17,26 +18,27 @@ def verif_pair(dataset,path_img1,path_img2,rec_model,rest=None):
         (data['name1'] == name1) & (data['name2'] == name2) & (data['image1'] == img1) & (data['image2'] == img2)]
     i = line.index[0] // 600
     score = line[col].iloc[0]
-    threshold, acc, far, frr = calcul_threshold_acc(data[[col]], i)
-    return score, threshold
+    threshold, acc, far, frr,_ = calcul_threshold_acc(data[[col]], i)
+    return score, threshold,far,frr
 
 def verif_fold(dataset,nb_fold,rec_model,rest=None):
-    data=pd.read_csv(rf"C:\Users\HP\PycharmProjects\pythonProject\demo_app\data\files\{dataset.lower()}_scores.csv")
+    data=pd.read_csv(rf"demo_app\data\files\{dataset.lower()}_scores.csv")
     data['image1'] = data['image1'].astype(int)
     data['image2'] = data['image2'].astype(int)
     if rest == None:
         col = rec_model.lower()
     else:
         col = f"{rec_model.lower()}_{rest.lower()}"
-    threshold, acc, far, frr = calcul_threshold_acc(data[[col]],nb_fold)
-    return acc, threshold
+    threshold, acc, far, frr,train = calcul_threshold_acc(data[[col]],nb_fold)
+    return acc, threshold,far,frr,train
 
 def verif_all(dataset,rec_model,rest=None):
+    print(dataset,rec_model,rest)
     THR = []
     ACC = []
     FAR = []
     FRR = []
-    data=pd.read_csv(rf"C:\Users\HP\PycharmProjects\pythonProject\demo_app\data\files\{dataset.lower()}_scores.csv")
+    data=pd.read_csv(rf"demo_app\data\files\{dataset.lower()}_scores.csv")
     data['image1'] = data['image1'].astype(int)
     data['image2'] = data['image2'].astype(int)
     if rest == None:
@@ -44,15 +46,17 @@ def verif_all(dataset,rec_model,rest=None):
     else:
         col = f"{rec_model.lower()}_{rest.lower()}"
     for i in range (10):
-        threshold, acc, far, frr = calcul_threshold_acc(data[[col]],i)
+        threshold, acc, far, frr,_ = calcul_threshold_acc(data[[col]],i)
         THR.append(threshold)
         ACC.append(acc)
         FAR.append(far)
         FRR.append(frr)
 
-
+    far=sum(FAR)/len(FAR)
+    frr = sum(FRR) / len(FRR)
+    thr=sum(THR)/len(THR)
     total_acc = sum(ACC) / len(ACC)
-    return total_acc
+    return total_acc,thr,far,frr,data[[col]]
 
 
 if __name__ == '__main__':

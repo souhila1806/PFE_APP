@@ -1,7 +1,10 @@
-from demo_app.uis.cdta_ui import Ui_MainWindow
-from demo_app.python_files.pages.degradationpage import DegPage
-from demo_app.python_files.pages.pairsverifpage import PairsVerificationClass
+from uis.cdta_ui import Ui_MainWindow
+from python_files.pages.degradationpage import DegPage
+from python_files.pages.pairsverifpage import PairsVerificationClass
+from python_files.pages.folderverifpage import FoldsVerificationClass
 from PyQt5 import QtWidgets
+from python_files.pages.imageRestorationClass import ImageRestorationClass
+from python_files.pages.foldsRestorationClass import FoldsRestorationClass
 import sys
 
 
@@ -65,7 +68,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.ui.degradation_btn.setStyleSheet(unactive_ss)
             self.ui.verification.setStyleSheet(unactive_ss)
 
-        elif current_page=="pairsVerifPage" or current_page== "foldsverifpage":
+        elif current_page=="pairsVerifPage" or current_page== "foldsVerifPage":
             # activate
             self.ui.verification.setStyleSheet(active_ss)
             # unactivate
@@ -83,6 +86,31 @@ class MainWindow(QtWidgets.QMainWindow):
         self.activate_btn_menu()
 
     def pairs_restoration_fun(self):
+        page = ImageRestorationClass()
+        self.ui.stackedWidget.addWidget(page)
+        self.ui.stackedWidget.setCurrentWidget(page)
+        self.activate_btn_menu()
+        self.ui.pairs_rest_btn.setStyleSheet(
+            "color: white;font-size:8pt; font-weight:bold;font-family: Georama;border:none; height: 30px}\n"
+            "QPushButton:hover{background-color:rgb(28, 142, 178);")
+        self.ui.folds_rest_btn.setStyleSheet(
+            "color: grey;font-size:8pt; font-weight:bold;font-family: Georama;border:none; height: 30px}\n"
+            "QPushButton:hover{background-color:rgb(28, 142, 178);")
+
+    def folds_restoration_fun(self):
+        page = FoldsRestorationClass()
+        self.ui.stackedWidget.addWidget(page)
+        self.ui.stackedWidget.setCurrentWidget(page)
+        self.activate_btn_menu()
+        self.ui.pairs_rest_btn.setStyleSheet(
+            "color: grey;font-size:8pt; font-weight:bold;font-family: Georama;border:none; height: 30px}\n"
+            "QPushButton:hover{background-color:rgb(28, 142, 178);")
+        self.ui.folds_rest_btn.setStyleSheet(
+            "color: white;font-size:8pt; font-weight:bold;font-family: Georama;border:none; height: 30px}\n"
+            "QPushButton:hover{background-color:rgb(28, 142, 178);")
+
+
+    '''def pairs_restoration_fun(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.pairrestorationpage)
         self.activate_btn_menu()
         self.ui.pairs_rest_btn.setStyleSheet("color: white;font-size:8pt; font-weight:bold;font-family: Georama;border:none; height: 30px}\n"
@@ -96,7 +124,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.pairs_rest_btn.setStyleSheet("color: grey;font-size:8pt; font-weight:bold;font-family: Georama;border:none; height: 30px}\n"
 "QPushButton:hover{background-color:rgb(28, 142, 178);")
         self.ui.folds_rest_btn.setStyleSheet("color: white;font-size:8pt; font-weight:bold;font-family: Georama;border:none; height: 30px}\n"
-"QPushButton:hover{background-color:rgb(28, 142, 178);")
+"QPushButton:hover{background-color:rgb(28, 142, 178);")'''
 
     def pairs_verif_fun(self):
         page = PairsVerificationClass()
@@ -112,7 +140,9 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
     def folds_verif_fun(self):
-        self.ui.stackedWidget.setCurrentWidget(self.ui.foldsverifpage)
+        page = FoldsVerificationClass()
+        self.ui.stackedWidget.addWidget(page)
+        self.ui.stackedWidget.setCurrentWidget(page)
         self.activate_btn_menu()
         self.ui.pairs_verif_btn.setStyleSheet(
             "color: grey;font-size:8pt; font-weight:bold;font-family: Georama;border:none; height: 30px}\n"
@@ -124,7 +154,11 @@ class MainWindow(QtWidgets.QMainWindow):
 
     # main function
 if __name__ == "__main__":
-    app = QtWidgets.QApplication(sys.argv)
-    mw = MainWindow()
-    mw.show()
-    app.exec_()
+    try:
+        app = QtWidgets.QApplication(sys.argv)
+        mw = MainWindow()
+        mw.show()
+        app.exec_()
+    except Exception as e:
+        import traceback
+        traceback.print_exc()

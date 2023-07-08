@@ -18,12 +18,13 @@ class Ui_MainWindow(object):
         MainWindow.setMaximumSize(QtCore.QSize(1300, 850))
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setMinimumSize(QtCore.QSize(700, 450))
-        self.centralwidget.setMaximumSize(QtCore.QSize(1400, 900))
+        self.centralwidget.setMaximumSize(QtCore.QSize(1300, 900))
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
         self.gridLayout.setObjectName("gridLayout")
         self.content = QtWidgets.QFrame(self.centralwidget)
+        self.content.setMaximumSize(QtCore.QSize(1300, 850))
         self.content.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.content.setFrameShadow(QtWidgets.QFrame.Raised)
         self.content.setObjectName("content")
@@ -162,7 +163,7 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.stackedWidget.sizePolicy().hasHeightForWidth())
         self.stackedWidget.setSizePolicy(sizePolicy)
-        self.stackedWidget.setMinimumSize(QtCore.QSize(600, 450))
+        self.stackedWidget.setMinimumSize(QtCore.QSize(1100, 450))
         self.stackedWidget.setMaximumSize(QtCore.QSize(1100, 850))
         self.stackedWidget.setStyleSheet("background-color: rgb(35, 33, 40);")
         self.stackedWidget.setObjectName("stackedWidget")
@@ -404,7 +405,7 @@ class Ui_MainWindow(object):
 "        subcontrol-position: bottom right;\n"
 "        border-radius: 10px;\n"
 "        text-align: center;\n"
-"        image: url(:/icons/fleche-vers-le-bas.png);\n"
+"image: url(:/icons/images/fleche-vers-le-bas.png);\n"
 "        border:none\n"
 "    }\n"
 "    \n"
@@ -513,10 +514,11 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.imagesspace_2.sizePolicy().hasHeightForWidth())
         self.imagesspace_2.setSizePolicy(sizePolicy)
-        self.imagesspace_2.setMinimumSize(QtCore.QSize(450, 0))
-        self.imagesspace_2.setMaximumSize(QtCore.QSize(900, 16777215))
+        self.imagesspace_2.setMinimumSize(QtCore.QSize(800, 550))
+        self.imagesspace_2.setMaximumSize(QtCore.QSize(860, 560))
         self.imagesspace_2.setObjectName("imagesspace_2")
         self.imagesspace = QtWidgets.QHBoxLayout(self.imagesspace_2)
+        self.imagesspace.setSpacing(15)
         self.imagesspace.setObjectName("imagesspace")
         self.verticalLayout_9.addWidget(self.imagesspace_2)
         self.stackedWidget.addWidget(self.degradationpage)
@@ -558,6 +560,7 @@ class Ui_MainWindow(object):
         self.foldrestlabel.setObjectName("foldrestlabel")
         self.stackedWidget.addWidget(self.foldsrestorationpage)
         self.foldsverifpage = QtWidgets.QWidget()
+        self.foldsverifpage.setMaximumSize(QtCore.QSize(1100, 850))
         self.foldsverifpage.setObjectName("foldsverifpage")
         self.foldsveriflabel = QtWidgets.QLabel(self.foldsverifpage)
         self.foldsveriflabel.setGeometry(QtCore.QRect(0, 0, 1200, 900))

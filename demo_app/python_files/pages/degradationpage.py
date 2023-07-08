@@ -7,6 +7,7 @@ from ..functions.degradation_funcs import generate_noise, generate_blur,generate
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import Qt,QTimer
 from PyQt5.QtGui import QPixmap,QRegExpValidator,QImage, QMovie
+from python_files.loading import LoadingScreen
 
 
 class ImageLabel(QtWidgets.QLabel):
@@ -25,7 +26,7 @@ class ImageLabel(QtWidgets.QLabel):
                 font: 14pt "Georgia";
             }
         ''')
-        self.resize(50,50)
+        self.setFixedSize(20,20)
     def setPixmap(self, image):
         super().setPixmap(image)
 
@@ -91,42 +92,27 @@ class ImageLabel(QtWidgets.QLabel):
 
 
 # class for loading
-class LoadingScreen(QtWidgets.QWidget):
-    def __init__(self):
+class LongTimeProcessThread(QtCore.QThread):
+    detectionFinished = QtCore.pyqtSignal(bool)
+
+    def __init__(self, input_path, detector):
         super().__init__()
-        self.setFixedSize(200, 200)
+        self.input_path = input_path
+        self.detector = detector
 
-        self.setWindowFlags(Qt.WindowStaysOnTopHint | Qt.CustomizeWindowHint)
-        #self.setAttribute(Qt.WA_TranslucentBackground,on=True)
-        self.loading_animation = QtWidgets.QLabel(self)
-        self.loading_animation.setText("helloooo")
+    def run(self):
+        try:
+            inputimage = detect_face(self.input_path, self.detector)
+            cv2.imwrite(r"images\degradation_results\input_detected.jpg", inputimage)
+            outputimage = detect_face(r"images\degradation_results\degraded.jpg", self.detector)
+            cv2.imwrite(r"images\degradation_results\output_detected.jpg", outputimage)
 
-
-        #self.movie = QMovie(r"C:\Users\HP\PycharmProjects\pythonProject\demo_app\images\loading2.gif")
-        #self.loading_animation.setFixedSize(self.movie.currentPixmap().size())
-        #self.loading_animation.setMovie(self.movie)
-        # self.loading_animation.setVisible(True)
-
-        #self.loading_animation.setStyleSheet("background-color: blue;")
-
-        # Create the "loading..." label
-        #self.loading_label = QtWidgets.QLabel("Loading...", self)
-        #self.loading_label.setAlignment(Qt.AlignCenter)
-
-        # Create a vertical layout and add the QLabel widgets
-        layout = QtWidgets.QVBoxLayout(self)
-        layout.addWidget(self.loading_animation)
-        #layout.addWidget(self.loading_label)
-        self.setLayout(layout)
-        self.show()
-
-    def startLoading(self):
-        self.show()
-        #self.movie.start()
-    def stopLoading(self):
-        #self.movie.stop()
-        self.close()
-
+            # Emit the signal to indicate detection is finished
+            self.detectionFinished.emit(True)
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+        self.finished.emit()
 
 class DegPage(QtWidgets.QMainWindow):
     def __init__(self,main_app):
@@ -140,7 +126,7 @@ class DegPage(QtWidgets.QMainWindow):
 
 # functions to add a random image to image viewer input
     def random_deg_image(self):
-        directory = r"C:\Users\HP\PycharmProjects\pythonProject\demo_app\data\images\XQLFW"
+        directory = r"data\images\LFW"
         imagePath=os.path.join(directory,self.random_image(directory))
         print(imagePath)
         self.main_app.photoViewerInput.set_image(imagePath)
@@ -191,30 +177,50 @@ class DegPage(QtWidgets.QMainWindow):
                 self.main_app.ui.lowresvalue.setText(str(percentage))
             degraded_image= generate_lowresolution(degraded_image,percentage)
 
-        cv2.imwrite(r"C:\Users\HP\PycharmProjects\pythonProject\demo_app\images\degradation_results\degraded.jpg", degraded_image)
+        cv2.imwrite(r"images\degradation_results\degraded.jpg", degraded_image)
 
         if self.main_app.ui.detectcheckBox.isChecked():
-            loading=LoadingScreen()
+            '''
+            loading = LoadingScreen()
             loading.startLoading()
 
-            detector=self.main_app.ui.detectcomboBox.currentText()
-            inputimage= detect_face(input_path,detector)
-            cv2.imwrite(r"C:\Users\HP\PycharmProjects\pythonProject\demo_app\images\degradation_results\input_detected.jpg", inputimage)
-            outputimage=detect_face(r"C:\Users\HP\PycharmProjects\pythonProject\demo_app\images\degradation_results\degraded.jpg",detector)
-            cv2.imwrite(r"C:\Users\HP\PycharmProjects\pythonProject\demo_app\images\degradation_results\output_detected.jpg", outputimage)
-            
-            #set detected input image
-            self.main_app.photoViewerInput.set_image(r"C:\Users\HP\PycharmProjects\pythonProject\demo_app\images\degradation_results\input_detected.jpg", False)
-            # set detected output img
-            self.main_app.photoViewerOutput.set_image(r"C:\Users\HP\PycharmProjects\pythonProject\demo_app\images\degradation_results\output_detected.jpg", True)
-            detection=True
+            detector = self.main_app.ui.detectcomboBox.currentText()
+
+            # Start the long-time process in a separate thread
+            process_thread = LongTimeProcessThread(input_path, detector)
+            process_thread.finished.connect(loading.stopLoading)
+            process_thread.finished.connect(self.updateUI)
+            process_thread.start()
+            '''
+            loading=LoadingScreen()
+            loading.startLoading()
+            try:
+                detector=self.main_app.ui.detectcomboBox.currentText()
+                inputimage= detect_face(input_path,detector)
+                cv2.imwrite(r"images\degradation_results\input_detected.jpg", inputimage)
+                outputimage=detect_face(r"images\degradation_results\degraded.jpg",detector)
+                cv2.imwrite(r"images\degradation_results\output_detected.jpg", outputimage)
+
+                #set detected input image
+                self.main_app.photoViewerInput.set_image(r"images\degradation_results\input_detected.jpg", False)
+                # set detected output img
+                self.main_app.photoViewerOutput.set_image(r"images\degradation_results\output_detected.jpg", True)
+                detection=True
+            except Exception as e:
+                import traceback
+                traceback.print_exc()
+           
             loading.stopLoading()
 
         if detection== False:
-            self.main_app.photoViewerOutput.set_image(r"C:\Users\HP\PycharmProjects\pythonProject\demo_app\images\degradation_results\degraded.jpg", True)
+            self.main_app.photoViewerOutput.set_image(r"images\degradation_results\degraded.jpg", True)
 
-
-
+    def updateUI(self, detection):
+        if detection:
+            # Set detected input image
+            self.main_app.photoViewerInput.set_image(r"images\degradation_results\input_detected.jpg", False)
+            # Set detected output image
+            self.main_app.photoViewerOutput.set_image(r"images\degradation_results\output_detected.jpg", True)
 
     ############################################################################
     # function to initialize settings checkboxes and edit texts

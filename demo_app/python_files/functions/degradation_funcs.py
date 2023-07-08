@@ -31,17 +31,17 @@ def generate_lowresolution(image, scale_percent):
 
 def generate_compression_artifact(image,quality):
     # Save the image with the specified quality
-    cv2.imwrite(r"C:\Users\HP\PycharmProjects\pythonProject\demo_app\images\degradation_results\resolution.jpg", image, [cv2.IMWRITE_JPEG_QUALITY, quality])
+    cv2.imwrite(r"demo_app\images\degradation_results\resolution.jpg", image, [cv2.IMWRITE_JPEG_QUALITY, quality])
     # Read the compressed image back using OpenCV
-    image = cv2.imread(r"C:\Users\HP\PycharmProjects\pythonProject\demo_app\images\degradation_resultsresolution.jpg")
+    image = cv2.imread(r"demo_app\images\degradation_results\resolution.jpg")
 
     return image
 
 
 
 if __name__ == '__main__':
-    image = cv2.imread(r"C:\Users\HP\PycharmProjects\pythonProject\demo_app\data\images\XQLFW\Laura_Bush_0007.jpg")
-    directory = (r'C:\Users\HP\PycharmProjects\pythonProject\demo_app\images\degradation_results')
+    image = cv2.imread(r"demo_app\data\images\XQLFW\Laura_Bush_0007.jpg")
+    directory = (r'demo_app\images\degradation_results')
     os.chdir(directory)
     filename = "degraded.jpg"
     #noisy = generate_noise(image,0,100)

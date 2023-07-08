@@ -28,7 +28,7 @@
    </property>
    <property name="maximumSize">
     <size>
-     <width>1400</width>
+     <width>1300</width>
      <height>900</height>
     </size>
    </property>
@@ -47,6 +47,12 @@
     </property>
     <item row="0" column="0">
      <widget class="QFrame" name="content">
+      <property name="maximumSize">
+       <size>
+        <width>1300</width>
+        <height>850</height>
+       </size>
+      </property>
       <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>
       </property>
@@ -387,7 +393,7 @@ QPushButton:hover{background-color:rgb(28, 142, 178);}</string>
                </property>
                <property name="minimumSize">
                 <size>
-                 <width>600</width>
+                 <width>1100</width>
                  <height>450</height>
                 </size>
                </property>
@@ -495,7 +501,7 @@ QPushButton:hover{background-color:rgb(28, 142, 178);}</string>
                         <string/>
                        </property>
                        <property name="pixmap">
-                        <pixmap>:/icons/images/reglages.png</pixmap>
+                        <pixmap resource="../ressources.qrc">:/icons/images/reglages.png</pixmap>
                        </property>
                        <property name="alignment">
                         <set>Qt::AlignCenter</set>
@@ -936,7 +942,7 @@ padding-top:20px</string>
         subcontrol-position: bottom right;
         border-radius: 10px;
         text-align: center;
-		image: url(:/icons/fleche-vers-le-bas.png);
+image: url(:/icons/images/fleche-vers-le-bas.png);
 		border:none
     }
     
@@ -1062,7 +1068,7 @@ padding-top:20px</string>
                         <string/>
                        </property>
                        <property name="pixmap">
-                        <pixmap>:/icons/images/identifiant-du-visage 1.png</pixmap>
+                        <pixmap resource="../ressources.qrc">:/icons/images/identifiant-du-visage 1.png</pixmap>
                        </property>
                        <property name="alignment">
                         <set>Qt::AlignCenter</set>
@@ -1205,17 +1211,21 @@ font: 75 10pt &quot;Georgia&quot;;</string>
                     </property>
                     <property name="minimumSize">
                      <size>
-                      <width>450</width>
-                      <height>0</height>
+                      <width>800</width>
+                      <height>550</height>
                      </size>
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>900</width>
-                      <height>16777215</height>
+                      <width>860</width>
+                      <height>560</height>
                      </size>
                     </property>
-                    <layout class="QHBoxLayout" name="imagesspace"/>
+                    <layout class="QHBoxLayout" name="imagesspace">
+                     <property name="spacing">
+                      <number>15</number>
+                     </property>
+                    </layout>
                    </widget>
                   </item>
                  </layout>
@@ -1322,6 +1332,12 @@ font: 75 24pt &quot;Georgia&quot;;</string>
                 </widget>
                </widget>
                <widget class="QWidget" name="foldsverifpage">
+                <property name="maximumSize">
+                 <size>
+                  <width>1100</width>
+                  <height>850</height>
+                 </size>
+                </property>
                 <widget class="QLabel" name="foldsveriflabel">
                  <property name="geometry">
                   <rect>
@@ -1371,8 +1387,8 @@ font: 75 24pt &quot;Georgia&quot;;</string>
   </widget>
  </widget>
  <resources>
-  <include location="../../step1/ressources.qrc"/>
-  <include location="../../../../.designer/backup/ressources.qrc"/>
+  <include location="../ressources.qrc"/>
+  <include location="../ressources.qrc"/>
  </resources>
  <connections>
   <connection>

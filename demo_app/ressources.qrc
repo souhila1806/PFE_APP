@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="icons">
+    <file>images/details.png</file>
     <file>images/ajouter (1).png</file>
     <file>images/Correct.png</file>
     <file>images/fleche-vers-le-bas.png</file>

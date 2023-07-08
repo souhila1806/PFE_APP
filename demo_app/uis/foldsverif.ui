@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>PairsVerifForm</class>
- <widget class="QWidget" name="PairsVerifForm">
+ <class>FoldsVerifForm</class>
+ <widget class="QWidget" name="FoldsVerifForm">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -30,6 +30,50 @@
   </property>
   <property name="windowTitle">
    <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#tabsPages{
+background-color:rgba(56, 64, 73, 0.8);
+}
+QTabWidget::pane {
+    background-color:rgba(56, 64, 73, 0.8);
+}
+
+
+
+QTabBar::tab {
+    background-color:rgba(95, 107, 110, 1); /* Set the desired background color for the tab buttons */
+    color: white; /* Set the desired text color for the tab buttons */
+font-weight:bold;
+width: 140px; /* Set the desired width of the tab buttons */
+height: 33px;
+border-top-right-radius: 10px; /* Set the desired border radius for the top-right corner */
+border-top-left-radius: 10px;
+}
+
+QTabBar::tab:selected {
+    background-color: rgba(90, 255, 231, 1); /* Set the desired background color for the selected tab button */
+    color: white; /* Set the desired text color for the selected tab button */
+font-weight:bold;
+}
+#Distribution, #RocCurve, #Magnitude, #SimIndex,#FussionRegression{
+background-color:rgba(56, 64, 73, 0.8);
+}
+QCheckBox {
+    color: rgba(231, 235, 244, 1); /* Remplacez &quot;red&quot; par la couleur souhaitée */
+font-size:12px;
+font-weight:bold;
+}
+#frame_3,#frame_4,#frame_5,#frame_6,#frame_7,#frame_8,#frame_9{
+background-color:rgba(47, 61, 78, 0);
+}
+QTabBar::tab:disabled {
+    background-color: rgba(150, 150, 150, 1); /* Set the desired background color for disabled tab */
+    color: rgba(200, 200, 200, 1); /* Set the desired text color for disabled tab */
+}
+
+    
+</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_2">
    <property name="leftMargin">
@@ -99,44 +143,228 @@
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_4">
          <item>
-          <widget class="QPushButton" name="randomHQ">
+          <widget class="QLabel" name="label_21">
            <property name="maximumSize">
             <size>
-             <width>200</width>
-             <height>40</height>
+             <width>150</width>
+             <height>50</height>
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">border-radius: 10px;color:rgb(255, 255, 255);
-font: 75 10pt &quot;Georgia&quot;;
-background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0.628821 rgba(105, 85, 163, 255), stop:1 rgba(231, 235, 244, 255));
+            <string notr="true">background-color: &quot;transparent&quot;;
+color: rgb(255, 255, 255);
+font: 10pt &quot;Georgia&quot;;
 </string>
            </property>
            <property name="text">
-            <string>random HQ image</string>
+            <string>Choose your dataset: </string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="randomLQ">
+          <widget class="QComboBox" name="datasetcombobox">
            <property name="maximumSize">
             <size>
-             <width>200</width>
-             <height>40</height>
+             <width>100</width>
+             <height>16777215</height>
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">border-radius: 10px;color:rgb(255, 255, 255);
-font: 75 10pt &quot;Georgia&quot;;
-background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0.628821 rgba(105, 85, 163, 255), stop:1 rgba(231, 235, 244, 255));</string>
+            <string notr="true"> QComboBox {
+        background-color: white;
+        font: 10pt &quot;Georgia&quot;;
+        padding-bottom: 8px;
+        padding-left: 5px;
+        border-radius: 10px;
+		align:justify
+    }
+    
+    QComboBox::down-arrow {
+        subcontrol-origin: padding;
+        subcontrol-position: bottom right;
+        border-radius: 10px;
+        text-align: center;
+		image: url(:/icons/images/fleche-vers-le-bas.png);
+		border:none
+    }
+    
+    QComboBox QAbstractItemView {
+        background-color: white;
+    }
+    
+    QComboBox QAbstractItemView::item:hover {
+        background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 rgba(90, 255, 231, 255), stop:1 rgba(21, 205, 202, 255));
+        color: white;
+    }
+QComboBox QAbstractItemView {
+    background-color: white;
+}
+
+QComboBox QAbstractItemView::scrollbar:vertical {
+    background-color: #E0E0E0;  /* Set the background color of the vertical scrollbar */
+    width: 10px;                /* Set the width of the scrollbar */
+}
+
+QComboBox QAbstractItemView::scrollbar-handle:vertical {
+    background-color: #BDBDBD;  /* Set the color of the scrollbar handle */
+    border-radius: 5px;         /* Add rounded corners to the scrollbar handle */
+}
+
+QScrollBar:vertical {border: 1px solid #999999; background:white; width:10px; margin: 0px 0px 0px 0px;}
+
+
+QScrollBar::handle:vertical {background:rgb(47, 61, 78);  min-height: 0px; border-radius: 20px}</string>
+           </property>
+           <item>
+            <property name="text">
+             <string>LFW</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>XQLFW</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_14">
+           <property name="maximumSize">
+            <size>
+             <width>150</width>
+             <height>50</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: &quot;transparent&quot;;
+color: rgb(255, 255, 255);
+font: 10pt &quot;Georgia&quot;;
+</string>
            </property>
            <property name="text">
-            <string>Random LQ image</string>
+            <string>Choose your folder: </string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="apply_pairs_verif_btn">
+          <widget class="QComboBox" name="foldcombobox">
+           <property name="maximumSize">
+            <size>
+             <width>100</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"> QComboBox {
+        background-color: white;
+        font: 10pt &quot;Georgia&quot;;
+        padding-bottom: 8px;
+        padding-left: 5px;
+        border-radius: 10px;
+		align:justify
+    }
+    
+    QComboBox::down-arrow {
+        subcontrol-origin: content;
+        subcontrol-position: bottom right;
+        border-radius: 10px;
+        text-align: center;
+		image: url(:/icons/images/fleche-vers-le-bas.png);
+		border:none
+    }
+    
+    QComboBox QAbstractItemView {
+        background-color: white;
+    }
+    
+    QComboBox QAbstractItemView::item:hover {
+        background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 rgba(90, 255, 231, 255), stop:1 rgba(21, 205, 202, 255));
+        color: white;
+    }
+QComboBox QAbstractItemView {
+    background-color: white;
+}
+
+QComboBox QAbstractItemView::scrollbar:vertical {
+    background-color: #E0E0E0;  /* Set the background color of the vertical scrollbar */
+    width: 10px;                /* Set the width of the scrollbar */
+}
+
+QComboBox QAbstractItemView::scrollbar-handle:vertical {
+    background-color: #BDBDBD;  /* Set the color of the scrollbar handle */
+    border-radius: 5px;         /* Add rounded corners to the scrollbar handle */
+}
+
+QScrollBar:vertical {border: 1px solid #999999; background:white; width:10px; margin: 0px 0px 0px 0px;}
+
+
+QScrollBar::handle:vertical {background:rgb(47, 61, 78);  min-height: 0px; border-radius: 20px}</string>
+           </property>
+           <item>
+            <property name="text">
+             <string>ALL</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>0</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>1</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>2</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>3</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>4</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>5</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>6</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>7</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>8</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>9</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="apply_folds_verif_btn">
            <property name="enabled">
             <bool>false</bool>
            </property>
@@ -160,30 +388,432 @@ font: 75 10pt &quot;Georgia&quot;;</string>
       </item>
       <item>
        <widget class="QFrame" name="imagespace">
-        <layout class="QHBoxLayout" name="horizontalLayout_5">
-         <property name="spacing">
-          <number>0</number>
+        <widget class="QTabWidget" name="tabsPages">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>10</y>
+           <width>850</width>
+           <height>452</height>
+          </rect>
          </property>
-         <property name="leftMargin">
-          <number>0</number>
+         <property name="minimumSize">
+          <size>
+           <width>711</width>
+           <height>0</height>
+          </size>
          </property>
-         <property name="topMargin">
-          <number>0</number>
+         <property name="maximumSize">
+          <size>
+           <width>870</width>
+           <height>16777215</height>
+          </size>
          </property>
-         <property name="rightMargin">
-          <number>0</number>
+         <property name="styleSheet">
+          <string notr="true">QTabWidget::pane {
+    background-color:rgba(56, 64, 73, 0.8); 
+}</string>
          </property>
-         <property name="bottomMargin">
-          <number>0</number>
+         <property name="currentIndex">
+          <number>4</number>
          </property>
-         <item>
-          <layout class="QHBoxLayout" name="imagespacelayout">
-           <property name="spacing">
-            <number>6</number>
+         <property name="movable">
+          <bool>true</bool>
+         </property>
+         <widget class="QWidget" name="distribution">
+          <attribute name="title">
+           <string>Distribution</string>
+          </attribute>
+          <layout class="QGridLayout" name="gridLayout_2">
+           <property name="leftMargin">
+            <number>0</number>
            </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item row="0" column="0">
+            <widget class="QFrame" name="dist_plot">
+             <property name="minimumSize">
+              <size>
+               <width>708</width>
+               <height>380</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>865</width>
+               <height>480</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color:rgb(83, 83, 83);
+border-radius: 10px;</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <widget class="QLabel" name="label_15">
+              <property name="geometry">
+               <rect>
+                <x>220</x>
+                <y>120</y>
+                <width>400</width>
+                <height>150</height>
+               </rect>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>400</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>400</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: &quot;transparent&quot;;
+color: rgb(255, 255, 255);
+font: 12pt &quot;Georgia&quot;;
+padding-top:20px
+</string>
+              </property>
+              <property name="text">
+               <string>Click Apply!
+ Distribution plot will appear here!</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </widget>
+           </item>
           </layout>
-         </item>
-        </layout>
+         </widget>
+         <widget class="QWidget" name="roccurve">
+          <attribute name="title">
+           <string>Roc Curve</string>
+          </attribute>
+          <layout class="QGridLayout" name="gridLayout_8">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item row="0" column="0">
+            <widget class="QFrame" name="roccurve_plot">
+             <property name="minimumSize">
+              <size>
+               <width>708</width>
+               <height>380</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>865</width>
+               <height>480</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color:rgb(83, 83, 83);
+border-radius: 10px;</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <widget class="QLabel" name="label_16">
+              <property name="geometry">
+               <rect>
+                <x>220</x>
+                <y>120</y>
+                <width>400</width>
+                <height>150</height>
+               </rect>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>400</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>400</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: &quot;transparent&quot;;
+color: rgb(255, 255, 255);
+font: 12pt &quot;Georgia&quot;;
+padding-top:20px
+</string>
+              </property>
+              <property name="text">
+               <string>Click Apply!
+ Roc Curve plot will appear here!</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="magnitude">
+          <attribute name="title">
+           <string>Magnitude</string>
+          </attribute>
+          <layout class="QGridLayout" name="gridLayout_9">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item row="0" column="0">
+            <widget class="QFrame" name="magnitudeplot">
+             <property name="minimumSize">
+              <size>
+               <width>708</width>
+               <height>380</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>865</width>
+               <height>480</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color:rgb(83, 83, 83);
+border-radius: 10px;</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <widget class="QLabel" name="label_18">
+              <property name="geometry">
+               <rect>
+                <x>220</x>
+                <y>120</y>
+                <width>400</width>
+                <height>150</height>
+               </rect>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>400</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>400</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: &quot;transparent&quot;;
+color: rgb(255, 255, 255);
+font: 12pt &quot;Georgia&quot;;
+padding-top:20px
+</string>
+              </property>
+              <property name="text">
+               <string>Click Apply!
+ Magnitude plot will appear here!</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="simindex">
+          <attribute name="title">
+           <string>Sim Index</string>
+          </attribute>
+          <layout class="QGridLayout" name="gridLayout_10">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item row="0" column="0">
+            <widget class="QFrame" name="simindexplot">
+             <property name="minimumSize">
+              <size>
+               <width>708</width>
+               <height>380</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>865</width>
+               <height>480</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color:rgb(83, 83, 83);
+border-radius: 10px;</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <widget class="QLabel" name="label_19">
+              <property name="geometry">
+               <rect>
+                <x>220</x>
+                <y>120</y>
+                <width>400</width>
+                <height>150</height>
+               </rect>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>400</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>400</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: &quot;transparent&quot;;
+color: rgb(255, 255, 255);
+font: 12pt &quot;Georgia&quot;;
+padding-top:20px
+</string>
+              </property>
+              <property name="text">
+               <string>Click Apply!
+ Similarity index plot will appear here!</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="fusionregression">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <attribute name="title">
+           <string>Fusion Regression</string>
+          </attribute>
+          <layout class="QGridLayout" name="gridLayout_11">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item row="0" column="0">
+            <widget class="QFrame" name="fusionregressionplot">
+             <property name="minimumSize">
+              <size>
+               <width>708</width>
+               <height>380</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>865</width>
+               <height>480</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color:rgb(83, 83, 83);
+border-radius: 10px;</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <widget class="QLabel" name="label_20">
+              <property name="geometry">
+               <rect>
+                <x>220</x>
+                <y>120</y>
+                <width>400</width>
+                <height>150</height>
+               </rect>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>400</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>400</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: &quot;transparent&quot;;
+color: rgb(255, 255, 255);
+font: 12pt &quot;Georgia&quot;;
+padding-top:20px
+</string>
+              </property>
+              <property name="text">
+               <string>Click Apply!
+ Scores scatter plots will appear here!</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
        </widget>
       </item>
       <item>
@@ -220,26 +850,52 @@ font: 75 10pt &quot;Georgia&quot;;</string>
           <number>0</number>
          </property>
          <item>
-          <widget class="QLabel" name="result">
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>50</height>
-            </size>
+          <layout class="QHBoxLayout" name="horizontalLayout_5">
+           <property name="spacing">
+            <number>0</number>
            </property>
-           <property name="styleSheet">
-            <string notr="true">color: rgb(255, 255, 255);
+           <property name="leftMargin">
+            <number>40</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="label_13">
+             <property name="maximumSize">
+              <size>
+               <width>60</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="pixmap">
+              <pixmap>:/icons/details.png</pixmap>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="result">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>50</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(255, 255, 255);
 font: 12pt &quot;Georgia&quot;;
 padding-top:20px
 </string>
-           </property>
-           <property name="text">
-            <string>Click Apply! The result will show here</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
+             </property>
+             <property name="text">
+              <string>Details</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
          <item>
           <widget class="QFrame" name="horizontalFrame">
@@ -258,11 +914,11 @@ padding-top:20px
               <property name="styleSheet">
                <string notr="true">background-color: &quot;transparent&quot;;
 color: rgb(255, 255, 255);
-font: 12pt &quot;Georgia&quot;;
+font: 10pt &quot;Georgia&quot;;
 padding-top:20px</string>
               </property>
               <property name="text">
-               <string>Similarity Score</string>
+               <string>False rejection:</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -270,7 +926,7 @@ padding-top:20px</string>
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="accuracy">
+             <widget class="QLabel" name="FR">
               <property name="maximumSize">
                <size>
                 <width>16777215</width>
@@ -296,11 +952,11 @@ padding-top:20px</string>
               <property name="styleSheet">
                <string notr="true">background-color: &quot;transparent&quot;;
 color: rgb(255, 255, 255);
-font: 12pt &quot;Georgia&quot;;
+font: 10pt &quot;Georgia&quot;;
 padding-top:20px</string>
               </property>
               <property name="text">
-               <string>Threshold:  </string>
+               <string>False Acceptance:</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -308,7 +964,7 @@ padding-top:20px</string>
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="threshold">
+             <widget class="QLabel" name="FA">
               <property name="maximumSize">
                <size>
                 <width>16777215</width>
@@ -326,6 +982,64 @@ padding-top:20px</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_5">
+              <property name="styleSheet">
+               <string notr="true">background-color: &quot;transparent&quot;;
+color: rgb(255, 255, 255);
+font: 10pt &quot;Georgia&quot;;
+padding-top:20px</string>
+              </property>
+              <property name="text">
+               <string>Accuracy:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="accuracy">
+              <property name="styleSheet">
+               <string notr="true">background-color: &quot;transparent&quot;;
+color: rgb(255, 255, 255);
+font: 12pt &quot;Georgia&quot;;
+padding-top:20px</string>
+              </property>
+              <property name="text">
+               <string>-</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_7">
+              <property name="styleSheet">
+               <string notr="true">background-color: &quot;transparent&quot;;
+color: rgb(255, 255, 255);
+font: 10pt &quot;Georgia&quot;;
+padding-top:20px</string>
+              </property>
+              <property name="text">
+               <string>Threshold:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="threshold">
+              <property name="styleSheet">
+               <string notr="true">background-color: &quot;transparent&quot;;
+color: rgb(255, 255, 255);
+font: 10pt &quot;Georgia&quot;;
+padding-top:20px</string>
+              </property>
+              <property name="text">
+               <string>-</string>
               </property>
              </widget>
             </item>
@@ -603,7 +1317,7 @@ padding-top:20px</string>
         subcontrol-position: bottom right;
         border-radius: 10px;
         text-align: center;
-image: url(:/icons/images/fleche-vers-le-bas.png);
+		image: url(:/icons/images/fleche-vers-le-bas.png);
 		border:none
     }
     
@@ -624,11 +1338,6 @@ image: url(:/icons/images/fleche-vers-le-bas.png);
         <item>
          <property name="text">
           <string>GPEN</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>SGPN</string>
          </property>
         </item>
        </widget>
@@ -682,7 +1391,7 @@ padding-top:20px</string>
         subcontrol-position: bottom right;
         border-radius: 10px;
         text-align: center;
-image: url(:/icons/images/fleche-vers-le-bas.png);
+		image: url(:/icons/images/fleche-vers-le-bas.png);
 		border:none
     }
     
@@ -783,7 +1492,7 @@ padding-top:20px</string>
         subcontrol-position: bottom right;
         border-radius: 10px;
         text-align: center;
-image: url(:/icons/images/fleche-vers-le-bas.png);
+		image: url(:/icons/images/fleche-vers-le-bas.png);
 		border:none
     }
     
@@ -898,7 +1607,7 @@ padding-top:20px
         subcontrol-position: bottom right;
         border-radius: 10px;
         text-align: center;
-image: url(:/icons/images/fleche-vers-le-bas.png);
+		image: url(:/icons/images/fleche-vers-le-bas.png);
 		border:none
     }
     
@@ -957,8 +1666,6 @@ image: url(:/icons/images/fleche-vers-le-bas.png);
   </layout>
  </widget>
  <resources>
-  <include location="../ressources.qrc"/>
-  <include location="../ressources.qrc"/>
   <include location="../ressources.qrc"/>
  </resources>
  <connections/>

@@ -20,82 +20,136 @@ class Ui_PairsVerifForm(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(PairsVerifForm.sizePolicy().hasHeightForWidth())
         PairsVerifForm.setSizePolicy(sizePolicy)
-        PairsVerifForm.setMinimumSize(QtCore.QSize(600, 450))
+        PairsVerifForm.setMinimumSize(QtCore.QSize(1100, 850))
         PairsVerifForm.setMaximumSize(QtCore.QSize(1100, 850))
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(PairsVerifForm)
+        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.workingspace = QtWidgets.QFrame(PairsVerifForm)
-        self.workingspace.setGeometry(QtCore.QRect(0, 0, 900, 850))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.workingspace.sizePolicy().hasHeightForWidth())
         self.workingspace.setSizePolicy(sizePolicy)
-        self.workingspace.setMinimumSize(QtCore.QSize(650, 450))
+        self.workingspace.setMinimumSize(QtCore.QSize(900, 850))
         self.workingspace.setMaximumSize(QtCore.QSize(900, 850))
         self.workingspace.setStyleSheet("background-color: rgb(35, 33, 40);")
         self.workingspace.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.workingspace.setFrameShadow(QtWidgets.QFrame.Raised)
         self.workingspace.setObjectName("workingspace")
-        self.apply_pairs_verif_btn = QtWidgets.QPushButton(self.workingspace)
-        self.apply_pairs_verif_btn.setEnabled(True)
-        self.apply_pairs_verif_btn.setGeometry(QtCore.QRect(380, 200, 200, 40))
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.workingspace)
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout.setSpacing(0)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.buttonspace = QtWidgets.QFrame(self.workingspace)
+        self.buttonspace.setMaximumSize(QtCore.QSize(16777215, 150))
+        self.buttonspace.setObjectName("buttonspace")
+        self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.buttonspace)
+        self.horizontalLayout_4.setObjectName("horizontalLayout_4")
+        self.randomHQ = QtWidgets.QPushButton(self.buttonspace)
+        self.randomHQ.setMaximumSize(QtCore.QSize(200, 40))
+        self.randomHQ.setStyleSheet("border-radius: 10px;color:rgb(255, 255, 255);\n"
+"font: 75 10pt \"Georgia\";\n"
+"background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0.628821 rgba(105, 85, 163, 255), stop:1 rgba(231, 235, 244, 255));\n"
+"")
+        self.randomHQ.setObjectName("randomHQ")
+        self.horizontalLayout_4.addWidget(self.randomHQ)
+        self.randomLQ = QtWidgets.QPushButton(self.buttonspace)
+        self.randomLQ.setMaximumSize(QtCore.QSize(200, 40))
+        self.randomLQ.setStyleSheet("border-radius: 10px;color:rgb(255, 255, 255);\n"
+"font: 75 10pt \"Georgia\";\n"
+"background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0.628821 rgba(105, 85, 163, 255), stop:1 rgba(231, 235, 244, 255));")
+        self.randomLQ.setObjectName("randomLQ")
+        self.horizontalLayout_4.addWidget(self.randomLQ)
+        self.apply_pairs_verif_btn = QtWidgets.QPushButton(self.buttonspace)
+        self.apply_pairs_verif_btn.setEnabled(False)
         self.apply_pairs_verif_btn.setMaximumSize(QtCore.QSize(200, 40))
         self.apply_pairs_verif_btn.setStyleSheet("background-color: rgb(170, 170, 170);border-radius: 10px;color:rgb(255, 255, 255);\n"
 "font: 75 10pt \"Georgia\";")
         self.apply_pairs_verif_btn.setObjectName("apply_pairs_verif_btn")
-        self.accuracy = QtWidgets.QLabel(self.workingspace)
-        self.accuracy.setGeometry(QtCore.QRect(150, 370, 191, 81))
+        self.horizontalLayout_4.addWidget(self.apply_pairs_verif_btn)
+        self.verticalLayout.addWidget(self.buttonspace)
+        self.imagespace = QtWidgets.QFrame(self.workingspace)
+        self.imagespace.setObjectName("imagespace")
+        self.horizontalLayout_5 = QtWidgets.QHBoxLayout(self.imagespace)
+        self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_5.setSpacing(0)
+        self.horizontalLayout_5.setObjectName("horizontalLayout_5")
+        self.imagespacelayout = QtWidgets.QHBoxLayout()
+        self.imagespacelayout.setSpacing(6)
+        self.imagespacelayout.setObjectName("imagespacelayout")
+        self.horizontalLayout_5.addLayout(self.imagespacelayout)
+        self.verticalLayout.addWidget(self.imagespace)
+        self.resultspace = QtWidgets.QFrame(self.workingspace)
+        self.resultspace.setMinimumSize(QtCore.QSize(900, 200))
+        self.resultspace.setMaximumSize(QtCore.QSize(900, 200))
+        self.resultspace.setStyleSheet("background-color: rgb(47, 61, 78);")
+        self.resultspace.setObjectName("resultspace")
+        self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.resultspace)
+        self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_3.setSpacing(0)
+        self.verticalLayout_3.setObjectName("verticalLayout_3")
+        self.result = QtWidgets.QLabel(self.resultspace)
+        self.result.setMaximumSize(QtCore.QSize(16777215, 50))
+        self.result.setStyleSheet("color: rgb(255, 255, 255);\n"
+"font: 12pt \"Georgia\";\n"
+"padding-top:20px\n"
+"")
+        self.result.setAlignment(QtCore.Qt.AlignCenter)
+        self.result.setObjectName("result")
+        self.verticalLayout_3.addWidget(self.result)
+        self.horizontalFrame = QtWidgets.QFrame(self.resultspace)
+        self.horizontalFrame.setMaximumSize(QtCore.QSize(16777215, 100))
+        self.horizontalFrame.setObjectName("horizontalFrame")
+        self.horizontalLayout_6 = QtWidgets.QHBoxLayout(self.horizontalFrame)
+        self.horizontalLayout_6.setSpacing(0)
+        self.horizontalLayout_6.setObjectName("horizontalLayout_6")
+        self.label_3 = QtWidgets.QLabel(self.horizontalFrame)
+        self.label_3.setStyleSheet("background-color: \"transparent\";\n"
+"color: rgb(255, 255, 255);\n"
+"font: 12pt \"Georgia\";\n"
+"padding-top:20px")
+        self.label_3.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.label_3.setObjectName("label_3")
+        self.horizontalLayout_6.addWidget(self.label_3)
+        self.accuracy = QtWidgets.QLabel(self.horizontalFrame)
+        self.accuracy.setMaximumSize(QtCore.QSize(16777215, 50))
         self.accuracy.setStyleSheet("background-color: \"transparent\";\n"
 "color: rgb(255, 255, 255);\n"
 "font: 12pt \"Georgia\";\n"
 "padding-top:20px")
-        self.accuracy.setAlignment(QtCore.Qt.AlignCenter)
+        self.accuracy.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.accuracy.setObjectName("accuracy")
-        self.threshold = QtWidgets.QLabel(self.workingspace)
-        self.threshold.setGeometry(QtCore.QRect(530, 360, 191, 81))
+        self.horizontalLayout_6.addWidget(self.accuracy)
+        self.label_4 = QtWidgets.QLabel(self.horizontalFrame)
+        self.label_4.setStyleSheet("background-color: \"transparent\";\n"
+"color: rgb(255, 255, 255);\n"
+"font: 12pt \"Georgia\";\n"
+"padding-top:20px")
+        self.label_4.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.label_4.setObjectName("label_4")
+        self.horizontalLayout_6.addWidget(self.label_4)
+        self.threshold = QtWidgets.QLabel(self.horizontalFrame)
+        self.threshold.setMaximumSize(QtCore.QSize(16777215, 50))
         self.threshold.setStyleSheet("background-color: \"transparent\";\n"
 "color: rgb(255, 255, 255);\n"
 "font: 12pt \"Georgia\";\n"
 "padding-top:20px")
-        self.threshold.setAlignment(QtCore.Qt.AlignCenter)
+        self.threshold.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.threshold.setObjectName("threshold")
-        self.menuscroll = QtWidgets.QScrollArea(PairsVerifForm)
-        self.menuscroll.setGeometry(QtCore.QRect(900, 0, 200, 850))
-        self.menuscroll.setMinimumSize(QtCore.QSize(100, 450))
-        self.menuscroll.setMaximumSize(QtCore.QSize(200, 850))
-        self.menuscroll.setWidgetResizable(True)
-        self.menuscroll.setObjectName("menuscroll")
-        self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 198, 848))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.scrollAreaWidgetContents.sizePolicy().hasHeightForWidth())
-        self.scrollAreaWidgetContents.setSizePolicy(sizePolicy)
-        self.scrollAreaWidgetContents.setMinimumSize(QtCore.QSize(100, 450))
-        self.scrollAreaWidgetContents.setMaximumSize(QtCore.QSize(200, 850))
-        self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
-        self.rightmenuverification = QtWidgets.QFrame(self.scrollAreaWidgetContents)
-        self.rightmenuverification.setGeometry(QtCore.QRect(0, 0, 200, 1000))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.rightmenuverification.sizePolicy().hasHeightForWidth())
-        self.rightmenuverification.setSizePolicy(sizePolicy)
-        self.rightmenuverification.setMinimumSize(QtCore.QSize(100, 500))
-        self.rightmenuverification.setMaximumSize(QtCore.QSize(200, 1000))
-        self.rightmenuverification.setStyleSheet("background-color: rgb(36, 40, 59);")
-        self.rightmenuverification.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.rightmenuverification.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.rightmenuverification.setObjectName("rightmenuverification")
-        self.horizontalLayout = QtWidgets.QHBoxLayout(self.rightmenuverification)
-        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout.setObjectName("horizontalLayout")
-        self.frame = QtWidgets.QFrame(self.rightmenuverification)
-        self.frame.setObjectName("frame")
-        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.frame)
+        self.horizontalLayout_6.addWidget(self.threshold)
+        self.verticalLayout_3.addWidget(self.horizontalFrame)
+        self.verticalLayout.addWidget(self.resultspace)
+        self.horizontalLayout_2.addWidget(self.workingspace)
+        self.rightmenubar = QtWidgets.QFrame(PairsVerifForm)
+        self.rightmenubar.setMinimumSize(QtCore.QSize(200, 850))
+        self.rightmenubar.setMaximumSize(QtCore.QSize(200, 850))
+        self.rightmenubar.setStyleSheet("background-color: rgb(47, 61, 78);")
+        self.rightmenubar.setObjectName("rightmenubar")
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.rightmenubar)
         self.verticalLayout_2.setContentsMargins(10, 0, 10, 0)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.frame_2 = QtWidgets.QFrame(self.frame)
+        self.frame_2 = QtWidgets.QFrame(self.rightmenubar)
         self.frame_2.setMaximumSize(QtCore.QSize(200, 80))
         self.frame_2.setObjectName("frame_2")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.frame_2)
@@ -125,19 +179,31 @@ class Ui_PairsVerifForm(object):
         self.label_11.setObjectName("label_11")
         self.horizontalLayout_3.addWidget(self.label_11)
         self.verticalLayout_2.addWidget(self.frame_2)
-        spacerItem = QtWidgets.QSpacerItem(20, 50, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout_2.addItem(spacerItem)
-        self.label_15 = QtWidgets.QLabel(self.frame)
-        self.label_15.setStyleSheet("background-color: \"transparent\";\n"
+        self.recognitionlabem = QtWidgets.QLabel(self.rightmenubar)
+        self.recognitionlabem.setStyleSheet("background-color: \"transparent\";\n"
 "color: rgb(255, 255, 255);\n"
 "font: 12pt \"Georgia\";\n"
 "padding-top:20px")
-        self.label_15.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_15.setObjectName("label_15")
-        self.verticalLayout_2.addWidget(self.label_15)
-        self.detectcomboBox_2 = QtWidgets.QComboBox(self.frame)
-        self.detectcomboBox_2.setEnabled(False)
-        self.detectcomboBox_2.setStyleSheet(" QComboBox {\n"
+        self.recognitionlabem.setAlignment(QtCore.Qt.AlignCenter)
+        self.recognitionlabem.setObjectName("recognitionlabem")
+        self.verticalLayout_2.addWidget(self.recognitionlabem)
+        self.frame_4 = QtWidgets.QFrame(self.rightmenubar)
+        self.frame_4.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_4.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_4.setObjectName("frame_4")
+        self.horizontalLayout = QtWidgets.QHBoxLayout(self.frame_4)
+        self.horizontalLayout.setContentsMargins(0, -1, 0, -1)
+        self.horizontalLayout.setSpacing(0)
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.label_2 = QtWidgets.QLabel(self.frame_4)
+        self.label_2.setMaximumSize(QtCore.QSize(60, 50))
+        self.label_2.setStyleSheet("color: rgb(255, 255, 255);")
+        self.label_2.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_2.setObjectName("label_2")
+        self.horizontalLayout.addWidget(self.label_2)
+        self.recognitionmodel = QtWidgets.QComboBox(self.frame_4)
+        self.recognitionmodel.setEnabled(True)
+        self.recognitionmodel.setStyleSheet(" QComboBox {\n"
 "        background-color: white;\n"
 "        font: 10pt \"Georgia\";\n"
 "        padding-bottom: 8px;\n"
@@ -151,7 +217,7 @@ class Ui_PairsVerifForm(object):
 "        subcontrol-position: bottom right;\n"
 "        border-radius: 10px;\n"
 "        text-align: center;\n"
-"        image: url(:/icons/fleche-vers-le-bas.png);\n"
+"        image: url(:/icons/images/fleche-vers-le-bas.png);\n"
 "        border:none\n"
 "    }\n"
 "    \n"
@@ -163,40 +229,13 @@ class Ui_PairsVerifForm(object):
 "        background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 rgba(90, 255, 231, 255), stop:1 rgba(21, 205, 202, 255));\n"
 "        color: white;\n"
 "    }")
-        self.detectcomboBox_2.setObjectName("detectcomboBox_2")
-        self.detectcomboBox_2.addItem("")
-        self.detectcomboBox_2.addItem("")
-        self.detectcomboBox_2.addItem("")
-        self.verticalLayout_2.addWidget(self.detectcomboBox_2)
-        spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout_2.addItem(spacerItem1)
-        self.label_18 = QtWidgets.QLabel(self.frame)
-        self.label_18.setStyleSheet("background-color: \"transparent\";\n"
-"color: rgb(255, 255, 255);\n"
-"font: 12pt \"Georgia\";\n"
-"padding-top:20px")
-        self.label_18.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_18.setObjectName("label_18")
-        self.verticalLayout_2.addWidget(self.label_18)
-        self.noisecheckBox = QtWidgets.QCheckBox(self.frame)
-        self.noisecheckBox.setStyleSheet("background-color: \"transparent\";\n"
-"color: rgb(255, 255, 255);\n"
-"font: 12pt \"Georgia\";\n"
-"padding-top:20px")
-        self.noisecheckBox.setObjectName("noisecheckBox")
-        self.verticalLayout_2.addWidget(self.noisecheckBox)
-        self.noisecheckBox_2 = QtWidgets.QCheckBox(self.frame)
-        self.noisecheckBox_2.setStyleSheet("background-color: \"transparent\";\n"
-"color: rgb(255, 255, 255);\n"
-"font: 12pt \"Georgia\";\n"
-"padding-top:20px")
-        self.noisecheckBox_2.setObjectName("noisecheckBox_2")
-        self.verticalLayout_2.addWidget(self.noisecheckBox_2)
-        spacerItem2 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout_2.addItem(spacerItem2)
-        spacerItem3 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout_2.addItem(spacerItem3)
-        self.label_10 = QtWidgets.QLabel(self.frame)
+        self.recognitionmodel.setObjectName("recognitionmodel")
+        self.recognitionmodel.addItem("")
+        self.recognitionmodel.addItem("")
+        self.recognitionmodel.addItem("")
+        self.horizontalLayout.addWidget(self.recognitionmodel)
+        self.verticalLayout_2.addWidget(self.frame_4)
+        self.label_10 = QtWidgets.QLabel(self.rightmenubar)
         self.label_10.setStyleSheet("background-color: \"transparent\";\n"
 "color: rgb(255, 255, 255);\n"
 "font: 12pt \"Georgia\";\n"
@@ -204,23 +243,105 @@ class Ui_PairsVerifForm(object):
         self.label_10.setAlignment(QtCore.Qt.AlignCenter)
         self.label_10.setObjectName("label_10")
         self.verticalLayout_2.addWidget(self.label_10)
-        self.detectcheckBox = QtWidgets.QCheckBox(self.frame)
-        self.detectcheckBox.setStyleSheet("background-color: \"transparent\";\n"
+        self.classic_checkbox = QtWidgets.QCheckBox(self.rightmenubar)
+        self.classic_checkbox.setStyleSheet("background-color: \"transparent\";\n"
 "color: rgb(255, 255, 255);\n"
 "font: 12pt \"Georgia\";\n"
 "padding-top:20px")
-        self.detectcheckBox.setObjectName("detectcheckBox")
-        self.verticalLayout_2.addWidget(self.detectcheckBox)
-        self.blurcheckbox = QtWidgets.QCheckBox(self.frame)
-        self.blurcheckbox.setStyleSheet("background-color: \"transparent\";\n"
+        self.classic_checkbox.setObjectName("classic_checkbox")
+        self.verticalLayout_2.addWidget(self.classic_checkbox)
+        self.rest_model_classic = QtWidgets.QComboBox(self.rightmenubar)
+        self.rest_model_classic.setEnabled(False)
+        self.rest_model_classic.setStyleSheet(" QComboBox {\n"
+"        background-color: white;\n"
+"        font: 10pt \"Georgia\";\n"
+"        padding-bottom: 8px;\n"
+"        padding-left: 5px;\n"
+"        border-radius: 10px;\n"
+"        align:justify\n"
+"    }\n"
+"    \n"
+"    QComboBox::down-arrow {\n"
+"        subcontrol-origin: padding;\n"
+"        subcontrol-position: bottom right;\n"
+"        border-radius: 10px;\n"
+"        text-align: center;\n"
+"image: url(:/icons/images/fleche-vers-le-bas.png);\n"
+"        border:none\n"
+"    }\n"
+"    \n"
+"    QComboBox QAbstractItemView {\n"
+"        background-color: white;\n"
+"    }\n"
+"    \n"
+"    QComboBox QAbstractItemView::item:hover {\n"
+"        background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 rgba(90, 255, 231, 255), stop:1 rgba(21, 205, 202, 255));\n"
+"        color: white;\n"
+"    }")
+        self.rest_model_classic.setObjectName("rest_model_classic")
+        self.rest_model_classic.addItem("")
+        self.rest_model_classic.addItem("")
+        self.rest_model_classic.addItem("")
+        self.verticalLayout_2.addWidget(self.rest_model_classic)
+        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_2.addItem(spacerItem)
+        self.advancedwidget = QtWidgets.QWidget(self.rightmenubar)
+        self.advancedwidget.setObjectName("advancedwidget")
+        self.advancedlayout = QtWidgets.QVBoxLayout(self.advancedwidget)
+        self.advancedlayout.setObjectName("advancedlayout")
+        self.advancedcheckbox = QtWidgets.QCheckBox(self.advancedwidget)
+        self.advancedcheckbox.setStyleSheet("background-color: \"transparent\";\n"
 "color: rgb(255, 255, 255);\n"
 "font: 12pt \"Georgia\";\n"
 "padding-top:20px")
-        self.blurcheckbox.setObjectName("blurcheckbox")
-        self.verticalLayout_2.addWidget(self.blurcheckbox)
-        self.frame_3 = QtWidgets.QFrame(self.frame)
+        self.advancedcheckbox.setObjectName("advancedcheckbox")
+        self.advancedlayout.addWidget(self.advancedcheckbox)
+        self.typefusioncombobox = QtWidgets.QComboBox(self.advancedwidget)
+        self.typefusioncombobox.setEnabled(False)
+        self.typefusioncombobox.setStyleSheet(" QComboBox {\n"
+"        background-color: white;\n"
+"        font: 10pt \"Georgia\";\n"
+"        padding-bottom: 8px;\n"
+"        padding-left: 5px;\n"
+"        border-radius: 10px;\n"
+"        align:justify\n"
+"    }\n"
+"    \n"
+"    QComboBox::down-arrow {\n"
+"        subcontrol-origin: padding;\n"
+"        subcontrol-position: bottom right;\n"
+"        border-radius: 10px;\n"
+"        text-align: center;\n"
+"image: url(:/icons/images/fleche-vers-le-bas.png);\n"
+"        border:none\n"
+"    }\n"
+"    \n"
+"    QComboBox QAbstractItemView {\n"
+"        background-color: white;\n"
+"    }\n"
+"    \n"
+"    QComboBox QAbstractItemView::item:hover {\n"
+"        background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 rgba(90, 255, 231, 255), stop:1 rgba(21, 205, 202, 255));\n"
+"        color: white;\n"
+"    }\n"
+"")
+        self.typefusioncombobox.setObjectName("typefusioncombobox")
+        self.typefusioncombobox.addItem("")
+        self.typefusioncombobox.addItem("")
+        self.typefusioncombobox.addItem("")
+        self.advancedlayout.addWidget(self.typefusioncombobox)
+        self.label = QtWidgets.QLabel(self.advancedwidget)
+        self.label.setStyleSheet("background-color: \"transparent\";\n"
+"color: rgb(255, 255, 255);\n"
+"font: 11pt \"Georgia\";\n"
+"padding-top:20px")
+        self.label.setAlignment(QtCore.Qt.AlignCenter)
+        self.label.setObjectName("label")
+        self.advancedlayout.addWidget(self.label)
+        self.frame_3 = QtWidgets.QFrame(self.advancedwidget)
         self.frame_3.setObjectName("frame_3")
         self.horizontalLayout_10 = QtWidgets.QHBoxLayout(self.frame_3)
+        self.horizontalLayout_10.setContentsMargins(0, -1, 0, -1)
         self.horizontalLayout_10.setObjectName("horizontalLayout_10")
         self.label_12 = QtWidgets.QLabel(self.frame_3)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
@@ -230,12 +351,12 @@ class Ui_PairsVerifForm(object):
         self.label_12.setSizePolicy(sizePolicy)
         self.label_12.setMaximumSize(QtCore.QSize(60, 50))
         self.label_12.setStyleSheet("color: rgb(255, 255, 255);")
-        self.label_12.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_12.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.label_12.setObjectName("label_12")
         self.horizontalLayout_10.addWidget(self.label_12)
-        self.detectcomboBox_3 = QtWidgets.QComboBox(self.frame_3)
-        self.detectcomboBox_3.setEnabled(False)
-        self.detectcomboBox_3.setStyleSheet(" QComboBox {\n"
+        self.featurelevelcombobox = QtWidgets.QComboBox(self.frame_3)
+        self.featurelevelcombobox.setEnabled(False)
+        self.featurelevelcombobox.setStyleSheet(" QComboBox {\n"
 "        background-color: white;\n"
 "        font: 10pt \"Georgia\";\n"
 "        padding-bottom: 8px;\n"
@@ -249,7 +370,7 @@ class Ui_PairsVerifForm(object):
 "        subcontrol-position: bottom right;\n"
 "        border-radius: 10px;\n"
 "        text-align: center;\n"
-"        image: url(:/icons/fleche-vers-le-bas.png);\n"
+"image: url(:/icons/images/fleche-vers-le-bas.png);\n"
 "        border:none\n"
 "    }\n"
 "    \n"
@@ -261,18 +382,28 @@ class Ui_PairsVerifForm(object):
 "        background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 rgba(90, 255, 231, 255), stop:1 rgba(21, 205, 202, 255));\n"
 "        color: white;\n"
 "    }")
-        self.detectcomboBox_3.setObjectName("detectcomboBox_3")
-        self.detectcomboBox_3.addItem("")
-        self.detectcomboBox_3.addItem("")
-        self.horizontalLayout_10.addWidget(self.detectcomboBox_3)
-        self.verticalLayout_2.addWidget(self.frame_3)
-        spacerItem4 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout_2.addItem(spacerItem4)
-        self.frame_7 = QtWidgets.QFrame(self.frame)
-        self.frame_7.setObjectName("frame_7")
-        self.horizontalLayout_14 = QtWidgets.QHBoxLayout(self.frame_7)
+        self.featurelevelcombobox.setObjectName("featurelevelcombobox")
+        self.featurelevelcombobox.addItem("")
+        self.featurelevelcombobox.addItem("")
+        self.featurelevelcombobox.addItem("")
+        self.featurelevelcombobox.addItem("")
+        self.horizontalLayout_10.addWidget(self.featurelevelcombobox)
+        self.advancedlayout.addWidget(self.frame_3)
+        self.scorelevellabel = QtWidgets.QLabel(self.advancedwidget)
+        self.scorelevellabel.setStyleSheet("background-color: \"transparent\";\n"
+"color: rgb(255, 255, 255);\n"
+"font: 12pt \"Georgia\";\n"
+"padding-top:20px\n"
+"")
+        self.scorelevellabel.setAlignment(QtCore.Qt.AlignCenter)
+        self.scorelevellabel.setObjectName("scorelevellabel")
+        self.advancedlayout.addWidget(self.scorelevellabel)
+        self.scorelev = QtWidgets.QFrame(self.advancedwidget)
+        self.scorelev.setObjectName("scorelev")
+        self.horizontalLayout_14 = QtWidgets.QHBoxLayout(self.scorelev)
+        self.horizontalLayout_14.setContentsMargins(0, -1, 0, -1)
         self.horizontalLayout_14.setObjectName("horizontalLayout_14")
-        self.label_17 = QtWidgets.QLabel(self.frame_7)
+        self.label_17 = QtWidgets.QLabel(self.scorelev)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -281,80 +412,12 @@ class Ui_PairsVerifForm(object):
         self.label_17.setMinimumSize(QtCore.QSize(60, 30))
         self.label_17.setMaximumSize(QtCore.QSize(60, 50))
         self.label_17.setStyleSheet("color: rgb(255, 255, 255);")
-        self.label_17.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_17.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.label_17.setObjectName("label_17")
         self.horizontalLayout_14.addWidget(self.label_17)
-        self.stdnoise_2 = QtWidgets.QLineEdit(self.frame_7)
-        self.stdnoise_2.setEnabled(False)
-        self.stdnoise_2.setMaximumSize(QtCore.QSize(100, 30))
-        self.stdnoise_2.setStyleSheet("background-color: rgb(255, 255, 255);border-radius:10px;\n"
-"")
-        self.stdnoise_2.setMaxLength(6)
-        self.stdnoise_2.setObjectName("stdnoise_2")
-        self.horizontalLayout_14.addWidget(self.stdnoise_2)
-        self.verticalLayout_2.addWidget(self.frame_7)
-        self.frame_6 = QtWidgets.QFrame(self.frame)
-        self.frame_6.setObjectName("frame_6")
-        self.horizontalLayout_13 = QtWidgets.QHBoxLayout(self.frame_6)
-        self.horizontalLayout_13.setObjectName("horizontalLayout_13")
-        self.label_16 = QtWidgets.QLabel(self.frame_6)
-        self.label_16.setMinimumSize(QtCore.QSize(0, 30))
-        self.label_16.setMaximumSize(QtCore.QSize(16777215, 30))
-        self.label_16.setStyleSheet("color: rgb(255, 255, 255);")
-        self.label_16.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_16.setObjectName("label_16")
-        self.horizontalLayout_13.addWidget(self.label_16)
-        self.lowresvalue_2 = QtWidgets.QLineEdit(self.frame_6)
-        self.lowresvalue_2.setEnabled(False)
-        self.lowresvalue_2.setMinimumSize(QtCore.QSize(100, 30))
-        self.lowresvalue_2.setMaximumSize(QtCore.QSize(100, 30))
-        self.lowresvalue_2.setStyleSheet("background-color: rgb(255, 255, 255);border-radius:10px;\n"
-"")
-        self.lowresvalue_2.setInputMask("")
-        self.lowresvalue_2.setMaxLength(4)
-        self.lowresvalue_2.setObjectName("lowresvalue_2")
-        self.horizontalLayout_13.addWidget(self.lowresvalue_2)
-        self.verticalLayout_2.addWidget(self.frame_6)
-        spacerItem5 = QtWidgets.QSpacerItem(20, 230, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Maximum)
-        self.verticalLayout_2.addItem(spacerItem5)
-        self.frame_5 = QtWidgets.QFrame(self.frame)
-        self.frame_5.setObjectName("frame_5")
-        self.horizontalLayout_12 = QtWidgets.QHBoxLayout(self.frame_5)
-        self.horizontalLayout_12.setObjectName("horizontalLayout_12")
-        self.label_14 = QtWidgets.QLabel(self.frame_5)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.label_14.sizePolicy().hasHeightForWidth())
-        self.label_14.setSizePolicy(sizePolicy)
-        self.label_14.setMaximumSize(QtCore.QSize(60, 50))
-        self.label_14.setStyleSheet("color: rgb(255, 255, 255);")
-        self.label_14.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_14.setObjectName("label_14")
-        self.horizontalLayout_12.addWidget(self.label_14)
-        self.meannoise_2 = QtWidgets.QLineEdit(self.frame_5)
-        self.meannoise_2.setEnabled(False)
-        self.meannoise_2.setMinimumSize(QtCore.QSize(100, 30))
-        self.meannoise_2.setMaximumSize(QtCore.QSize(100, 30))
-        self.meannoise_2.setStyleSheet("background-color: rgb(255, 255, 255);border-radius:10px;\n"
-"")
-        self.meannoise_2.setMaxLength(6)
-        self.meannoise_2.setObjectName("meannoise_2")
-        self.horizontalLayout_12.addWidget(self.meannoise_2)
-        self.verticalLayout_2.addWidget(self.frame_5)
-        self.compressioncheckbox = QtWidgets.QCheckBox(self.frame)
-        self.compressioncheckbox.setEnabled(True)
-        self.compressioncheckbox.setStyleSheet("background-color: \"transparent\";\n"
-"color: rgb(255, 255, 255);\n"
-"font: 12pt \"Georgia\";\n"
-"padding-top:20px\n"
-"")
-        self.compressioncheckbox.setCheckable(True)
-        self.compressioncheckbox.setObjectName("compressioncheckbox")
-        self.verticalLayout_2.addWidget(self.compressioncheckbox)
-        self.detectcomboBox = QtWidgets.QComboBox(self.frame)
-        self.detectcomboBox.setEnabled(False)
-        self.detectcomboBox.setStyleSheet(" QComboBox {\n"
+        self.scorelevelcombobox = QtWidgets.QComboBox(self.scorelev)
+        self.scorelevelcombobox.setEnabled(False)
+        self.scorelevelcombobox.setStyleSheet(" QComboBox {\n"
 "        background-color: white;\n"
 "        font: 10pt \"Georgia\";\n"
 "        padding-bottom: 8px;\n"
@@ -368,7 +431,7 @@ class Ui_PairsVerifForm(object):
 "        subcontrol-position: bottom right;\n"
 "        border-radius: 10px;\n"
 "        text-align: center;\n"
-"        image: url(:/icons/fleche-vers-le-bas.png);\n"
+"image: url(:/icons/images/fleche-vers-le-bas.png);\n"
 "        border:none\n"
 "    }\n"
 "    \n"
@@ -379,41 +442,18 @@ class Ui_PairsVerifForm(object):
 "    QComboBox QAbstractItemView::item:hover {\n"
 "        background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 rgba(90, 255, 231, 255), stop:1 rgba(21, 205, 202, 255));\n"
 "        color: white;\n"
-"    }")
-        self.detectcomboBox.setObjectName("detectcomboBox")
-        self.detectcomboBox.addItem("")
-        self.detectcomboBox.addItem("")
-        self.verticalLayout_2.addWidget(self.detectcomboBox)
-        self.frame_4 = QtWidgets.QFrame(self.frame)
-        self.frame_4.setObjectName("frame_4")
-        self.horizontalLayout_11 = QtWidgets.QHBoxLayout(self.frame_4)
-        self.horizontalLayout_11.setObjectName("horizontalLayout_11")
-        self.label_13 = QtWidgets.QLabel(self.frame_4)
-        self.label_13.setMinimumSize(QtCore.QSize(0, 30))
-        self.label_13.setMaximumSize(QtCore.QSize(16777215, 30))
-        self.label_13.setStyleSheet("color: rgb(255, 255, 255);")
-        self.label_13.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_13.setObjectName("label_13")
-        self.horizontalLayout_11.addWidget(self.label_13)
-        self.compressionvalue_2 = QtWidgets.QLineEdit(self.frame_4)
-        self.compressionvalue_2.setEnabled(False)
-        self.compressionvalue_2.setMaximumSize(QtCore.QSize(100, 30))
-        self.compressionvalue_2.setStyleSheet("background-color: rgb(255, 255, 255);border-radius:10px;")
-        self.compressionvalue_2.setObjectName("compressionvalue_2")
-        self.horizontalLayout_11.addWidget(self.compressionvalue_2)
-        self.verticalLayout_2.addWidget(self.frame_4)
-        self.lrcheckbox = QtWidgets.QCheckBox(self.frame)
-        self.lrcheckbox.setStyleSheet("background-color: \"transparent\";\n"
-"color: rgb(255, 255, 255);\n"
-"font: 12pt \"Georgia\";\n"
-"padding-top:20px")
-        self.lrcheckbox.setObjectName("lrcheckbox")
-        self.verticalLayout_2.addWidget(self.lrcheckbox)
-        self.label = QtWidgets.QLabel(self.frame)
-        self.label.setObjectName("label")
-        self.verticalLayout_2.addWidget(self.label)
-        self.horizontalLayout.addWidget(self.frame)
-        self.menuscroll.setWidget(self.scrollAreaWidgetContents)
+"    }\n"
+"")
+        self.scorelevelcombobox.setObjectName("scorelevelcombobox")
+        self.scorelevelcombobox.addItem("")
+        self.scorelevelcombobox.addItem("")
+        self.scorelevelcombobox.addItem("")
+        self.horizontalLayout_14.addWidget(self.scorelevelcombobox)
+        self.advancedlayout.addWidget(self.scorelev)
+        self.verticalLayout_2.addWidget(self.advancedwidget)
+        spacerItem1 = QtWidgets.QSpacerItem(20, 150, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Maximum)
+        self.verticalLayout_2.addItem(spacerItem1)
+        self.horizontalLayout_2.addWidget(self.rightmenubar)
 
         self.retranslateUi(PairsVerifForm)
         QtCore.QMetaObject.connectSlotsByName(PairsVerifForm)
@@ -421,32 +461,40 @@ class Ui_PairsVerifForm(object):
     def retranslateUi(self, PairsVerifForm):
         _translate = QtCore.QCoreApplication.translate
         PairsVerifForm.setWindowTitle(_translate("PairsVerifForm", "Form"))
+        self.randomHQ.setText(_translate("PairsVerifForm", "random HQ image"))
+        self.randomLQ.setText(_translate("PairsVerifForm", "Random LQ image"))
         self.apply_pairs_verif_btn.setText(_translate("PairsVerifForm", "apply"))
-        self.accuracy.setText(_translate("PairsVerifForm", "acc"))
-        self.threshold.setText(_translate("PairsVerifForm", "threshold"))
+        self.result.setText(_translate("PairsVerifForm", "Click Apply! The result will show here"))
+        self.label_3.setText(_translate("PairsVerifForm", "Similarity Score"))
+        self.accuracy.setText(_translate("PairsVerifForm", "-"))
+        self.label_4.setText(_translate("PairsVerifForm", "Threshold:  "))
+        self.threshold.setText(_translate("PairsVerifForm", "-"))
         self.label_11.setText(_translate("PairsVerifForm", "Settings"))
-        self.label_15.setText(_translate("PairsVerifForm", "Model"))
-        self.detectcomboBox_2.setItemText(0, _translate("PairsVerifForm", "AdaFace"))
-        self.detectcomboBox_2.setItemText(1, _translate("PairsVerifForm", "MagFace"))
-        self.detectcomboBox_2.setItemText(2, _translate("PairsVerifForm", "ArcFace"))
-        self.label_18.setText(_translate("PairsVerifForm", "Preprocessing"))
-        self.noisecheckBox.setText(_translate("PairsVerifForm", "Alignement"))
-        self.noisecheckBox_2.setText(_translate("PairsVerifForm", "Crop"))
+        self.recognitionlabem.setText(_translate("PairsVerifForm", "Recognition"))
+        self.label_2.setText(_translate("PairsVerifForm", "model"))
+        self.recognitionmodel.setItemText(0, _translate("PairsVerifForm", "AdaFace"))
+        self.recognitionmodel.setItemText(1, _translate("PairsVerifForm", "MagFace"))
+        self.recognitionmodel.setItemText(2, _translate("PairsVerifForm", "ArcFace"))
         self.label_10.setText(_translate("PairsVerifForm", "Restoration"))
-        self.detectcheckBox.setText(_translate("PairsVerifForm", "Classical"))
-        self.blurcheckbox.setText(_translate("PairsVerifForm", "Advanced"))
-        self.label_12.setText(_translate("PairsVerifForm", "levels"))
-        self.detectcomboBox_3.setItemText(0, _translate("PairsVerifForm", "1"))
-        self.detectcomboBox_3.setItemText(1, _translate("PairsVerifForm", "2"))
-        self.label_17.setText(_translate("PairsVerifForm", "std"))
-        self.label_16.setText(_translate("PairsVerifForm", "scale"))
-        self.label_14.setText(_translate("PairsVerifForm", "mean"))
-        self.compressioncheckbox.setText(_translate("PairsVerifForm", "Compression"))
-        self.detectcomboBox.setItemText(0, _translate("PairsVerifForm", "RetinaFace"))
-        self.detectcomboBox.setItemText(1, _translate("PairsVerifForm", "MTCNN"))
-        self.label_13.setText(_translate("PairsVerifForm", "quality"))
-        self.lrcheckbox.setText(_translate("PairsVerifForm", "Low Resolution"))
-        self.label.setText(_translate("PairsVerifForm", "TextLabel"))
+        self.classic_checkbox.setText(_translate("PairsVerifForm", "Classical"))
+        self.rest_model_classic.setItemText(0, _translate("PairsVerifForm", "GFPGAN"))
+        self.rest_model_classic.setItemText(1, _translate("PairsVerifForm", "GPEN"))
+        self.rest_model_classic.setItemText(2, _translate("PairsVerifForm", "SGPN"))
+        self.advancedcheckbox.setText(_translate("PairsVerifForm", "Advanced"))
+        self.typefusioncombobox.setItemText(0, _translate("PairsVerifForm", "feature fusion"))
+        self.typefusioncombobox.setItemText(1, _translate("PairsVerifForm", "score fusion"))
+        self.typefusioncombobox.setItemText(2, _translate("PairsVerifForm", "hybrid fusion"))
+        self.label.setText(_translate("PairsVerifForm", "feature level fusion"))
+        self.label_12.setText(_translate("PairsVerifForm", "models"))
+        self.featurelevelcombobox.setItemText(0, _translate("PairsVerifForm", "GPEN_SGPN"))
+        self.featurelevelcombobox.setItemText(1, _translate("PairsVerifForm", "GPEN_GFPGAN"))
+        self.featurelevelcombobox.setItemText(2, _translate("PairsVerifForm", "SGPN_GFPGAN"))
+        self.featurelevelcombobox.setItemText(3, _translate("PairsVerifForm", "ALL"))
+        self.scorelevellabel.setText(_translate("PairsVerifForm", "score level fusion"))
+        self.label_17.setText(_translate("PairsVerifForm", "models"))
+        self.scorelevelcombobox.setItemText(0, _translate("PairsVerifForm", "GPEN_GFPGAN"))
+        self.scorelevelcombobox.setItemText(1, _translate("PairsVerifForm", "GPEN_SGPN"))
+        self.scorelevelcombobox.setItemText(2, _translate("PairsVerifForm", "SGPN_GFPGAN"))
 import ressources_rc
 
 
