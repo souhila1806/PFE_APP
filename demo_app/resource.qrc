@@ -1,0 +1,7 @@
+<RCC>
+  <qresource prefix="icon">
+    <file>C:/Users/HP/Downloads/reglages.png</file>
+    <file>details.png</file>
+    <file>images/details.png</file>
+  </qresource>
+</RCC>
