@@ -29,11 +29,7 @@ class Ui_Form(object):
 "font-weight:bold;\n"
 "\n"
 "}\n"
-"#HQBT,#LQBT,#ApplyBT{\n"
-"font-size:13px;\n"
-"color:rgba(255, 255, 255, 1);\n"
-"background-color:rgba(168, 171, 179, 1);\n"
-"}\n"
+"\n"
 "\n"
 "QPushButton {\n"
 "    border-radius: 13px; /* Adjust the value to change the roundness */\n"
@@ -96,7 +92,7 @@ class Ui_Form(object):
         self.selectionIcon.setSizePolicy(sizePolicy)
         self.selectionIcon.setMaximumSize(QtCore.QSize(30, 30))
         self.selectionIcon.setText("")
-        self.selectionIcon.setPixmap(QtGui.QPixmap(":/icon1/C:/Users/HP/Downloads/identifiant-du-visage.png"))
+        self.selectionIcon.setPixmap(QtGui.QPixmap(":/icons/images/identifiant-du-visage 1.png"))
         self.selectionIcon.setScaledContents(True)
         self.selectionIcon.setObjectName("selectionIcon")
         self.horizontalLayout_2.addWidget(self.selectionIcon)
@@ -108,6 +104,7 @@ class Ui_Form(object):
         self.selectionLB.setSizePolicy(sizePolicy)
         self.selectionLB.setMinimumSize(QtCore.QSize(620, 0))
         self.selectionLB.setMaximumSize(QtCore.QSize(433, 90))
+        self.selectionLB.setStyleSheet("font: 75 12pt \"Georgia\";")
         self.selectionLB.setObjectName("selectionLB")
         self.horizontalLayout_2.addWidget(self.selectionLB)
         self.HQBT = QtWidgets.QPushButton(self.frame_2)
@@ -116,13 +113,17 @@ class Ui_Form(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.HQBT.sizePolicy().hasHeightForWidth())
         self.HQBT.setSizePolicy(sizePolicy)
-        self.HQBT.setMinimumSize(QtCore.QSize(90, 37))
+        self.HQBT.setMinimumSize(QtCore.QSize(90, 35))
         self.HQBT.setMaximumSize(QtCore.QSize(120, 50))
+        self.HQBT.setStyleSheet("background-color: rgb(170, 170, 170);border-radius: 10px;color:rgb(255, 255, 255);\n"
+"font: 75 10pt \"Georgia\";")
         self.HQBT.setObjectName("HQBT")
         self.horizontalLayout_2.addWidget(self.HQBT)
         self.LQBT = QtWidgets.QPushButton(self.frame_2)
         self.LQBT.setMinimumSize(QtCore.QSize(90, 35))
         self.LQBT.setMaximumSize(QtCore.QSize(120, 50))
+        self.LQBT.setStyleSheet("background-color: rgb(170, 170, 170);border-radius: 10px;color:rgb(255, 255, 255);\n"
+"font: 75 10pt \"Georgia\";")
         self.LQBT.setObjectName("LQBT")
         self.horizontalLayout_2.addWidget(self.LQBT)
         self.ApplyBT = QtWidgets.QPushButton(self.frame_2)
@@ -131,8 +132,10 @@ class Ui_Form(object):
         sizePolicy.setVerticalStretch(10)
         sizePolicy.setHeightForWidth(self.ApplyBT.sizePolicy().hasHeightForWidth())
         self.ApplyBT.setSizePolicy(sizePolicy)
-        self.ApplyBT.setMinimumSize(QtCore.QSize(90, 30))
+        self.ApplyBT.setMinimumSize(QtCore.QSize(90, 35))
         self.ApplyBT.setMaximumSize(QtCore.QSize(120, 50))
+        self.ApplyBT.setStyleSheet("background-color: rgb(170, 170, 170);border-radius: 10px;color:rgb(255, 255, 255);\n"
+"font: 75 10pt \"Georgia\";")
         self.ApplyBT.setObjectName("ApplyBT")
         self.horizontalLayout_2.addWidget(self.ApplyBT)
         self.verticalLayout_2.addWidget(self.frame_2)
@@ -211,7 +214,7 @@ class Ui_Form(object):
         self.detailsIcon.setSizePolicy(sizePolicy)
         self.detailsIcon.setMaximumSize(QtCore.QSize(30, 30))
         self.detailsIcon.setText("")
-        self.detailsIcon.setPixmap(QtGui.QPixmap(":/icon/images/details.png"))
+        self.detailsIcon.setPixmap(QtGui.QPixmap(":/icons/images/details.png"))
         self.detailsIcon.setScaledContents(True)
         self.detailsIcon.setObjectName("detailsIcon")
         self.gridLayout_2.addWidget(self.detailsIcon, 0, 0, 1, 1)
@@ -244,7 +247,7 @@ class Ui_Form(object):
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.frame_10)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         self.frame_16 = QtWidgets.QFrame(self.frame_10)
-        self.frame_16.setMaximumSize(QtCore.QSize(150, 16777215))
+        self.frame_16.setMaximumSize(QtCore.QSize(120, 16777215))
         self.frame_16.setStyleSheet("background-color:rgba(47, 61, 78, 1);")
         self.frame_16.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_16.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -383,7 +386,7 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.selectionLB.setText(_translate("Form", "Drop an image from your computer or select a random image from LFW or XQLFW"))
+        self.selectionLB.setText(_translate("Form", "Select a random image from LFW or XQLFW"))
         self.HQBT.setText(_translate("Form", "HQ image"))
         self.LQBT.setText(_translate("Form", "LQ image"))
         self.ApplyBT.setText(_translate("Form", "Apply"))
@@ -409,6 +412,7 @@ class Ui_Form(object):
         self.ppn.setText(_translate("Form", "-"))
         self.lppn.setText(_translate("Form", "-"))
 import resource_rc
+import ressources_rc
 
 
 if __name__ == "__main__":

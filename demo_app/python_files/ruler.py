@@ -20,8 +20,8 @@ class RulerWidget(QWidget):
             height = self.height()
 
             # Add some space above the ruler
-            ruler_top_padding = 30
-            ruler_height = height - 40 - ruler_top_padding
+            ruler_top_padding = 50
+            ruler_height = height - 20 - ruler_top_padding
             padding = 40  # Adjust the amount of padding as desired
 
             # Calculate the adjusted width and x positions

@@ -89,7 +89,7 @@ class Ui_FoldsVerifForm(object):
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.buttonspace)
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
         self.label_21 = QtWidgets.QLabel(self.buttonspace)
-        self.label_21.setMaximumSize(QtCore.QSize(150, 50))
+        self.label_21.setMaximumSize(QtCore.QSize(180, 50))
         self.label_21.setStyleSheet("background-color: \"transparent\";\n"
 "color: rgb(255, 255, 255);\n"
 "font: 10pt \"Georgia\";\n"
@@ -226,7 +226,7 @@ class Ui_FoldsVerifForm(object):
         self.imagespace = QtWidgets.QFrame(self.workingspace)
         self.imagespace.setObjectName("imagespace")
         self.tabsPages = QtWidgets.QTabWidget(self.imagespace)
-        self.tabsPages.setGeometry(QtCore.QRect(20, 10, 850, 452))
+        self.tabsPages.setGeometry(QtCore.QRect(20, 10, 850, 480))
         self.tabsPages.setMinimumSize(QtCore.QSize(711, 0))
         self.tabsPages.setMaximumSize(QtCore.QSize(870, 16777215))
         self.tabsPages.setStyleSheet("QTabWidget::pane {\n"
@@ -237,10 +237,10 @@ class Ui_FoldsVerifForm(object):
         self.distribution = QtWidgets.QWidget()
         self.distribution.setObjectName("distribution")
         self.gridLayout_2 = QtWidgets.QGridLayout(self.distribution)
-        self.gridLayout_2.setContentsMargins(0, -1, 0, 0)
+        self.gridLayout_2.setContentsMargins(0, 0, 0, 0)
         self.gridLayout_2.setObjectName("gridLayout_2")
         self.dist_plot = QtWidgets.QFrame(self.distribution)
-        self.dist_plot.setMinimumSize(QtCore.QSize(708, 380))
+        self.dist_plot.setMinimumSize(QtCore.QSize(708, 430))
         self.dist_plot.setMaximumSize(QtCore.QSize(865, 480))
         self.dist_plot.setStyleSheet("background-color:rgb(83, 83, 83);\n"
 "border-radius: 10px;")
@@ -263,10 +263,10 @@ class Ui_FoldsVerifForm(object):
         self.roccurve = QtWidgets.QWidget()
         self.roccurve.setObjectName("roccurve")
         self.gridLayout_8 = QtWidgets.QGridLayout(self.roccurve)
-        self.gridLayout_8.setContentsMargins(0, -1, 0, 0)
+        self.gridLayout_8.setContentsMargins(0, 0, 0, 0)
         self.gridLayout_8.setObjectName("gridLayout_8")
         self.roccurve_plot = QtWidgets.QFrame(self.roccurve)
-        self.roccurve_plot.setMinimumSize(QtCore.QSize(708, 380))
+        self.roccurve_plot.setMinimumSize(QtCore.QSize(708, 430))
         self.roccurve_plot.setMaximumSize(QtCore.QSize(865, 480))
         self.roccurve_plot.setStyleSheet("background-color:rgb(83, 83, 83);\n"
 "border-radius: 10px;")
@@ -289,10 +289,10 @@ class Ui_FoldsVerifForm(object):
         self.magnitude = QtWidgets.QWidget()
         self.magnitude.setObjectName("magnitude")
         self.gridLayout_9 = QtWidgets.QGridLayout(self.magnitude)
-        self.gridLayout_9.setContentsMargins(0, -1, 0, 0)
+        self.gridLayout_9.setContentsMargins(0, 0, 0, 0)
         self.gridLayout_9.setObjectName("gridLayout_9")
         self.magnitudeplot = QtWidgets.QFrame(self.magnitude)
-        self.magnitudeplot.setMinimumSize(QtCore.QSize(708, 380))
+        self.magnitudeplot.setMinimumSize(QtCore.QSize(708, 430))
         self.magnitudeplot.setMaximumSize(QtCore.QSize(865, 480))
         self.magnitudeplot.setStyleSheet("background-color:rgb(83, 83, 83);\n"
 "border-radius: 10px;")
@@ -315,7 +315,7 @@ class Ui_FoldsVerifForm(object):
         self.simindex = QtWidgets.QWidget()
         self.simindex.setObjectName("simindex")
         self.gridLayout_10 = QtWidgets.QGridLayout(self.simindex)
-        self.gridLayout_10.setContentsMargins(0, -1, 0, 0)
+        self.gridLayout_10.setContentsMargins(0, 0, 0, 0)
         self.gridLayout_10.setObjectName("gridLayout_10")
         self.simindexplot = QtWidgets.QFrame(self.simindex)
         self.simindexplot.setMinimumSize(QtCore.QSize(708, 380))
@@ -342,7 +342,7 @@ class Ui_FoldsVerifForm(object):
         self.fusionregression.setEnabled(True)
         self.fusionregression.setObjectName("fusionregression")
         self.gridLayout_11 = QtWidgets.QGridLayout(self.fusionregression)
-        self.gridLayout_11.setContentsMargins(0, -1, 0, 0)
+        self.gridLayout_11.setContentsMargins(0, 0, 0, 0)
         self.gridLayout_11.setObjectName("gridLayout_11")
         self.fusionregressionplot = QtWidgets.QFrame(self.fusionregression)
         self.fusionregressionplot.setMinimumSize(QtCore.QSize(708, 380))
@@ -404,7 +404,7 @@ class Ui_FoldsVerifForm(object):
         self.label_3 = QtWidgets.QLabel(self.horizontalFrame)
         self.label_3.setStyleSheet("background-color: \"transparent\";\n"
 "color: rgb(255, 255, 255);\n"
-"font: 10pt \"Georgia\";\n"
+"font: 12pt \"Georgia\";\n"
 "padding-top:20px")
         self.label_3.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_3.setObjectName("label_3")
@@ -421,7 +421,7 @@ class Ui_FoldsVerifForm(object):
         self.label_4 = QtWidgets.QLabel(self.horizontalFrame)
         self.label_4.setStyleSheet("background-color: \"transparent\";\n"
 "color: rgb(255, 255, 255);\n"
-"font: 10pt \"Georgia\";\n"
+"font: 12pt \"Georgia\";\n"
 "padding-top:20px")
         self.label_4.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_4.setObjectName("label_4")
@@ -438,7 +438,7 @@ class Ui_FoldsVerifForm(object):
         self.label_5 = QtWidgets.QLabel(self.horizontalFrame)
         self.label_5.setStyleSheet("background-color: \"transparent\";\n"
 "color: rgb(255, 255, 255);\n"
-"font: 10pt \"Georgia\";\n"
+"font: 12pt \"Georgia\";\n"
 "padding-top:20px")
         self.label_5.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_5.setObjectName("label_5")
@@ -453,7 +453,7 @@ class Ui_FoldsVerifForm(object):
         self.label_7 = QtWidgets.QLabel(self.horizontalFrame)
         self.label_7.setStyleSheet("background-color: \"transparent\";\n"
 "color: rgb(255, 255, 255);\n"
-"font: 10pt \"Georgia\";\n"
+"font: 12pt \"Georgia\";\n"
 "padding-top:20px")
         self.label_7.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_7.setObjectName("label_7")
@@ -523,7 +523,7 @@ class Ui_FoldsVerifForm(object):
         self.horizontalLayout.setSpacing(0)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.label_2 = QtWidgets.QLabel(self.frame_4)
-        self.label_2.setMaximumSize(QtCore.QSize(60, 50))
+        self.label_2.setMaximumSize(QtCore.QSize(43, 50))
         self.label_2.setStyleSheet("color: rgb(255, 255, 255);")
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")
@@ -609,11 +609,10 @@ class Ui_FoldsVerifForm(object):
         self.rest_model_classic.addItem("")
         self.rest_model_classic.addItem("")
         self.verticalLayout_2.addWidget(self.rest_model_classic)
-        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout_2.addItem(spacerItem)
         self.advancedwidget = QtWidgets.QWidget(self.rightmenubar)
         self.advancedwidget.setObjectName("advancedwidget")
         self.advancedlayout = QtWidgets.QVBoxLayout(self.advancedwidget)
+        self.advancedlayout.setContentsMargins(0, -1, -1, -1)
         self.advancedlayout.setObjectName("advancedlayout")
         self.advancedcheckbox = QtWidgets.QCheckBox(self.advancedwidget)
         self.advancedcheckbox.setStyleSheet("background-color: \"transparent\";\n"
@@ -735,8 +734,8 @@ class Ui_FoldsVerifForm(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.label_17.sizePolicy().hasHeightForWidth())
         self.label_17.setSizePolicy(sizePolicy)
-        self.label_17.setMinimumSize(QtCore.QSize(60, 30))
-        self.label_17.setMaximumSize(QtCore.QSize(60, 50))
+        self.label_17.setMinimumSize(QtCore.QSize(43, 30))
+        self.label_17.setMaximumSize(QtCore.QSize(43, 50))
         self.label_17.setStyleSheet("color: rgb(255, 255, 255);")
         self.label_17.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.label_17.setObjectName("label_17")
@@ -777,8 +776,8 @@ class Ui_FoldsVerifForm(object):
         self.horizontalLayout_14.addWidget(self.scorelevelcombobox)
         self.advancedlayout.addWidget(self.scorelev)
         self.verticalLayout_2.addWidget(self.advancedwidget)
-        spacerItem1 = QtWidgets.QSpacerItem(20, 150, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Maximum)
-        self.verticalLayout_2.addItem(spacerItem1)
+        spacerItem = QtWidgets.QSpacerItem(20, 1000, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Maximum)
+        self.verticalLayout_2.addItem(spacerItem)
         self.horizontalLayout_2.addWidget(self.rightmenubar)
 
         self.retranslateUi(FoldsVerifForm)
@@ -835,7 +834,7 @@ class Ui_FoldsVerifForm(object):
         self.recognitionmodel.setItemText(1, _translate("FoldsVerifForm", "MagFace"))
         self.recognitionmodel.setItemText(2, _translate("FoldsVerifForm", "ArcFace"))
         self.label_10.setText(_translate("FoldsVerifForm", "Restoration"))
-        self.classic_checkbox.setText(_translate("FoldsVerifForm", "Classical"))
+        self.classic_checkbox.setText(_translate("FoldsVerifForm", "Classic"))
         self.rest_model_classic.setItemText(0, _translate("FoldsVerifForm", "GFPGAN"))
         self.rest_model_classic.setItemText(1, _translate("FoldsVerifForm", "GPEN"))
         self.advancedcheckbox.setText(_translate("FoldsVerifForm", "Advanced"))

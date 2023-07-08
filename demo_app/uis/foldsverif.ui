@@ -146,7 +146,7 @@ QTabBar::tab:disabled {
           <widget class="QLabel" name="label_21">
            <property name="maximumSize">
             <size>
-             <width>150</width>
+             <width>180</width>
              <height>50</height>
             </size>
            </property>
@@ -394,7 +394,7 @@ font: 75 10pt &quot;Georgia&quot;;</string>
            <x>20</x>
            <y>10</y>
            <width>850</width>
-           <height>452</height>
+           <height>480</height>
           </rect>
          </property>
          <property name="minimumSize">
@@ -428,6 +428,9 @@ font: 75 10pt &quot;Georgia&quot;;</string>
            <property name="leftMargin">
             <number>0</number>
            </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
            <property name="rightMargin">
             <number>0</number>
            </property>
@@ -439,7 +442,7 @@ font: 75 10pt &quot;Georgia&quot;;</string>
              <property name="minimumSize">
               <size>
                <width>708</width>
-               <height>380</height>
+               <height>430</height>
               </size>
              </property>
              <property name="maximumSize">
@@ -506,6 +509,9 @@ padding-top:20px
            <property name="leftMargin">
             <number>0</number>
            </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
            <property name="rightMargin">
             <number>0</number>
            </property>
@@ -517,7 +523,7 @@ padding-top:20px
              <property name="minimumSize">
               <size>
                <width>708</width>
-               <height>380</height>
+               <height>430</height>
               </size>
              </property>
              <property name="maximumSize">
@@ -584,6 +590,9 @@ padding-top:20px
            <property name="leftMargin">
             <number>0</number>
            </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
            <property name="rightMargin">
             <number>0</number>
            </property>
@@ -595,7 +604,7 @@ padding-top:20px
              <property name="minimumSize">
               <size>
                <width>708</width>
-               <height>380</height>
+               <height>430</height>
               </size>
              </property>
              <property name="maximumSize">
@@ -660,6 +669,9 @@ padding-top:20px
           </attribute>
           <layout class="QGridLayout" name="gridLayout_10">
            <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
             <number>0</number>
            </property>
            <property name="rightMargin">
@@ -741,6 +753,9 @@ padding-top:20px
           </attribute>
           <layout class="QGridLayout" name="gridLayout_11">
            <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
             <number>0</number>
            </property>
            <property name="rightMargin">
@@ -914,7 +929,7 @@ padding-top:20px
               <property name="styleSheet">
                <string notr="true">background-color: &quot;transparent&quot;;
 color: rgb(255, 255, 255);
-font: 10pt &quot;Georgia&quot;;
+font: 12pt &quot;Georgia&quot;;
 padding-top:20px</string>
               </property>
               <property name="text">
@@ -952,7 +967,7 @@ padding-top:20px</string>
               <property name="styleSheet">
                <string notr="true">background-color: &quot;transparent&quot;;
 color: rgb(255, 255, 255);
-font: 10pt &quot;Georgia&quot;;
+font: 12pt &quot;Georgia&quot;;
 padding-top:20px</string>
               </property>
               <property name="text">
@@ -990,7 +1005,7 @@ padding-top:20px</string>
               <property name="styleSheet">
                <string notr="true">background-color: &quot;transparent&quot;;
 color: rgb(255, 255, 255);
-font: 10pt &quot;Georgia&quot;;
+font: 12pt &quot;Georgia&quot;;
 padding-top:20px</string>
               </property>
               <property name="text">
@@ -1019,7 +1034,7 @@ padding-top:20px</string>
               <property name="styleSheet">
                <string notr="true">background-color: &quot;transparent&quot;;
 color: rgb(255, 255, 255);
-font: 10pt &quot;Georgia&quot;;
+font: 12pt &quot;Georgia&quot;;
 padding-top:20px</string>
               </property>
               <property name="text">
@@ -1200,7 +1215,7 @@ padding-top:20px</string>
           <widget class="QLabel" name="label_2">
            <property name="maximumSize">
             <size>
-             <width>60</width>
+             <width>43</width>
              <height>50</height>
             </size>
            </property>
@@ -1293,7 +1308,7 @@ font: 12pt &quot;Georgia&quot;;
 padding-top:20px</string>
         </property>
         <property name="text">
-         <string>Classical</string>
+         <string>Classic</string>
         </property>
        </widget>
       </item>
@@ -1343,21 +1358,11 @@ padding-top:20px</string>
        </widget>
       </item>
       <item>
-       <spacer name="verticalSpacer_4">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
        <widget class="QWidget" name="advancedwidget" native="true">
         <layout class="QVBoxLayout" name="advancedlayout">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
          <item>
           <widget class="QCheckBox" name="advancedcheckbox">
            <property name="styleSheet">
@@ -1566,13 +1571,13 @@ padding-top:20px
               </property>
               <property name="minimumSize">
                <size>
-                <width>60</width>
+                <width>43</width>
                 <height>30</height>
                </size>
               </property>
               <property name="maximumSize">
                <size>
-                <width>60</width>
+                <width>43</width>
                 <height>50</height>
                </size>
               </property>
@@ -1655,7 +1660,7 @@ padding-top:20px
         <property name="sizeHint" stdset="0">
          <size>
           <width>20</width>
-          <height>150</height>
+          <height>1000</height>
          </size>
         </property>
        </spacer>

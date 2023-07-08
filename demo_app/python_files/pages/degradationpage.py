@@ -54,41 +54,16 @@ class ImageLabel(QtWidgets.QLabel):
             event.ignore()
 
     def set_image(self, file_path, change_path=True):
-        desired_width = 400
-        desired_height = 400
+        desired_width = 350
+        desired_height = 350
 
         if change_path:
             self.imagePath = file_path
             print(file_path)
         image = QImage(file_path)
-
-        # Get the original image size
-        original_width = image.width()
-        original_height = image.height()
-
-        # Check if the image size is greater than the desired size
-        if original_width > desired_width or original_height > desired_height:
-            # Calculate the scaled width and height while preserving the aspect ratio
-            scaled_width = original_width
-            scaled_height = original_height
-            aspect_ratio = scaled_width / scaled_height
-
-            if scaled_width > desired_width:
-                scaled_width = desired_width
-                scaled_height = int(scaled_width / aspect_ratio)
-
-            if scaled_height > desired_height:
-                scaled_height = desired_height
-                scaled_width = int(scaled_height * aspect_ratio)
-
-            # Create a QPixmap and resize it
-            pixmap = QPixmap.fromImage(image).scaled(scaled_width, scaled_height)
-        else:
-            # Use the original image as it is
-            pixmap = QPixmap.fromImage(image)
-        # Create a QPixmap and resize it
-        #pixmap = QPixmap.fromImage(image).scaled(desired_width, desired_height)
+        pixmap = QPixmap.fromImage(image).scaled(desired_width, desired_height, QtCore.Qt.KeepAspectRatio)
         self.setPixmap(pixmap)
+
 
 
 # class for loading

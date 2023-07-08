@@ -34,41 +34,15 @@ class ImageViewer(QtWidgets.QLabel):
     def setPixmap(self, image):
         super().setPixmap(image)
 
-
     def set_image(self, file_path, change_path=True):
-        desired_width = 400
-        desired_height = 400
+        desired_width = 350
+        desired_height = 350
 
         if change_path:
             self.imagePath = file_path
             print(file_path)
         image = QImage(file_path)
-
-        # Get the original image size
-        original_width = image.width()
-        original_height = image.height()
-
-        # Check if the image size is greater than the desired size
-        if original_width > desired_width or original_height > desired_height:
-            # Calculate the scaled width and height while preserving the aspect ratio
-            scaled_width = original_width
-            scaled_height = original_height
-            aspect_ratio = scaled_width / scaled_height
-
-            if scaled_width > desired_width:
-                scaled_width = desired_width
-                scaled_height = int(scaled_width / aspect_ratio)
-
-            if scaled_height > desired_height:
-                scaled_height = desired_height
-                scaled_width = int(scaled_height * aspect_ratio)
-
-            # Create a QPixmap and resize it
-            pixmap = QPixmap.fromImage(image).scaled(scaled_width, scaled_height)
-        else:
-            # Use the original image as it is
-            pixmap = QPixmap.fromImage(image)
-        # Create a QPixmap and resize it
+        pixmap = QPixmap.fromImage(image).scaled(desired_width, desired_height, QtCore.Qt.KeepAspectRatio)
         self.setPixmap(pixmap)
 
 class PairsVerificationClass(QtWidgets.QMainWindow):
@@ -79,13 +53,25 @@ class PairsVerificationClass(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         self.setObjectName("pairsVerifPage")
         self.ui.rightmenubar.move(900, 0)
+        lay1=self.ui.labelsnames
+        lay2=self.ui.imagespace
+        lay3 = self.ui.resultspace
+        self.ui.workingspace.layout().removeWidget(lay1)
+        self.ui.workingspace.layout().removeWidget(lay2)
+        self.ui.workingspace.layout().removeWidget(lay3)
+        self.ui.workingspace.layout().addWidget(lay2)
+        self.ui.workingspace.layout().addWidget(lay1)
+        self.ui.workingspace.layout().addWidget(lay3)
         self.ui.apply_pairs_verif_btn.clicked.connect(self.applyVerif)
         self.ui.randomHQ.clicked.connect(self.hqrandom)
         self.ui.randomLQ.clicked.connect(self.lqrandom)
         self.init_checkboxes()
         self.init_images()
         self.ruler = RulerWidget()
+        lay1=self.ui.values
+        self.ui.resultspace.layout().removeWidget(lay1)
         self.ui.resultspace.layout().addWidget(self.ruler)
+        self.ui.resultspace.layout().addWidget(lay1)
 
 
     def lqrandom(self):
@@ -102,6 +88,8 @@ class PairsVerificationClass(QtWidgets.QMainWindow):
         imagePath2 = os.path.join(directory, filename2)
         self.photoViewerOne.set_image(imagePath1)
         self.photoViewerTwo.set_image(imagePath2)
+        self.ui.name1.setText(filename1[:-9])
+        self.ui.name2.setText(filename2[:-9])
         self.enableApplyFunc()
     def hqrandom(self):
         try:
@@ -114,6 +102,8 @@ class PairsVerificationClass(QtWidgets.QMainWindow):
 
             self.photoViewerOne.set_image(imagePath1)
             self.photoViewerTwo.set_image(imagePath2)
+            self.ui.name1.setText(filename1[:-9])
+            self.ui.name2.setText(filename2[:-9])
             self.ui.rest_model_classic.clear()
             self.ui.rest_model_classic.addItem("GFPGAN")
             self.ui.rest_model_classic.addItem("GPEN")

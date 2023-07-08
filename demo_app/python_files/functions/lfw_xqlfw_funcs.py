@@ -3,7 +3,7 @@ import pandas as pd
 from python_files.utils import get_name_num_from_img, calcul_threshold_acc
 
 def verif_pair(dataset,path_img1,path_img2,rec_model,rest=None):
-    data=pd.read_csv(rf"demo_app\data\files\{dataset.lower()}_scores.csv")
+    data=pd.read_csv(rf"data\files\{dataset.lower()}_scores.csv")
     data['image1'] = data['image1'].astype(int)
     data['image2'] = data['image2'].astype(int)
     name1, img1 = get_name_num_from_img(path_img1)
@@ -22,7 +22,7 @@ def verif_pair(dataset,path_img1,path_img2,rec_model,rest=None):
     return score, threshold,far,frr
 
 def verif_fold(dataset,nb_fold,rec_model,rest=None):
-    data=pd.read_csv(rf"demo_app\data\files\{dataset.lower()}_scores.csv")
+    data=pd.read_csv(rf"data\files\{dataset.lower()}_scores.csv")
     data['image1'] = data['image1'].astype(int)
     data['image2'] = data['image2'].astype(int)
     if rest == None:
@@ -38,7 +38,7 @@ def verif_all(dataset,rec_model,rest=None):
     ACC = []
     FAR = []
     FRR = []
-    data=pd.read_csv(rf"demo_app\data\files\{dataset.lower()}_scores.csv")
+    data=pd.read_csv(rf"data\files\{dataset.lower()}_scores.csv")
     data['image1'] = data['image1'].astype(int)
     data['image2'] = data['image2'].astype(int)
     if rest == None:

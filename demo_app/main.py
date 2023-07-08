@@ -61,7 +61,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.ui.restoration_btn.setStyleSheet(unactive_ss)
             self.ui.verification.setStyleSheet(unactive_ss)
 
-        elif current_page=="pairrestorationpage" or current_page== "foldsrestorationpage":
+        elif current_page=="ImageResForm" or current_page== "FoldsResForm":
             # activate
             self.ui.restoration_btn.setStyleSheet(active_ss)
             # unactivate

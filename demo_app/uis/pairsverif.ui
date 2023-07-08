@@ -103,7 +103,7 @@
            <property name="maximumSize">
             <size>
              <width>200</width>
-             <height>40</height>
+             <height>47</height>
             </size>
            </property>
            <property name="styleSheet">
@@ -122,7 +122,7 @@ background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0
            <property name="maximumSize">
             <size>
              <width>200</width>
-             <height>40</height>
+             <height>47</height>
             </size>
            </property>
            <property name="styleSheet">
@@ -143,7 +143,7 @@ background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0
            <property name="maximumSize">
             <size>
              <width>200</width>
-             <height>40</height>
+             <height>47</height>
             </size>
            </property>
            <property name="styleSheet">
@@ -159,8 +159,73 @@ font: 75 10pt &quot;Georgia&quot;;</string>
        </widget>
       </item>
       <item>
+       <widget class="QFrame" name="labelsnames">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>60</height>
+         </size>
+        </property>
+        <layout class="QHBoxLayout" name="names">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="name1">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>50</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: &quot;transparent&quot;;
+color: rgb(255, 255, 255);
+font: 12pt &quot;Georgia&quot;;
+</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignHCenter|Qt::AlignTop</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="name2">
+           <property name="styleSheet">
+            <string notr="true">background-color: &quot;transparent&quot;;
+color: rgb(255, 255, 255);
+font: 12pt &quot;Georgia&quot;;
+</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignHCenter|Qt::AlignTop</set>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
        <widget class="QFrame" name="imagespace">
-        <layout class="QHBoxLayout" name="horizontalLayout_5">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>450</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>450</height>
+         </size>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_4">
          <property name="spacing">
           <number>0</number>
          </property>
@@ -242,7 +307,7 @@ padding-top:20px
           </widget>
          </item>
          <item>
-          <widget class="QFrame" name="horizontalFrame">
+          <widget class="QFrame" name="values">
            <property name="maximumSize">
             <size>
              <width>16777215</width>
@@ -258,8 +323,7 @@ padding-top:20px
               <property name="styleSheet">
                <string notr="true">background-color: &quot;transparent&quot;;
 color: rgb(255, 255, 255);
-font: 12pt &quot;Georgia&quot;;
-padding-top:20px</string>
+font: 12pt &quot;Georgia&quot;;</string>
               </property>
               <property name="text">
                <string>Similarity Score</string>
@@ -280,8 +344,7 @@ padding-top:20px</string>
               <property name="styleSheet">
                <string notr="true">background-color: &quot;transparent&quot;;
 color: rgb(255, 255, 255);
-font: 12pt &quot;Georgia&quot;;
-padding-top:20px</string>
+font: 12pt &quot;Georgia&quot;;</string>
               </property>
               <property name="text">
                <string>-</string>
@@ -296,8 +359,7 @@ padding-top:20px</string>
               <property name="styleSheet">
                <string notr="true">background-color: &quot;transparent&quot;;
 color: rgb(255, 255, 255);
-font: 12pt &quot;Georgia&quot;;
-padding-top:20px</string>
+font: 12pt &quot;Georgia&quot;;</string>
               </property>
               <property name="text">
                <string>Threshold:  </string>
@@ -318,8 +380,7 @@ padding-top:20px</string>
               <property name="styleSheet">
                <string notr="true">background-color: &quot;transparent&quot;;
 color: rgb(255, 255, 255);
-font: 12pt &quot;Georgia&quot;;
-padding-top:20px</string>
+font: 12pt &quot;Georgia&quot;;</string>
               </property>
               <property name="text">
                <string>-</string>
@@ -486,7 +547,7 @@ padding-top:20px</string>
           <widget class="QLabel" name="label_2">
            <property name="maximumSize">
             <size>
-             <width>60</width>
+             <width>47</width>
              <height>50</height>
             </size>
            </property>
@@ -579,7 +640,7 @@ font: 12pt &quot;Georgia&quot;;
 padding-top:20px</string>
         </property>
         <property name="text">
-         <string>Classical</string>
+         <string>Classic</string>
         </property>
        </widget>
       </item>
@@ -634,21 +695,11 @@ image: url(:/icons/images/fleche-vers-le-bas.png);
        </widget>
       </item>
       <item>
-       <spacer name="verticalSpacer_4">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
        <widget class="QWidget" name="advancedwidget" native="true">
         <layout class="QVBoxLayout" name="advancedlayout">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
          <item>
           <widget class="QCheckBox" name="advancedcheckbox">
            <property name="styleSheet">
@@ -857,13 +908,13 @@ padding-top:20px
               </property>
               <property name="minimumSize">
                <size>
-                <width>60</width>
+                <width>43</width>
                 <height>30</height>
                </size>
               </property>
               <property name="maximumSize">
                <size>
-                <width>60</width>
+                <width>43</width>
                 <height>50</height>
                </size>
               </property>
@@ -946,7 +997,7 @@ image: url(:/icons/images/fleche-vers-le-bas.png);
         <property name="sizeHint" stdset="0">
          <size>
           <width>20</width>
-          <height>150</height>
+          <height>1000</height>
          </size>
         </property>
        </spacer>

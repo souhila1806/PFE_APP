@@ -9,6 +9,11 @@
     <file>images/reglages.png</file>
   </qresource>
   <qresource prefix="images">
-    <file>Logo.png</file>
+    <file>images/reglages.png</file>
+    <file>images/ajouter (1).png</file>
+    <file>images/Correct.png</file>
+    <file>images/details.png</file>
+    <file>images/identifiant-du-visage 1.png</file>
+    <file>images/Logo.png</file>
   </qresource>
 </RCC>
