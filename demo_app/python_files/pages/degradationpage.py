@@ -8,6 +8,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import Qt,QTimer
 from PyQt5.QtGui import QPixmap,QRegExpValidator,QImage, QMovie
 from python_files.loading import LoadingScreen
+from PyQt5.QtCore import QThread, pyqtSignal
 
 
 class ImageLabel(QtWidgets.QLabel):
@@ -66,28 +67,23 @@ class ImageLabel(QtWidgets.QLabel):
 
 
 
-# class for loading
-class LongTimeProcessThread(QtCore.QThread):
-    detectionFinished = QtCore.pyqtSignal(bool)
+class DegradationThread(QThread):
+    finished = pyqtSignal(object)
 
-    def __init__(self, input_path, detector):
+    def __init__(self, input_path, params):
         super().__init__()
+        print('inputpath in thread',input_path)
+
         self.input_path = input_path
-        self.detector = detector
+        self.detector = params
 
     def run(self):
-        try:
-            inputimage = detect_face(self.input_path, self.detector)
-            cv2.imwrite(r"images\degradation_results\input_detected.jpg", inputimage)
-            outputimage = detect_face(r"images\degradation_results\degraded.jpg", self.detector)
-            cv2.imwrite(r"images\degradation_results\output_detected.jpg", outputimage)
-
-            # Emit the signal to indicate detection is finished
-            self.detectionFinished.emit(True)
-        except Exception as e:
-            import traceback
-            traceback.print_exc()
-        self.finished.emit()
+        inputimage = detect_face(self.input_path, self.detector)
+        cv2.imwrite(r"images\degradation_results\input_detected.jpg", inputimage)
+        outputimage = detect_face(r"images\degradation_results\degraded.jpg", self.detector)
+        cv2.imwrite(r"images\degradation_results\output_detected.jpg", outputimage)
+        result='Done'
+        self.finished.emit(result)
 
 class DegPage(QtWidgets.QMainWindow):
     def __init__(self,main_app):
@@ -119,7 +115,7 @@ class DegPage(QtWidgets.QMainWindow):
 
 # function to apply degradation
     def apply_deg(self):
-        detection=False
+        self.detection=False
         # get image path from imageviewer input
         input_path=self.main_app.photoViewerInput.imagePath
         inputimage=cv2.imread(input_path)
@@ -157,48 +153,30 @@ class DegPage(QtWidgets.QMainWindow):
 
         cv2.imwrite(r"images\degradation_results\degraded.jpg", degraded_image)
 
+
         if self.main_app.ui.detectcheckBox.isChecked():
-            '''
-            loading = LoadingScreen()
-            loading.startLoading()
-
             detector = self.main_app.ui.detectcomboBox.currentText()
+            self.degradation_thread = DegradationThread(input_path,detector)
+            self.degradation_thread.finished.connect(self.handle_degradation_finished)
 
-            # Start the long-time process in a separate thread
-            process_thread = LongTimeProcessThread(input_path, detector)
-            process_thread.finished.connect(loading.stopLoading)
-            process_thread.finished.connect(self.updateUI)
-            process_thread.start()
-            '''
-            loading=LoadingScreen()
-            loading.startLoading()
-            try:
-                detector=self.main_app.ui.detectcomboBox.currentText()
-                inputimage= detect_face(input_path,detector)
-                cv2.imwrite(r"images\degradation_results\input_detected.jpg", inputimage)
-                outputimage=detect_face(r"images\degradation_results\degraded.jpg",detector)
-                cv2.imwrite(r"images\degradation_results\output_detected.jpg", outputimage)
-
-                #set detected input image
-                self.main_app.photoViewerInput.set_image(r"images\degradation_results\input_detected.jpg", False)
-                # set detected output img
-                self.main_app.photoViewerOutput.set_image(r"images\degradation_results\output_detected.jpg", True)
-                detection=True
-            except Exception as e:
-                import traceback
-                traceback.print_exc()
-           
-            loading.stopLoading()
-
-        if detection== False:
+            # Start the thread
+            self.loading_screen = LoadingScreen()
+            self.loading_screen.startLoading()
+            self.degradation_thread.start()
+        if self.detection == False:
             self.main_app.photoViewerOutput.set_image(r"images\degradation_results\degraded.jpg", True)
 
-    def updateUI(self, detection):
-        if detection:
-            # Set detected input image
-            self.main_app.photoViewerInput.set_image(r"images\degradation_results\input_detected.jpg", False)
-            # Set detected output image
-            self.main_app.photoViewerOutput.set_image(r"images\degradation_results\output_detected.jpg", True)
+    def handle_degradation_finished(self, degraded_image):
+        # set detected input image
+        self.main_app.photoViewerInput.set_image(r"images\degradation_results\input_detected.jpg", False)
+        # set detected output img
+        self.main_app.photoViewerOutput.set_image(r"images\degradation_results\output_detected.jpg", True)
+        self.detection = True
+        self.loading_screen.stopLoading()
+
+        if self.detection == False:
+            self.main_app.photoViewerOutput.set_image(r"images\degradation_results\degraded.jpg", True)
+            self.loading_screen.stopLoading()
 
     ############################################################################
     # function to initialize settings checkboxes and edit texts

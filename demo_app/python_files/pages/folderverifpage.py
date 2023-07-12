@@ -10,6 +10,72 @@ from python_files.functions.plotclasses import RegressionPlotWidget,SimilarityPl
 from uis.foldsverif_ui import Ui_FoldsVerifForm
 from python_files.functions.fusion_funcs import ff_fold,ff_all,sf_fold,sf_all,hf_all,hf_fold
 from python_files.functions.lfw_xqlfw_funcs import verif_fold,verif_all
+from ..loading import LoadingScreen
+from PyQt5.QtCore import QThread, pyqtSignal
+
+class DegradationThread(QThread):
+    finished = pyqtSignal(object)
+
+    def __init__(self, page,fusiontype, rec_model, restorationmodels):
+        super().__init__()
+
+        self.page = page
+        self.fusiontype = fusiontype
+        self.rec_model = rec_model
+        self.restorationmodels = restorationmodels
+
+    def run(self):
+        if not hasattr(self.page, 'reg_plot_widget'):
+            self.page.reg_plot_widget = RegressionPlotWidget(self.fusiontype, self.rec_model, self.restorationmodels)
+            self.page.ui.fusionregressionplot.setLayout(QGridLayout())
+
+        # Create a scroll area
+        scroll_area = QScrollArea()
+        scroll_area.setWidgetResizable(True)
+
+        # Create a container widget for the scroll area
+        scroll_widget = QWidget()
+        scroll_widget.setLayout(QGridLayout())
+
+        # Add the RegressionPlotWidget to the container widget
+        scroll_widget.layout().addWidget(self.page.reg_plot_widget)
+
+        # Set the container widget as the scroll area's widget
+        scroll_area.setWidget(scroll_widget)
+        scroll_area.verticalScrollBar().setStyleSheet(
+            """
+            QScrollBar:vertical {
+                background-color: #E0E0E0;
+                width: 10px;
+                border: 1px solid #999999;
+                margin: 0px 0px 0px 0px;
+            }
+
+            QScrollBar::handle:vertical {
+                background-color: #BDBDBD;
+                border-radius: 5px;
+            }
+
+            QScrollBar::add-line:vertical,
+            QScrollBar::sub-line:vertical {
+                background-color: transparent;
+            }
+
+            QScrollBar::add-page:vertical,
+            QScrollBar::sub-page:vertical {
+                background-color: transparent;
+            }
+            """
+        )
+
+        # Set the layout of the fusion regression plot widget
+        self.page.ui.fusionregressionplot.layout().addWidget(scroll_area)
+
+        self.page.reg_plot_widget.plot(self.fusiontype, self.rec_model, self.restorationmodels)
+        result='Done'
+        self.finished.emit(result)
+
+
 class FoldsVerificationClass(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
@@ -165,67 +231,23 @@ class FoldsVerificationClass(QtWidgets.QMainWindow):
                     self.ui.simindexplot.setLayout(self.sim_plot_widget.layout())
                 self.sim_plot_widget.plot(model,rest)
 
-    '''  def regressionplot(self,fusiontype, restorationmodels,rec_model):
-            is_enabled = self.ui.tabsPages.isTabEnabled(4)
-            if is_enabled:
-                if not hasattr(self, 'reg_plot_widget'):
-                    self.reg_plot_widget = RegressionPlotWidget(fusiontype,rec_model, restorationmodels)
-                    self.ui.fusionregressionplot.setLayout(self.reg_plot_widget.layout())
-                self.reg_plot_widget.plot(fusiontype, rec_model,restorationmodels)'''
 
 
     def regressionplot(self, fusiontype, restorationmodels, rec_model):
         is_enabled = self.ui.tabsPages.isTabEnabled(4)
         if is_enabled:
-            if not hasattr(self, 'reg_plot_widget'):
-                self.reg_plot_widget = RegressionPlotWidget(fusiontype, rec_model, restorationmodels)
-                self.ui.fusionregressionplot.setLayout(QGridLayout())
+            self.degradation_thread = DegradationThread(self,fusiontype, rec_model, restorationmodels)
+            self.degradation_thread.finished.connect(self.handle_degradation_finished)
+
+            # Start the thread
+            self.loading_screen = LoadingScreen()
+            self.loading_screen.startLoading()
+            self.degradation_thread.start()
 
 
-            # Create a scroll area
-            scroll_area = QScrollArea()
-            scroll_area.setWidgetResizable(True)
+    def handle_degradation_finished(self):
 
-            # Create a container widget for the scroll area
-            scroll_widget = QWidget()
-            scroll_widget.setLayout(QGridLayout())
-
-            # Add the RegressionPlotWidget to the container widget
-            scroll_widget.layout().addWidget(self.reg_plot_widget)
-
-            # Set the container widget as the scroll area's widget
-            scroll_area.setWidget(scroll_widget)
-            scroll_area.verticalScrollBar().setStyleSheet(
-                """
-                QScrollBar:vertical {
-                    background-color: #E0E0E0;
-                    width: 10px;
-                    border: 1px solid #999999;
-                    margin: 0px 0px 0px 0px;
-                }
-
-                QScrollBar::handle:vertical {
-                    background-color: #BDBDBD;
-                    border-radius: 5px;
-                }
-
-                QScrollBar::add-line:vertical,
-                QScrollBar::sub-line:vertical {
-                    background-color: transparent;
-                }
-
-                QScrollBar::add-page:vertical,
-                QScrollBar::sub-page:vertical {
-                    background-color: transparent;
-                }
-                """
-            )
-
-            # Set the layout of the fusion regression plot widget
-            self.ui.fusionregressionplot.layout().addWidget(scroll_area)
-
-            self.reg_plot_widget.plot(fusiontype, rec_model, restorationmodels)
-
+        self.loading_screen.stopLoading()
     def init_checkboxes(self):
         try:
             self.ui.classic_checkbox.clicked.connect(lambda: self.handlecheckbox("classic"))

@@ -201,20 +201,21 @@ def calculate_lpips_lfw(p1, p2, lpips_model):
   return dist
 
 def calculate_lpips_xqlf(p1, p2, lpips_model):
-  image1 = Image.open(p1).convert('RGB')
-  image2 = Image.open(p2).convert('RGB')
-  # Resize the images if necessary
-  image1 = crop_img(p1, aligned=True)
-  image1 = cv2.resize(image1, (112,112))
-  image2 = image2.resize((112, 112))
+    print(p1)
+    image1 = Image.open(p1).convert('RGB')
+    image2 = Image.open(p2).convert('RGB')
+    # Resize the images if necessary
+    image1 = crop_img(p1, aligned=True)
+    image1 = cv2.resize(image1, (112,112))
+    image2 = image2.resize((112, 112))
 
-  # Convert the images to tensors
-  transform = ToTensor()
-  image1_tensor = transform(image1).unsqueeze(0)
-  image2_tensor = transform(image2).unsqueeze(0)
-  dist = lpips_model.forward(image1_tensor, image2_tensor)
-  dist= dist.item()
-  return dist
+    # Convert the images to tensors
+    transform = ToTensor()
+    image1_tensor = transform(image1).unsqueeze(0)
+    image2_tensor = transform(image2).unsqueeze(0)
+    dist = lpips_model.forward(image1_tensor, image2_tensor)
+    dist= dist.item()
+    return dist
 
 def calculate_ssim_crop(p1, p2):
     # Convert images to grayscale

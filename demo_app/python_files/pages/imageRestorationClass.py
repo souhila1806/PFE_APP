@@ -5,8 +5,154 @@ import random
 from PyQt5 import QtCore, QtGui, QtWidgets
 from uis.restoration_ui import Ui_Form
 from python_files.utils import *
-from PyQt5.QtCore import Qt,QTimer
-from PyQt5.QtGui import QPixmap,QRegExpValidator,QImage, QMovie
+from PyQt5.QtCore import QThread, pyqtSignal
+from ..loading import LoadingScreen
+
+
+class DegradationThread(QThread):
+    finished = pyqtSignal(object)
+
+    def __init__(self,typeImage,lpips_model,image_name,lfw,xqlfw,ui,page):
+        super().__init__()
+        self.type = typeImage
+        self.lpips_model=lpips_model
+        self.image_name=image_name
+        self.lfw=lfw
+        self.xqlfw=xqlfw
+        self.ui=ui
+        self.page=page
+
+    def run(self):
+        if self.type == "HQ":
+
+            gfpganPath = os.path.join(r"data\images\LFW_GFPGAN", self.image_name)
+            gpenPath = os.path.join(r"data\images\LFW_GPEN", self.image_name)
+            sgpnPath = os.path.join(r"data\images\LFW_GPEN", self.image_name)
+            lpips1 = '/'
+            lpipssg = round(calculate_lpips_lfw(self.lfw, sgpnPath, self.lpips_model), 3)
+            ssim1 = '/'
+            ssimsg = round(calculate_ssim_crop(self.lfw, sgpnPath), 3)
+            psnr1 = '/'
+            psnrsg = round(calculate_psnr_crop(self.lfw, sgpnPath), 3)
+        else:
+
+            gfpganPath = os.path.join(r"data\images\XQLFW_GFPGAN", self.image_name)
+            gpenPath = os.path.join(r"data\images\XQLFW_GPEN", self.image_name)
+            sgpnPath = os.path.join(r"data\v\XQLFW_SGPN", self.image_name)
+            lpips1 = round(calculate_lpips_xqlf(self.lfw, self.xqlfw, self.lpips_model), 3)
+            lpipssg = round(calculate_lpips_xqlf(self.lfw, sgpnPath, self.lpips_model), 3)
+            ssim1 = round(calculate_ssim(self.lfw, self.xqlfw), 3)
+            ssimsg = round(calculate_ssim(self.lfw, sgpnPath), 3)
+            psnr1 = round(calculate_psnr(self.lfw, self.xqlfw), 3)
+            psnrsg = round(calculate_psnr(self.lfw, sgpnPath), 3)
+
+        lpipsgf = round(calculate_lpips_lfw(self.lfw, gfpganPath, self.lpips_model), 3)
+        lpipsgp = round(calculate_lpips_lfw(self.lfw, gpenPath, self.lpips_model), 3)
+        ssimgf = round(calculate_ssim_crop(self.lfw, gfpganPath), 3)
+        ssimgp = round(calculate_ssim_crop(self.lfw, gpenPath), 3)
+        psnrgf = round(calculate_psnr_crop(self.lfw, gfpganPath), 3)
+        psnrgp = round(calculate_psnr_crop(self.lfw, gpenPath), 3)
+        self.page.gfpgan.set_image_name(gfpganPath)
+        self.page.gfpgan.display_image(gfpganPath)
+        self.page.gpen.set_image_name(gpenPath)
+        self.page.gpen.display_image(gpenPath)
+        self.page.sgpn.set_image_name(sgpnPath)
+        self.page.sgpn.display_image(sgpnPath)
+        # Display metrics
+        # List of lpips values
+        lpips_values = [lpips1, lpipsgf, lpipssg, lpipsgp]
+        print(lpips_values)
+        # List of ssim values
+        ssim_values = [ssim1, ssimgf, ssimsg, ssimgp]
+        # List of psnr values
+        psnr_values = [psnr1, psnrgf, psnrsg, psnrgp]
+
+        # Map of label names to values
+        lpips_labels = {
+            "lo": lpips1,
+            "lgf": lpipsgf,
+            "ln": lpipssg,
+            "lppn": lpipsgp
+        }
+
+        ssim_labels = {
+            "sso": ssim1,
+            "ssgf": ssimgf,
+            "ssn": ssimsg,
+            "sspn": ssimgp
+        }
+
+        psnr_labels = {
+            "po": psnr1,
+            "pgf": psnrgf,
+            "pn": psnrsg,
+            "ppn": psnrgp
+        }
+
+        # Set maximum and minimum colors for lpips values
+        if lpips_values[0] == '/':
+            max_lpips = max(lpips_values[1:])
+            min_lpips = min(lpips_values[1:])
+        else:
+            max_lpips = max(lpips_values)
+            min_lpips = min(lpips_values)
+
+        for label_name, value in lpips_labels.items():
+            label = getattr(self.ui, label_name)
+            label.setText(str(value))
+            if value != '/':
+                if value == max_lpips:
+                    label.setStyleSheet("color: green;")
+                elif value == min_lpips:
+                    label.setStyleSheet("color: red;")
+                else:
+                    label.setStyleSheet("color: white;")
+                    print(f"norm = {value}")
+
+        # Set maximum and minimum colors for ssim values
+        if ssim_values[0] == '/':
+            max_ssim = max(ssim_values[1:])
+            min_ssim = min(ssim_values[1:])
+        else:
+            max_ssim = max(ssim_values)
+            min_ssim = min(ssim_values)
+
+        for label_name, value in ssim_labels.items():
+            label = getattr(self.ui, label_name)
+            label.setText(str(value))
+            if value != '/':
+                if value == max_ssim:
+                    label.setStyleSheet("color: green;")
+                elif value == min_ssim:
+                    label.setStyleSheet("color: red;")
+                else:
+                    label.setStyleSheet("color: white;")
+                    print(f"norm = {value}")
+
+        # Set maximum and minimum colors for psnr values
+        if psnr_values[0] == '/':
+            max_psnr = max(psnr_values[1:])
+            min_psnr = min(psnr_values[1:])
+        else:
+            max_psnr = max(psnr_values)
+            min_psnr = min(psnr_values)
+
+        for label_name, value in psnr_labels.items():
+            label = getattr(self.ui, label_name)
+            label.setText(str(value))
+            if value != '/':
+                if value == max_psnr:
+                    label.setStyleSheet("color: green;")
+                    print(f"max = {value}")
+                elif value == min_psnr:
+                    label.setStyleSheet("color: red;")
+                    print(f"min = {value}")
+                else:
+                    label.setStyleSheet("color: white;")
+                    print(f"norm = {value}")
+        result='Done'
+        self.finished.emit(result)
+
 class ImageDisplayClass:
     def __init__(self, frame):
         self.frame = frame
@@ -125,135 +271,16 @@ class ImageRestorationClass(QtWidgets.QWidget):
         image_name=self.org.get_image_name()
         lfw = os.path.join(r"data\images\LFW", image_name)
         xqlfw = os.path.join(r"data\images\XQLFW", image_name)
-        if self.type=="HQ":
+        self.degradation_thread = DegradationThread(self.type, lpips_model,image_name,lfw,xqlfw,self.ui,self)
+        self.degradation_thread.finished.connect(self.handle_degradation_finished)
 
-            gfpganPath = os.path.join(r"data\images\LFW_GFPGAN", image_name)
-            gpenPath = os.path.join(r"data\images\LFW_GPEN", image_name)
-            sgpnPath = os.path.join(r"data\images\LFW_GPEN", image_name)
-            lpips1 = '/'
-            lpipssg= round(calculate_lpips_lfw(lfw, sgpnPath, lpips_model), 3)
-            ssim1='/'
-            ssimsg=round(calculate_ssim_crop(lfw, sgpnPath), 3)
-            psnr1='/'
-            psnrsg=round(calculate_psnr_crop(lfw, sgpnPath), 3)
-        else:
+        # Start the thread
+        self.loading_screen = LoadingScreen()
+        self.loading_screen.startLoading()
+        self.degradation_thread.start()
 
-            gfpganPath = os.path.join(r"data\images\XQLFW_GFPGAN", image_name)
-            gpenPath = os.path.join(r"data\images\XQLFW_GPEN", image_name)
-            sgpnPath = os.path.join(r"data\v\XQLFW_SGPN", image_name)
-            lpips1= round(calculate_lpips_xqlf(lfw,xqlfw,lpips_model),3)
-            lpipssg=round(calculate_lpips_xqlf(lfw,sgpnPath,lpips_model),3)
-            ssim1=round(calculate_ssim(lfw,xqlfw),3)
-            ssimsg=round(calculate_ssim(lfw,sgpnPath),3)
-            psnr1 = round(calculate_psnr(lfw,xqlfw), 3)
-            psnrsg = round(calculate_psnr(lfw,sgpnPath), 3)
-
-
-        lpipsgf = round(calculate_lpips_lfw(lfw, gfpganPath, lpips_model), 3)
-        lpipsgp = round(calculate_lpips_lfw(lfw, gpenPath, lpips_model), 3)
-        ssimgf=round(calculate_ssim_crop(lfw, gfpganPath),3)
-        ssimgp = round(calculate_ssim_crop(lfw, gpenPath), 3)
-        psnrgf=round(calculate_psnr_crop(lfw, gfpganPath), 3)
-        psnrgp=round(calculate_psnr_crop(lfw, gpenPath), 3)
-        self.gfpgan.set_image_name(gfpganPath)
-        self.gfpgan.display_image(gfpganPath)
-        self.gpen.set_image_name(gpenPath)
-        self.gpen.display_image(gpenPath)
-        self.sgpn.set_image_name(sgpnPath)
-        self.sgpn.display_image(sgpnPath)
-        # Display metrics
-        # List of lpips values
-        lpips_values = [lpips1, lpipsgf, lpipssg, lpipsgp]
-        print(lpips_values)
-        # List of ssim values
-        ssim_values = [ssim1, ssimgf, ssimsg, ssimgp]
-        # List of psnr values
-        psnr_values = [psnr1, psnrgf, psnrsg, psnrgp]
-
-        # Map of label names to values
-        lpips_labels = {
-            "lo": lpips1,
-            "lgf": lpipsgf,
-            "ln": lpipssg,
-            "lppn": lpipsgp
-        }
-
-        ssim_labels = {
-            "sso": ssim1,
-            "ssgf": ssimgf,
-            "ssn": ssimsg,
-            "sspn": ssimgp
-        }
-
-        psnr_labels = {
-            "po": psnr1,
-            "pgf": psnrgf,
-            "pn": psnrsg,
-            "ppn": psnrgp
-        }
-
-        # Set maximum and minimum colors for lpips values
-        if lpips_values[0]=='/':
-            max_lpips = max(lpips_values[1:])
-            min_lpips = min(lpips_values[1:])
-        else:
-            max_lpips = max(lpips_values)
-            min_lpips = min(lpips_values)
-
-        for label_name, value in lpips_labels.items():
-            label = getattr(self.ui, label_name)
-            label.setText(str(value))
-            if value!='/':
-                if value == max_lpips:
-                    label.setStyleSheet("color: green;")
-                elif value == min_lpips:
-                    label.setStyleSheet("color: red;")
-                else:
-                    label.setStyleSheet("color: white;")
-                    print(f"norm = {value}")
-
-        # Set maximum and minimum colors for ssim values
-        if ssim_values[0] == '/':
-            max_ssim = max(ssim_values[1:])
-            min_ssim = min(ssim_values[1:])
-        else:
-            max_ssim = max(ssim_values)
-            min_ssim = min(ssim_values)
-
-        for label_name, value in ssim_labels.items():
-            label = getattr(self.ui, label_name)
-            label.setText(str(value))
-            if value != '/':
-                if value == max_ssim:
-                    label.setStyleSheet("color: green;")
-                elif value == min_ssim:
-                    label.setStyleSheet("color: red;")
-                else:
-                    label.setStyleSheet("color: white;")
-                    print(f"norm = {value}")
-
-        # Set maximum and minimum colors for psnr values
-        if psnr_values[0] == '/':
-            max_psnr = max(psnr_values[1:])
-            min_psnr = min(psnr_values[1:])
-        else:
-            max_psnr = max(psnr_values)
-            min_psnr = min(psnr_values)
-
-        for label_name, value in psnr_labels.items():
-            label = getattr(self.ui, label_name)
-            label.setText(str(value))
-            if value != '/':
-                if value == max_psnr:
-                    label.setStyleSheet("color: green;")
-                    print(f"max = {value}")
-                elif value == min_psnr:
-                    label.setStyleSheet("color: red;")
-                    print(f"min = {value}")
-                else:
-                    label.setStyleSheet("color: white;")
-                    print(f"norm = {value}")
-
+    def handle_degradation_finished(self):
+        self.loading_screen.stopLoading()
     # functions to enable or disable apply button and change its style
     def enableApplyFunc(self):
         self.ui.ApplyBT.setEnabled(True)

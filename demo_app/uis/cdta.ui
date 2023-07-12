@@ -516,7 +516,7 @@ QPushButton:hover{background-color:rgb(28, 142, 178);}</string>
                         <string/>
                        </property>
                        <property name="pixmap">
-                        <pixmap resource="../ressources.qrc">:/images/images/reglages.png</pixmap>
+                        <pixmap resource="../ressources.qrc">:/icons/images/reglages.png</pixmap>
                        </property>
                        <property name="alignment">
                         <set>Qt::AlignCenter</set>

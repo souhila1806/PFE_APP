@@ -15,6 +15,7 @@ from python_files.pages.degradationpage import LoadingScreen
 from PyQt5.QtCore import Qt,QTimer
 from PyQt5.QtGui import QPixmap,QRegExpValidator,QImage, QMovie
 from python_files.ruler import RulerWidget
+from PyQt5.QtCore import QThread, pyqtSignal
 
 class ImageViewer(QtWidgets.QLabel):
     def __init__(self,text):
@@ -45,6 +46,26 @@ class ImageViewer(QtWidgets.QLabel):
         pixmap = QPixmap.fromImage(image).scaled(desired_width, desired_height, QtCore.Qt.KeepAspectRatio)
         self.setPixmap(pixmap)
 
+class DegradationThread(QThread):
+    finished = pyqtSignal(object)
+
+    def __init__(self, first_path, second_path, params):
+        super().__init__()
+
+        self.first_path = first_path
+        self.second_path = second_path
+        self.detector = params
+
+    def run(self):
+        firstimage = detect_face(self.first_path, self.detector)
+        secondimage = detect_face(self.second_path, self.detector)
+        cv2.imwrite(r"images\degradation_results\input_detected.jpg",
+                    firstimage)
+        cv2.imwrite(
+            r"images\degradation_results\output_detected.jpg",
+            secondimage)
+        result='Done'
+        self.finished.emit(result)
 class PairsVerificationClass(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
@@ -134,21 +155,24 @@ class PairsVerificationClass(QtWidgets.QMainWindow):
             second_path=os.path.join(f"data\images\{self.currentdataset.upper()}_{rest.upper()}",second_path.split("\\")[-1])
         print(first_path,second_path)
         detector="MTCNN"
-        firstimage = detect_face(first_path, detector)
-        secondimage = detect_face(second_path, detector)
-        cv2.imwrite(r"images\degradation_results\input_detected.jpg",
-                    firstimage)
-        cv2.imwrite(
-            r"images\degradation_results\output_detected.jpg",
-            secondimage)
+        self.degradation_thread = DegradationThread(first_path,second_path, detector)
+        self.degradation_thread.finished.connect(self.handle_degradation_finished)
 
+        # Start the thread
+        self.loading_screen = LoadingScreen()
+        self.loading_screen.startLoading()
+        self.degradation_thread.start()
+
+    def handle_degradation_finished(self, degraded_image):
         # set detected input image
         self.photoViewerOne.set_image(
             r"images\degradation_results\input_detected.jpg", False)
         # set detected output img
         self.photoViewerTwo.set_image(
             r"images\degradation_results\output_detected.jpg", False)
-        loading.stopLoading()
+
+        self.loading_screen.stopLoading()
+
     def applyVerif(self):
         try:
             acc=0
