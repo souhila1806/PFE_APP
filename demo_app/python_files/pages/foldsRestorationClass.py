@@ -1,6 +1,8 @@
 import numpy as np
 import cv2
 import os
+
+import pandas as pd
 from PyQt5 import QtCore, QtGui, QtWidgets
 from uis.folder_res import Ui_foldersRestoration
 from python_files.utils import *
@@ -18,100 +20,116 @@ class FoldsRestorationClass(QtWidgets.QWidget):
         self.setObjectName("FoldsResForm")
         self.ui.icon1.setPixmap(QtGui.QPixmap("images/details.png"))
         self.selected_tab=''
-        self.fold=''
-        self.disableApplyFunc()
-        self.ui.tabsPages.currentChanged.connect(self.tab_changed)
-        self.ui.fold.activated.connect(self.combo_box_clicked)
-        self.ui.ApplyFBT.clicked.connect(lambda: self.calculate_metrics(self.selected_tab, self.fold))
-
-    def tab_changed(self, index):
-        current_tab = self.ui.tabsPages.currentWidget()
-        self.selected_tab = self.ui.tabsPages.tabText(index)
-        self.ui.mean_gfpgan.setStyleSheet("color: white;")
-        self.ui.mean_gpen.setStyleSheet("color: white;")
-        self.ui.mean_sgpn.setStyleSheet("color: white;")
-        self.ui.mean_xqlfw.setStyleSheet("color: white;")
-
-    def combo_box_clicked(self,index):
-        self.fold= self.ui.fold.currentText()
+        self.fold='ALL'
+        self.df=[]
         self.enableApplyFunc()
-        self.ui.mean_gfpgan.setStyleSheet("color: white;")
-        self.ui.mean_gpen.setStyleSheet("color: white;")
-        self.ui.mean_sgpn.setStyleSheet("color: white;")
-        self.ui.mean_xqlfw.setStyleSheet("color: white;")
+        self.ui.tabsPages.currentChanged.connect(self.tab_changed)
+        self.ui.ApplyFBT.clicked.connect(lambda: self.calculate_metrics(self.selected_tab))
 
-    def calculate_metrics(self, tab, fold):
+    def tab_changed(self,index):
+        tab = self.ui.tabsPages.tabText(index)
+        print(f"taaab {tab}")
+        df = self.df
+        fold=self.fold
+        print(fold, tab)
+        if len(df)==0:
+            #self.selected_tab = self.ui.tabsPages.tabText(index)
+            self.ui.mean_gfpgan.setStyleSheet("color: white;")
+            self.ui.mean_gpen.setStyleSheet("color: white;")
+            self.ui.mean_sgpn.setStyleSheet("color: white;")
+            self.ui.mean_xqlfw.setStyleSheet("color: white;")
+
+        else:
+            means,index1,index2=calculate_column_means(df[index], tab)
+            print(f"means {means, index1,index2,df[index]}")
+            self.ui.mean_xqlfw.setText(str(round(means[3],3)))
+            self.ui.mean_gfpgan.setText(str(round(means[0],3)))
+            self.ui.mean_sgpn.setText(str(round(means[2],3)))
+            self.ui.mean_gpen.setText(str(round(means[1],3)))
+            self.ui.mean_gfpgan.setStyleSheet("color: white;")
+            self.ui.mean_gpen.setStyleSheet("color: white;")
+            self.ui.mean_sgpn.setStyleSheet("color: white;")
+            self.ui.mean_xqlfw.setStyleSheet("color: white;")
+            if index1 ==0:
+                self.ui.mean_gfpgan.setStyleSheet("color: green;")
+            elif index1 == 1:
+                self.ui.mean_gpen.setStyleSheet("color: green;")
+            elif index1 ==2:
+                self.ui.mean_sgpn.setStyleSheet("color: green;")
+            elif index1==3:
+                self.ui.mean_xqlfw.setStyleSheet("color: green;")
+            else:
+                print('no ')
+            if index2 ==0:
+                self.ui.mean_gfpgan.setStyleSheet("color: red;")
+            elif index2 == 1:
+                self.ui.mean_gpen.setStyleSheet("color: red;")
+            elif index2 ==2:
+                self.ui.mean_sgpn.setStyleSheet("color: red;")
+            elif index2==3:
+                self.ui.mean_xqlfw.setStyleSheet("color: red;")
+            else:
+                print('no ')
+
+
+    def calculate_metrics(self, tab):
         print("Selected tab:", tab)
-        print('Fold:', fold)
-        if tab == 'SSIM':
-            plot = self.ui.ssim_plot
-            title='SSIM boxplot diagram'
-        elif tab == 'PSNR':
-            plot = self.ui.psnr_plot
-            title = 'PSNR boxplot diagram'
-        elif tab == 'LPIPS':
-            plot = self.ui.lpips_plot
-            title = 'LPIPS boxplot diagram'
-        else:
-            print('else')
+        fold= self.ui.fold.currentText()
+        tablist=['SSIM','PSNR','LPIPS']
+        plotlist=[self.ui.ssim_plot,self.ui.psnr_plot,self.ui.lpips_plot]
+        titlelist=['SSIM boxplot diagram','PSNR boxplot diagram','LPIPS boxplot diagram']
 
-        df = get_data(fold, tab)
-        means,index1,index2=calculate_column_means(df, tab)
-        self.ui.mean_xqlfw.setText(str(round(means[3],3)))
-        self.ui.mean_gfpgan.setText(str(round(means[0],3)))
-        self.ui.mean_sgpn.setText(str(round(means[2],3)))
-        self.ui.mean_gpen.setText(str(round(means[1],3)))
-        if index1 ==0:
-            self.ui.mean_gfpgan.setStyleSheet("color: green;")
-        elif index1 == 1:
-            self.ui.mean_gpen.setStyleSheet("color: green;")
-        elif index1 ==2:
-            self.ui.mean_sgpn.setStyleSheet("color: green;")
-        elif index1==3:
-            self.ui.mean_xqlfw.setStyleSheet("color: green;")
-        else:
-            print('no ')
-        if index2 ==0:
-            self.ui.mean_gfpgan.setStyleSheet("color: red;")
-        elif index2 == 1:
-            self.ui.mean_gpen.setStyleSheet("color: red;")
-        elif index2 ==2:
-            self.ui.mean_sgpn.setStyleSheet("color: red;")
-        elif index2==3:
-            self.ui.mean_xqlfw.setStyleSheet("color: red;")
-        else:
-            print('no ')
-        fig_width = plot.size().width() / 80
-        fig_height = plot.size().height() / 80
-        fig = Figure(figsize=(fig_width, fig_height), facecolor='#E7EBF4')
-        ax = fig.add_subplot(111)
+        for i in range(3):
+            plot=plotlist[i]
+            tab=tablist[i]
+            title=titlelist[i]
+            df = get_data(fold, tab)
+            self.df.append(df)
+            print(fold, tab)
+            fig_width = plot.size().width() / 80
+            fig_height = plot.size().height() / 80
+            fig = Figure(figsize=(fig_width, fig_height), facecolor='#E7EBF4')
+            ax = fig.add_subplot(111)
 
-        # Define the colors for each box plot
-        box_colors = ['skyblue', 'lightgreen', 'mediumpurple', 'mediumaquamarine']
+            # Define the colors for each box plot
+            box_colors = ['skyblue', 'lightgreen', 'mediumpurple', 'mediumaquamarine']
 
-        # Plot the box plots with custom colors
-        bp = ax.boxplot(df.values, patch_artist=True)
-        ax.set_facecolor('#E7EBF4')
+            # Plot the box plots with custom colors
+            bp = ax.boxplot(df.values, patch_artist=True)
+            ax.set_facecolor('#E7EBF4')
 
-        # Set the face color for each box
-        for patch, color in zip(bp['boxes'], box_colors):
-            patch.set_facecolor(color)
+            # Set the face color for each box
+            for patch, color in zip(bp['boxes'], box_colors):
+                patch.set_facecolor(color)
 
-        # Set the x-axis tick labels
-        ax.set_xticklabels(['GFP-GAN', 'GPEN', 'SGPN','XQLFW'])
+            # Set the x-axis tick labels
+            ax.set_xticklabels(['GFP-GAN', 'GPEN', 'SGPN','XQLFW'])
 
-        # Set the y-axis label
-        ax.set_ylabel('Values')
+            # Set the y-axis label
+            ax.set_ylabel('Values')
 
-        # Set the plot title
-        ax.set_title(title)
-        # Create the canvas to display the plot
-        canvas = FigureCanvas(fig)
+            # Set the plot title
+            ax.set_title(title)
+            # Create the canvas to display the plot
+            canvas = FigureCanvas(fig)
+            # Set a QVBoxLayout for the plot frame
 
-        # Set a QVBoxLayout for the plot frame
-        layout = QVBoxLayout(plot)
-        layout.addWidget(canvas)
+            layout = plot.layout()
+            print(layout)
+            if layout is None:
+                layout = QVBoxLayout(plot)
+            self.clearLayout(layout)
+            layout.addWidget(canvas)
 
+            self.ui.tabsPages.setCurrentIndex(0)
+
+    def clearLayout(self, layout):
+        while layout.count():
+            item = layout.itemAt(0)
+            widget = item.widget()
+            if widget:
+                layout.removeWidget(widget)
+                widget.deleteLater()
     def enableApplyFunc(self):
         self.ui.ApplyFBT.setEnabled(True)
         self.ui.ApplyFBT.setStyleSheet(

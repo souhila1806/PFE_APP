@@ -4,6 +4,7 @@ import random
 
 import pandas as pd
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QScrollArea, QWidget, QGridLayout
 from python_files.functions.plotclasses import RegressionPlotWidget,SimilarityPlotWidget,PlotWidget,RocCurvePlotWidget,MagnitudePlotWidget
 
 from uis.foldsverif_ui import Ui_FoldsVerifForm
@@ -143,24 +144,87 @@ class FoldsVerificationClass(QtWidgets.QMainWindow):
             self.roc_plot_widget.plot(train)
             is_enabled = self.ui.tabsPages.isTabEnabled(2)
             if is_enabled:
+                if self.ui.classic_checkbox.isChecked():
+                    rest = self.ui.rest_model_classic.currentText().lower()
+                elif self.ui.advancedcheckbox.isChecked():
+                    rest = None
+                else:
+                    rest = "xqlfw"
                 if not hasattr(self, 'mag_plot_widget'):
-                    self.mag_plot_widget = MagnitudePlotWidget()
+                    self.mag_plot_widget = MagnitudePlotWidget(rest)
                     self.ui.magnitudeplot.setLayout(self.mag_plot_widget.layout())
-                self.mag_plot_widget.plot()
+                self.mag_plot_widget.plot(rest)
             is_enabled = self.ui.tabsPages.isTabEnabled(3)
             if is_enabled:
+                if self.ui.classic_checkbox.isChecked():
+                    rest = self.ui.rest_model_classic.currentText().lower()
+                else:
+                    rest = None
                 if not hasattr(self, 'sim_plot_widget'):
-                    self.sim_plot_widget = SimilarityPlotWidget(model)
+                    self.sim_plot_widget = SimilarityPlotWidget(model,rest)
                     self.ui.simindexplot.setLayout(self.sim_plot_widget.layout())
-                self.sim_plot_widget.plot(model)
-    def regressionplot(self,fusiontype, restorationmodels,rec_model):
+                self.sim_plot_widget.plot(model,rest)
+
+    '''  def regressionplot(self,fusiontype, restorationmodels,rec_model):
             is_enabled = self.ui.tabsPages.isTabEnabled(4)
             if is_enabled:
                 if not hasattr(self, 'reg_plot_widget'):
                     self.reg_plot_widget = RegressionPlotWidget(fusiontype,rec_model, restorationmodels)
                     self.ui.fusionregressionplot.setLayout(self.reg_plot_widget.layout())
-                self.reg_plot_widget.plot(fusiontype, rec_model,restorationmodels)
+                self.reg_plot_widget.plot(fusiontype, rec_model,restorationmodels)'''
 
+
+    def regressionplot(self, fusiontype, restorationmodels, rec_model):
+        is_enabled = self.ui.tabsPages.isTabEnabled(4)
+        if is_enabled:
+            if not hasattr(self, 'reg_plot_widget'):
+                self.reg_plot_widget = RegressionPlotWidget(fusiontype, rec_model, restorationmodels)
+                self.ui.fusionregressionplot.setLayout(QGridLayout())
+
+
+            # Create a scroll area
+            scroll_area = QScrollArea()
+            scroll_area.setWidgetResizable(True)
+
+            # Create a container widget for the scroll area
+            scroll_widget = QWidget()
+            scroll_widget.setLayout(QGridLayout())
+
+            # Add the RegressionPlotWidget to the container widget
+            scroll_widget.layout().addWidget(self.reg_plot_widget)
+
+            # Set the container widget as the scroll area's widget
+            scroll_area.setWidget(scroll_widget)
+            scroll_area.verticalScrollBar().setStyleSheet(
+                """
+                QScrollBar:vertical {
+                    background-color: #E0E0E0;
+                    width: 10px;
+                    border: 1px solid #999999;
+                    margin: 0px 0px 0px 0px;
+                }
+
+                QScrollBar::handle:vertical {
+                    background-color: #BDBDBD;
+                    border-radius: 5px;
+                }
+
+                QScrollBar::add-line:vertical,
+                QScrollBar::sub-line:vertical {
+                    background-color: transparent;
+                }
+
+                QScrollBar::add-page:vertical,
+                QScrollBar::sub-page:vertical {
+                    background-color: transparent;
+                }
+                """
+            )
+
+            # Set the layout of the fusion regression plot widget
+            self.ui.fusionregressionplot.layout().addWidget(scroll_area)
+
+            self.reg_plot_widget.plot(fusiontype, rec_model, restorationmodels)
 
     def init_checkboxes(self):
         try:
@@ -176,6 +240,7 @@ class FoldsVerificationClass(QtWidgets.QMainWindow):
             if type=="classic":
                 self.ui.tabsPages.setTabEnabled(4, False)
                 if self.ui.classic_checkbox.isChecked():
+                    self.ui.tabsPages.setTabEnabled(2, True)
                     self.ui.rest_model_classic.setEnabled(True)
                     self.ui.advancedcheckbox.setChecked(False)
                     self.ui.featurelevelcombobox.setEnabled(False)
@@ -185,6 +250,7 @@ class FoldsVerificationClass(QtWidgets.QMainWindow):
                     self.ui.rest_model_classic.setEnabled(False)
             else:
                 if self.ui.advancedcheckbox.isChecked():
+                    self.ui.tabsPages.setTabEnabled(2, False)
                     self.ui.rest_model_classic.setEnabled(False)
                     self.ui.classic_checkbox.setChecked(False)
                     self.ui.featurelevelcombobox.setEnabled(True)
@@ -192,6 +258,7 @@ class FoldsVerificationClass(QtWidgets.QMainWindow):
                     self.ui.scorelevelcombobox.setEnabled(False)
                     self.ui.typefusioncombobox.setEnabled(True)
                 else:
+                    self.ui.tabsPages.setTabEnabled(2, True)
                     self.ui.advancedcheckbox.setChecked(False)
                     self.ui.featurelevelcombobox.setEnabled(False)
                     self.ui.scorelevelcombobox.setEnabled(False)

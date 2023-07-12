@@ -31,16 +31,16 @@ def generate_lowresolution(image, scale_percent):
 
 def generate_compression_artifact(image,quality):
     # Save the image with the specified quality
-    cv2.imwrite(r"demo_app\images\degradation_results\resolution.jpg", image, [cv2.IMWRITE_JPEG_QUALITY, quality])
+    cv2.imwrite(r"images\degradation_results\resolution.jpg", image, [cv2.IMWRITE_JPEG_QUALITY, quality])
     # Read the compressed image back using OpenCV
-    image = cv2.imread(r"demo_app\images\degradation_results\resolution.jpg")
+    image = cv2.imread(r"images\degradation_results\resolution.jpg")
 
     return image
 
 
 
 if __name__ == '__main__':
-    image = cv2.imread(r"demo_app\data\images\XQLFW\Laura_Bush_0007.jpg")
+    image = cv2.imread(r"data\images\XQLFW\Laura_Bush_0007.jpg")
     directory = (r'demo_app\images\degradation_results')
     os.chdir(directory)
     filename = "degraded.jpg"

@@ -87,7 +87,7 @@ class ImageRestorationClass(QtWidgets.QWidget):
         self.type=""
 
     def random_lq_image(self):
-        directory = r"data\datasets\XQLFW_200"
+        directory = r"data\images\XQLFW"
         imagePath = os.path.join(directory, self.random_image(directory))
 
         self.org.display_image(imagePath)
@@ -99,7 +99,7 @@ class ImageRestorationClass(QtWidgets.QWidget):
 
     def random_hq_image(self):
         print('test test')
-        directory = r"data\datasets\LFW_200"
+        directory = r"data\images\LFW"
         imagePath = os.path.join(directory, self.random_image(directory))
         print(imagePath)
         self.org.display_image(imagePath)
@@ -123,13 +123,13 @@ class ImageRestorationClass(QtWidgets.QWidget):
         self.gpen.display_text('GPEN')
         self.sgpn.display_text('SGPN')
         image_name=self.org.get_image_name()
-        lfw = os.path.join(r"data\datasets\LFW_200", image_name)
-        xqlfw = os.path.join(r"data\datasets\XQLFW_200", image_name)
+        lfw = os.path.join(r"data\images\LFW", image_name)
+        xqlfw = os.path.join(r"data\images\XQLFW", image_name)
         if self.type=="HQ":
 
-            gfpganPath = os.path.join(r"data\datasets\LFW_200_GFPGAN", image_name)
-            gpenPath = os.path.join(r"data\datasets\LFW_200_GPEN", image_name)
-            sgpnPath = os.path.join(r"data\datasets\LFW_200_GPEN", image_name)
+            gfpganPath = os.path.join(r"data\images\LFW_GFPGAN", image_name)
+            gpenPath = os.path.join(r"data\images\LFW_GPEN", image_name)
+            sgpnPath = os.path.join(r"data\images\LFW_GPEN", image_name)
             lpips1 = '/'
             lpipssg= round(calculate_lpips_lfw(lfw, sgpnPath, lpips_model), 3)
             ssim1='/'
@@ -138,9 +138,9 @@ class ImageRestorationClass(QtWidgets.QWidget):
             psnrsg=round(calculate_psnr_crop(lfw, sgpnPath), 3)
         else:
 
-            gfpganPath = os.path.join(r"data\datasets\XQLFW_200_GFPGAN", image_name)
-            gpenPath = os.path.join(r"data\datasets\XQLFW_200_GPEN", image_name)
-            sgpnPath = os.path.join(r"data\datasets\XQLFW_200_SGPN", image_name)
+            gfpganPath = os.path.join(r"data\images\XQLFW_GFPGAN", image_name)
+            gpenPath = os.path.join(r"data\images\XQLFW_GPEN", image_name)
+            sgpnPath = os.path.join(r"data\v\XQLFW_SGPN", image_name)
             lpips1= round(calculate_lpips_xqlf(lfw,xqlfw,lpips_model),3)
             lpipssg=round(calculate_lpips_xqlf(lfw,sgpnPath,lpips_model),3)
             ssim1=round(calculate_ssim(lfw,xqlfw),3)

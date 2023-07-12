@@ -326,7 +326,7 @@ color: rgb(255, 255, 255);
 font: 12pt &quot;Georgia&quot;;</string>
               </property>
               <property name="text">
-               <string>Similarity Score</string>
+               <string>Similarity Score: </string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

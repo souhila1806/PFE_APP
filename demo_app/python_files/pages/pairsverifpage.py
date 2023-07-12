@@ -81,7 +81,7 @@ class PairsVerificationClass(QtWidgets.QMainWindow):
         self.ui.rest_model_classic.addItem("GPEN")
         self.ui.rest_model_classic.addItem("SGPN")
         self.currentdataset = "xqlfw"
-        csvfile = r"data\files\pairs.csv"
+        csvfile = r"data\files\XQLFW_pairsVerif.csv"
         directory = r"data\images\XQLFW"
         filename1, filename2 = self.random_images(csvfile)
         imagePath1 = os.path.join(directory, filename1)
@@ -94,7 +94,7 @@ class PairsVerificationClass(QtWidgets.QMainWindow):
     def hqrandom(self):
         try:
             self.currentdataset="lfw"
-            csvfile=r"data\files\lfw_pairs.csv"
+            csvfile=r"data\files\LFW_pairsVerif.csv"
             directory = r"data\images\LFW"
             filename1,filename2=self.random_images(csvfile)
             imagePath1= os.path.join(directory, filename1)
@@ -118,15 +118,21 @@ class PairsVerificationClass(QtWidgets.QMainWindow):
 
     def random_images(self, csvfile):
         df=pd.read_csv(csvfile)
+        print(df.columns)
         randomline=df.iloc[random.randint(0, df.shape[0] - 1)]
         path1=f"{randomline.loc['name1']}_{randomline.loc['image1']:04d}.png"
+        print(randomline.loc['recognition'],randomline.loc['restoration'])
         path2 = f"{randomline.loc['name2']}_{randomline.loc['image2']:04d}.png"
         return path1,path2
-    def detection(self):
+    def detection(self,rest):
         loading = LoadingScreen()
         loading.startLoading()
         first_path = self.photoViewerOne.imagePath
         second_path = self.photoViewerTwo.imagePath
+        if rest != None:
+            first_path=os.path.join(f"data\images\{self.currentdataset.upper()}_{rest.upper()}",first_path.split("\\")[-1])
+            second_path=os.path.join(f"data\images\{self.currentdataset.upper()}_{rest.upper()}",second_path.split("\\")[-1])
+        print(first_path,second_path)
         detector="MTCNN"
         firstimage = detect_face(first_path, detector)
         secondimage = detect_face(second_path, detector)
@@ -180,7 +186,8 @@ class PairsVerificationClass(QtWidgets.QMainWindow):
                 if self.ui.classic_checkbox.isChecked():
                     rest=self.ui.rest_model_classic.currentText()
                 acc,threshold,_,_=verif_pair(dataset,imgpath1,imgpath2,model,rest)
-            self.detection()
+
+            self.detection(rest)
             self.ui.accuracy.setText(str(round(acc,4)))
             self.ui.threshold.setText(str(round(threshold,4)))
             if acc>threshold:

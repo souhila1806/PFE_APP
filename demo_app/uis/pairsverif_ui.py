@@ -488,7 +488,7 @@ class Ui_PairsVerifForm(object):
         self.randomLQ.setText(_translate("PairsVerifForm", "Random LQ image"))
         self.apply_pairs_verif_btn.setText(_translate("PairsVerifForm", "apply"))
         self.result.setText(_translate("PairsVerifForm", "Click Apply! The result will show here"))
-        self.label_3.setText(_translate("PairsVerifForm", "Similarity Score"))
+        self.label_3.setText(_translate("PairsVerifForm", "Similarity Score: "))
         self.accuracy.setText(_translate("PairsVerifForm", "-"))
         self.label_4.setText(_translate("PairsVerifForm", "Threshold:  "))
         self.threshold.setText(_translate("PairsVerifForm", "-"))

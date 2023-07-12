@@ -242,7 +242,7 @@ class Ui_FoldsVerifForm(object):
         self.dist_plot = QtWidgets.QFrame(self.distribution)
         self.dist_plot.setMinimumSize(QtCore.QSize(708, 430))
         self.dist_plot.setMaximumSize(QtCore.QSize(865, 480))
-        self.dist_plot.setStyleSheet("background-color:rgb(83, 83, 83);\n"
+        self.dist_plot.setStyleSheet("background-color:rgba(56, 64, 73, 0.8);\n"
 "border-radius: 10px;")
         self.dist_plot.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.dist_plot.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -268,7 +268,7 @@ class Ui_FoldsVerifForm(object):
         self.roccurve_plot = QtWidgets.QFrame(self.roccurve)
         self.roccurve_plot.setMinimumSize(QtCore.QSize(708, 430))
         self.roccurve_plot.setMaximumSize(QtCore.QSize(865, 480))
-        self.roccurve_plot.setStyleSheet("background-color:rgb(83, 83, 83);\n"
+        self.roccurve_plot.setStyleSheet("background-color:rgba(56, 64, 73, 0.8);\n"
 "border-radius: 10px;")
         self.roccurve_plot.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.roccurve_plot.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -294,7 +294,7 @@ class Ui_FoldsVerifForm(object):
         self.magnitudeplot = QtWidgets.QFrame(self.magnitude)
         self.magnitudeplot.setMinimumSize(QtCore.QSize(708, 430))
         self.magnitudeplot.setMaximumSize(QtCore.QSize(865, 480))
-        self.magnitudeplot.setStyleSheet("background-color:rgb(83, 83, 83);\n"
+        self.magnitudeplot.setStyleSheet("background-color:rgba(56, 64, 73, 0.8);\n"
 "border-radius: 10px;")
         self.magnitudeplot.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.magnitudeplot.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -320,7 +320,7 @@ class Ui_FoldsVerifForm(object):
         self.simindexplot = QtWidgets.QFrame(self.simindex)
         self.simindexplot.setMinimumSize(QtCore.QSize(708, 380))
         self.simindexplot.setMaximumSize(QtCore.QSize(865, 480))
-        self.simindexplot.setStyleSheet("background-color:rgb(83, 83, 83);\n"
+        self.simindexplot.setStyleSheet("background-color:rgba(56, 64, 73, 0.8);\n"
 "border-radius: 10px;")
         self.simindexplot.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.simindexplot.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -347,7 +347,7 @@ class Ui_FoldsVerifForm(object):
         self.fusionregressionplot = QtWidgets.QFrame(self.fusionregression)
         self.fusionregressionplot.setMinimumSize(QtCore.QSize(708, 380))
         self.fusionregressionplot.setMaximumSize(QtCore.QSize(865, 480))
-        self.fusionregressionplot.setStyleSheet("background-color:rgb(83, 83, 83);\n"
+        self.fusionregressionplot.setStyleSheet("background-color:rgba(56, 64, 73, 0.8);\n"
 "border-radius: 10px;")
         self.fusionregressionplot.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.fusionregressionplot.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -367,8 +367,8 @@ class Ui_FoldsVerifForm(object):
         self.tabsPages.addTab(self.fusionregression, "")
         self.verticalLayout.addWidget(self.imagespace)
         self.resultspace = QtWidgets.QFrame(self.workingspace)
-        self.resultspace.setMinimumSize(QtCore.QSize(900, 200))
-        self.resultspace.setMaximumSize(QtCore.QSize(900, 200))
+        self.resultspace.setMinimumSize(QtCore.QSize(900, 170))
+        self.resultspace.setMaximumSize(QtCore.QSize(900, 170))
         self.resultspace.setStyleSheet("background-color: rgb(47, 61, 78);")
         self.resultspace.setObjectName("resultspace")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.resultspace)
@@ -376,24 +376,29 @@ class Ui_FoldsVerifForm(object):
         self.verticalLayout_3.setSpacing(0)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_5.setContentsMargins(40, -1, -1, -1)
+        self.horizontalLayout_5.setContentsMargins(10, -1, -1, -1)
         self.horizontalLayout_5.setSpacing(0)
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
         self.label_13 = QtWidgets.QLabel(self.resultspace)
-        self.label_13.setMaximumSize(QtCore.QSize(60, 16777215))
+        self.label_13.setMaximumSize(QtCore.QSize(50, 50))
         self.label_13.setText("")
-        self.label_13.setPixmap(QtGui.QPixmap(":/icons/details.png"))
+        self.label_13.setPixmap(QtGui.QPixmap(":/images/images/details.png"))
         self.label_13.setObjectName("label_13")
         self.horizontalLayout_5.addWidget(self.label_13)
         self.result = QtWidgets.QLabel(self.resultspace)
-        self.result.setMaximumSize(QtCore.QSize(16777215, 50))
+        self.result.setMaximumSize(QtCore.QSize(150, 50))
         self.result.setStyleSheet("color: rgb(255, 255, 255);\n"
 "font: 12pt \"Georgia\";\n"
-"padding-top:20px\n"
+"\n"
 "")
-        self.result.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.result.setAlignment(QtCore.Qt.AlignCenter)
         self.result.setObjectName("result")
         self.horizontalLayout_5.addWidget(self.result)
+        self.frame = QtWidgets.QFrame(self.resultspace)
+        self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame.setObjectName("frame")
+        self.horizontalLayout_5.addWidget(self.frame)
         self.verticalLayout_3.addLayout(self.horizontalLayout_5)
         self.horizontalFrame = QtWidgets.QFrame(self.resultspace)
         self.horizontalFrame.setMaximumSize(QtCore.QSize(16777215, 100))
@@ -401,6 +406,10 @@ class Ui_FoldsVerifForm(object):
         self.horizontalLayout_6 = QtWidgets.QHBoxLayout(self.horizontalFrame)
         self.horizontalLayout_6.setSpacing(0)
         self.horizontalLayout_6.setObjectName("horizontalLayout_6")
+        self.label_6 = QtWidgets.QLabel(self.horizontalFrame)
+        self.label_6.setText("")
+        self.label_6.setObjectName("label_6")
+        self.horizontalLayout_6.addWidget(self.label_6)
         self.label_3 = QtWidgets.QLabel(self.horizontalFrame)
         self.label_3.setStyleSheet("background-color: \"transparent\";\n"
 "color: rgb(255, 255, 255);\n"
@@ -781,7 +790,7 @@ class Ui_FoldsVerifForm(object):
         self.horizontalLayout_2.addWidget(self.rightmenubar)
 
         self.retranslateUi(FoldsVerifForm)
-        self.tabsPages.setCurrentIndex(4)
+        self.tabsPages.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(FoldsVerifForm)
 
     def retranslateUi(self, FoldsVerifForm):
@@ -802,7 +811,7 @@ class Ui_FoldsVerifForm(object):
         self.foldcombobox.setItemText(8, _translate("FoldsVerifForm", "7"))
         self.foldcombobox.setItemText(9, _translate("FoldsVerifForm", "8"))
         self.foldcombobox.setItemText(10, _translate("FoldsVerifForm", "9"))
-        self.apply_folds_verif_btn.setText(_translate("FoldsVerifForm", "apply"))
+        self.apply_folds_verif_btn.setText(_translate("FoldsVerifForm", "Apply"))
         self.label_15.setText(_translate("FoldsVerifForm", "Click Apply!\n"
 " Distribution plot will appear here!"))
         self.tabsPages.setTabText(self.tabsPages.indexOf(self.distribution), _translate("FoldsVerifForm", "Distribution"))

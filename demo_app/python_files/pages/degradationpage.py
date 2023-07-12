@@ -124,6 +124,7 @@ class DegPage(QtWidgets.QMainWindow):
         input_path=self.main_app.photoViewerInput.imagePath
         inputimage=cv2.imread(input_path)
         degraded_image = inputimage
+        print (f"input image{input_path}")
 
         #handle noise degradation
         if self.main_app.ui.noisecheckBox.isChecked():
@@ -143,7 +144,9 @@ class DegPage(QtWidgets.QMainWindow):
             if quality>100:
                 quality=100
                 self.main_app.ui.lowresvalue.setText(str(quality))
+            print(f" degraded image shape {degraded_image.shape}")
             degraded_image= generate_compression_artifact(degraded_image,quality)
+            print(f" degraded image shape {degraded_image.shape}")
         # handle lr degradation
         if self.main_app.ui.lrcheckbox.isChecked():
             percentage=int(self.main_app.ui.lowresvalue.text().rstrip('%'))

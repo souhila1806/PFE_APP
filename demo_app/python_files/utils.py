@@ -10,6 +10,7 @@ import torch
 import lpips
 from torchvision.transforms import ToTensor
 from matplotlib.figure import Figure
+from sklearn.preprocessing import MinMaxScaler
 
 def get_name_num_from_img(image_path):
     # Split the image path using "/"
@@ -291,6 +292,7 @@ def calculate_psnr(p1, p2):
 # functions used in the folds restoration page
 def get_data(fold, metric):
     df=pd.read_csv('data/metrics files/iqaMetrics_file.csv')
+    print (f"follld {fold}")
     if metric=='SSIM':
         col_s=4
         col_e=7
@@ -302,13 +304,13 @@ def get_data(fold, metric):
         col_e =3
     else:
         print(metric)
-    if fold=='10':
-        row_s = (int(fold) - 1) * 1323
+    if fold=='9':
+        row_s = (int(fold)) * 1323
         sub_df = df.iloc[row_s:, col_s: col_e+1]
-    elif fold=='All':
+    elif fold=='ALL':
         sub_df=df.iloc[:, col_s:col_e+1]
     else:
-        row_s = (int(fold) - 1) * 1323
+        row_s = (int(fold)) * 1323
         row_e = row_s + 1323
         sub_df = df.iloc[row_s:row_e,col_s:col_e+1]
 
@@ -320,13 +322,31 @@ def calculate_column_means(df, metric_type):
     if metric_type == 'LPIPS':
         min_index = means.index(min(means))
         max_index= means.index(max(means))
-        return means, min_index,max_index
-    elif metric_type in ['SSIM', 'PSNR']:
+        #return means, min_index,max_index
+    else :
         max_index = means.index(max(means))
         min_index=means.index(min(means))
-        return means, max_index,min_index
-    else:
-        print('Invalid metric type')
+    return means, max_index,min_index
+
+
+import pandas as pd
+from sklearn.preprocessing import MinMaxScaler
+
+
+def normalize_column(column):
+    # Create a MinMaxScaler object
+    scaler = MinMaxScaler(feature_range=(-1, 1))
+
+    # Reshape the column to a 2-dimensional array
+    reshaped_column = column.values.reshape(-1, 1)
+
+    # Fit and transform the column using the scaler
+    normalized_column = scaler.fit_transform(reshaped_column)
+
+    # Create a DataFrame with the normalized column
+    normalized_df = pd.DataFrame(normalized_column, columns=[column.name])
+
+    return normalized_df
 
 
 if __name__ == '__main__':

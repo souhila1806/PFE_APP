@@ -379,7 +379,7 @@ QScrollBar::handle:vertical {background:rgb(47, 61, 78);  min-height: 0px; borde
 font: 75 10pt &quot;Georgia&quot;;</string>
            </property>
            <property name="text">
-            <string>apply</string>
+            <string>Apply</string>
            </property>
           </widget>
          </item>
@@ -415,7 +415,7 @@ font: 75 10pt &quot;Georgia&quot;;</string>
 }</string>
          </property>
          <property name="currentIndex">
-          <number>4</number>
+          <number>0</number>
          </property>
          <property name="movable">
           <bool>true</bool>
@@ -452,7 +452,7 @@ font: 75 10pt &quot;Georgia&quot;;</string>
               </size>
              </property>
              <property name="styleSheet">
-              <string notr="true">background-color:rgb(83, 83, 83);
+              <string notr="true">background-color:rgba(56, 64, 73, 0.8);
 border-radius: 10px;</string>
              </property>
              <property name="frameShape">
@@ -533,7 +533,7 @@ padding-top:20px
               </size>
              </property>
              <property name="styleSheet">
-              <string notr="true">background-color:rgb(83, 83, 83);
+              <string notr="true">background-color:rgba(56, 64, 73, 0.8);
 border-radius: 10px;</string>
              </property>
              <property name="frameShape">
@@ -614,7 +614,7 @@ padding-top:20px
               </size>
              </property>
              <property name="styleSheet">
-              <string notr="true">background-color:rgb(83, 83, 83);
+              <string notr="true">background-color:rgba(56, 64, 73, 0.8);
 border-radius: 10px;</string>
              </property>
              <property name="frameShape">
@@ -695,7 +695,7 @@ padding-top:20px
               </size>
              </property>
              <property name="styleSheet">
-              <string notr="true">background-color:rgb(83, 83, 83);
+              <string notr="true">background-color:rgba(56, 64, 73, 0.8);
 border-radius: 10px;</string>
              </property>
              <property name="frameShape">
@@ -779,7 +779,7 @@ padding-top:20px
               </size>
              </property>
              <property name="styleSheet">
-              <string notr="true">background-color:rgb(83, 83, 83);
+              <string notr="true">background-color:rgba(56, 64, 73, 0.8);
 border-radius: 10px;</string>
              </property>
              <property name="frameShape">
@@ -836,13 +836,13 @@ padding-top:20px
         <property name="minimumSize">
          <size>
           <width>900</width>
-          <height>200</height>
+          <height>170</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
           <width>900</width>
-          <height>200</height>
+          <height>170</height>
          </size>
         </property>
         <property name="styleSheet">
@@ -870,21 +870,21 @@ padding-top:20px
             <number>0</number>
            </property>
            <property name="leftMargin">
-            <number>40</number>
+            <number>10</number>
            </property>
            <item>
             <widget class="QLabel" name="label_13">
              <property name="maximumSize">
               <size>
-               <width>60</width>
-               <height>16777215</height>
+               <width>50</width>
+               <height>50</height>
               </size>
              </property>
              <property name="text">
               <string/>
              </property>
              <property name="pixmap">
-              <pixmap>:/icons/details.png</pixmap>
+              <pixmap resource="../ressources.qrc">:/images/images/details.png</pixmap>
              </property>
             </widget>
            </item>
@@ -892,21 +892,31 @@ padding-top:20px
             <widget class="QLabel" name="result">
              <property name="maximumSize">
               <size>
-               <width>16777215</width>
+               <width>150</width>
                <height>50</height>
               </size>
              </property>
              <property name="styleSheet">
               <string notr="true">color: rgb(255, 255, 255);
 font: 12pt &quot;Georgia&quot;;
-padding-top:20px
+
 </string>
              </property>
              <property name="text">
               <string>Details</string>
              </property>
              <property name="alignment">
-              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="frame">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
              </property>
             </widget>
            </item>
@@ -924,6 +934,13 @@ padding-top:20px
             <property name="spacing">
              <number>0</number>
             </property>
+            <item>
+             <widget class="QLabel" name="label_6">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
             <item>
              <widget class="QLabel" name="label_3">
               <property name="styleSheet">
