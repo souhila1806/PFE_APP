@@ -465,7 +465,7 @@ font: 12pt &quot;Georgia&quot;;</string>
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap resource="../ressources.qrc">:/icons/images/reglages.png</pixmap>
+            <pixmap resource="../ressources.qrc">:/images/images/reglages (1).png</pixmap>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -1008,8 +1008,6 @@ image: url(:/icons/images/fleche-vers-le-bas.png);
   </layout>
  </widget>
  <resources>
-  <include location="../ressources.qrc"/>
-  <include location="../ressources.qrc"/>
   <include location="../ressources.qrc"/>
  </resources>
  <connections/>

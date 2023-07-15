@@ -323,7 +323,7 @@ font: 75 10pt &quot;Georgia&quot;;</string>
               </property>
               <property name="styleSheet">
                <string notr="true">background-color: rgba(168, 171, 179, 0.34);
-border-raidus:10px;</string>
+border-radius: 20px;</string>
               </property>
               <property name="frameShape">
                <enum>QFrame::StyledPanel</enum>
@@ -342,7 +342,8 @@ border-raidus:10px;</string>
                </size>
               </property>
               <property name="styleSheet">
-               <string notr="true">background-color:rgba(168, 171, 179, 0.34);</string>
+               <string notr="true">background-color:rgba(168, 171, 179, 0.34);
+border-radius: 20px;</string>
               </property>
               <property name="frameShape">
                <enum>QFrame::StyledPanel</enum>
@@ -361,7 +362,8 @@ border-raidus:10px;</string>
                </size>
               </property>
               <property name="styleSheet">
-               <string notr="true">background-color: rgba(168, 171, 179, 0.34);</string>
+               <string notr="true">background-color: rgba(168, 171, 179, 0.34);
+border-radius: 20px;</string>
               </property>
               <property name="frameShape">
                <enum>QFrame::StyledPanel</enum>
@@ -380,7 +382,8 @@ border-raidus:10px;</string>
                </size>
               </property>
               <property name="styleSheet">
-               <string notr="true">background-color:rgba(168, 171, 179, 0.34);</string>
+               <string notr="true">background-color:rgba(168, 171, 179, 0.34);
+border-radius: 20px</string>
               </property>
               <property name="frameShape">
                <enum>QFrame::StyledPanel</enum>
@@ -850,7 +853,7 @@ border-raidus:10px;</string>
   </layout>
  </widget>
  <resources>
-  <include location="../resource.qrc"/>
+  <include location="../ressources.qrc"/>
   <include location="../ressources.qrc"/>
  </resources>
  <connections/>

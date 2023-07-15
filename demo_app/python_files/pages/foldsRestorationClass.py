@@ -122,6 +122,9 @@ class FoldsRestorationClass(QtWidgets.QWidget):
             layout.addWidget(canvas)
 
             self.ui.tabsPages.setCurrentIndex(0)
+            index = self.ui.tabsPages.currentIndex()
+            self.tab_changed(0)
+
 
     def clearLayout(self, layout):
         while layout.count():

@@ -183,7 +183,7 @@ class Ui_PairsVerifForm(object):
         self.label_9 = QtWidgets.QLabel(self.frame_2)
         self.label_9.setMinimumSize(QtCore.QSize(80, 80))
         self.label_9.setText("")
-        self.label_9.setPixmap(QtGui.QPixmap("images/reglages.png"))
+        self.label_9.setPixmap(QtGui.QPixmap(":/images/images/reglages (1).png"))
         self.label_9.setAlignment(QtCore.Qt.AlignCenter)
         self.label_9.setObjectName("label_9")
         self.horizontalLayout_3.addWidget(self.label_9)

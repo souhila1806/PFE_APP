@@ -3,6 +3,7 @@ from PyQt5.QtCore import Qt,QTimer,QSize,QTimer
 from PyQt5.QtGui import QPixmap,QRegExpValidator,QImage, QMovie
 from PyQt5.QtWidgets import QApplication
 import os
+import threading
 
 
 class LoadingScreen(QtWidgets.QWidget):
@@ -11,6 +12,7 @@ class LoadingScreen(QtWidgets.QWidget):
         self.setFixedSize(1300, 850)
         # Create a vertical layout and add the QLabel widgets
         layout = QtWidgets.QVBoxLayout(self)
+        print("name6 ", threading.current_thread().name)
 
         self.setWindowFlags(Qt.WindowStaysOnTopHint | Qt.CustomizeWindowHint)
         self.setAttribute(Qt.WA_TranslucentBackground,on=True)
@@ -32,6 +34,7 @@ class LoadingScreen(QtWidgets.QWidget):
 
     def startLoading(self):
         self.show()
+        print("name7 ", threading.current_thread().name)
         self.movie.start()
     def stopLoading(self):
 

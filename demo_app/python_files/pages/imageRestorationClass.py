@@ -25,9 +25,9 @@ class DegradationThread(QThread):
     def run(self):
         if self.type == "HQ":
 
-            gfpganPath = os.path.join(r"data\images\LFW_GFPGAN", self.image_name)
-            gpenPath = os.path.join(r"data\images\LFW_GPEN", self.image_name)
-            sgpnPath = os.path.join(r"data\images\LFW_GPEN", self.image_name)
+            gfpganPath = os.path.join(r"data\images\LFW_GFPGAN_IQA", self.image_name)
+            gpenPath = os.path.join(r"data\images\LFW_GPEN_IQA", self.image_name)
+            sgpnPath = os.path.join(r"data\images\LFW_SGPN_IQA", self.image_name)
             lpips1 = '/'
             lpipssg = round(calculate_lpips_lfw(self.lfw, sgpnPath, self.lpips_model), 3)
             ssim1 = '/'
@@ -38,8 +38,8 @@ class DegradationThread(QThread):
 
             gfpganPath = os.path.join(r"data\images\XQLFW_GFPGAN", self.image_name)
             gpenPath = os.path.join(r"data\images\XQLFW_GPEN", self.image_name)
-            sgpnPath = os.path.join(r"data\v\XQLFW_SGPN", self.image_name)
-            lpips1 = round(calculate_lpips_xqlf(self.lfw, self.xqlfw, self.lpips_model), 3)
+            sgpnPath = os.path.join(r"data\images\XQLFW_SGPN", self.image_name)
+            lpips1 = round(calculate_lpips_lfw(self.lfw, self.xqlfw, self.lpips_model), 3)
             lpipssg = round(calculate_lpips_xqlf(self.lfw, sgpnPath, self.lpips_model), 3)
             ssim1 = round(calculate_ssim(self.lfw, self.xqlfw), 3)
             ssimsg = round(calculate_ssim(self.lfw, sgpnPath), 3)
@@ -61,96 +61,16 @@ class DegradationThread(QThread):
         # Display metrics
         # List of lpips values
         lpips_values = [lpips1, lpipsgf, lpipssg, lpipsgp]
-        print(lpips_values)
+        print('lpips',lpips_values)
         # List of ssim values
         ssim_values = [ssim1, ssimgf, ssimsg, ssimgp]
+        print('ssim',ssim_values)
         # List of psnr values
         psnr_values = [psnr1, psnrgf, psnrsg, psnrgp]
-
+        print('psnr', psnr_values)
         # Map of label names to values
-        lpips_labels = {
-            "lo": lpips1,
-            "lgf": lpipsgf,
-            "ln": lpipssg,
-            "lppn": lpipsgp
-        }
 
-        ssim_labels = {
-            "sso": ssim1,
-            "ssgf": ssimgf,
-            "ssn": ssimsg,
-            "sspn": ssimgp
-        }
-
-        psnr_labels = {
-            "po": psnr1,
-            "pgf": psnrgf,
-            "pn": psnrsg,
-            "ppn": psnrgp
-        }
-
-        # Set maximum and minimum colors for lpips values
-        if lpips_values[0] == '/':
-            max_lpips = max(lpips_values[1:])
-            min_lpips = min(lpips_values[1:])
-        else:
-            max_lpips = max(lpips_values)
-            min_lpips = min(lpips_values)
-
-        for label_name, value in lpips_labels.items():
-            label = getattr(self.ui, label_name)
-            label.setText(str(value))
-            if value != '/':
-                if value == max_lpips:
-                    label.setStyleSheet("color: green;")
-                elif value == min_lpips:
-                    label.setStyleSheet("color: red;")
-                else:
-                    label.setStyleSheet("color: white;")
-                    print(f"norm = {value}")
-
-        # Set maximum and minimum colors for ssim values
-        if ssim_values[0] == '/':
-            max_ssim = max(ssim_values[1:])
-            min_ssim = min(ssim_values[1:])
-        else:
-            max_ssim = max(ssim_values)
-            min_ssim = min(ssim_values)
-
-        for label_name, value in ssim_labels.items():
-            label = getattr(self.ui, label_name)
-            label.setText(str(value))
-            if value != '/':
-                if value == max_ssim:
-                    label.setStyleSheet("color: green;")
-                elif value == min_ssim:
-                    label.setStyleSheet("color: red;")
-                else:
-                    label.setStyleSheet("color: white;")
-                    print(f"norm = {value}")
-
-        # Set maximum and minimum colors for psnr values
-        if psnr_values[0] == '/':
-            max_psnr = max(psnr_values[1:])
-            min_psnr = min(psnr_values[1:])
-        else:
-            max_psnr = max(psnr_values)
-            min_psnr = min(psnr_values)
-
-        for label_name, value in psnr_labels.items():
-            label = getattr(self.ui, label_name)
-            label.setText(str(value))
-            if value != '/':
-                if value == max_psnr:
-                    label.setStyleSheet("color: green;")
-                    print(f"max = {value}")
-                elif value == min_psnr:
-                    label.setStyleSheet("color: red;")
-                    print(f"min = {value}")
-                else:
-                    label.setStyleSheet("color: white;")
-                    print(f"norm = {value}")
-        result='Done'
+        result = (lpips_values, ssim_values, psnr_values)
         self.finished.emit(result)
 
 class ImageDisplayClass:
@@ -245,7 +165,7 @@ class ImageRestorationClass(QtWidgets.QWidget):
 
     def random_hq_image(self):
         print('test test')
-        directory = r"data\images\LFW"
+        directory = r"data\images\LFW_IQA"
         imagePath = os.path.join(directory, self.random_image(directory))
         print(imagePath)
         self.org.display_image(imagePath)
@@ -269,7 +189,7 @@ class ImageRestorationClass(QtWidgets.QWidget):
         self.gpen.display_text('GPEN')
         self.sgpn.display_text('SGPN')
         image_name=self.org.get_image_name()
-        lfw = os.path.join(r"data\images\LFW", image_name)
+        lfw = os.path.join(r"data\images\LFW_IQA", image_name)
         xqlfw = os.path.join(r"data\images\XQLFW", image_name)
         self.degradation_thread = DegradationThread(self.type, lpips_model,image_name,lfw,xqlfw,self.ui,self)
         self.degradation_thread.finished.connect(self.handle_degradation_finished)
@@ -279,7 +199,90 @@ class ImageRestorationClass(QtWidgets.QWidget):
         self.loading_screen.startLoading()
         self.degradation_thread.start()
 
-    def handle_degradation_finished(self):
+    def handle_degradation_finished(self,result):
+        lpips_values, ssim_values, psnr_values = result
+        lpips_labels = {
+            "lo": lpips_values[0],
+            "lgf": lpips_values[1],
+            "ln": lpips_values[2],
+            "lppn": lpips_values[3]
+        }
+
+        ssim_labels = {
+            "sso": ssim_values[0],
+            "ssgf": ssim_values[1],
+            "ssn": ssim_values[2],
+            "sspn": ssim_values[3]
+        }
+
+        psnr_labels = {
+            "po": psnr_values[0],
+            "pgf": psnr_values[1],
+            "pn": psnr_values[2],
+            "ppn": psnr_values[3]
+        }
+
+        # Set maximum and minimum colors for lpips values
+        if lpips_values[0] == '/':
+            max_lpips = max(lpips_values[1:])
+            min_lpips = min(lpips_values[1:])
+        else:
+            max_lpips = max(lpips_values)
+            min_lpips = min(lpips_values)
+
+        for label_name, value in lpips_labels.items():
+            label = getattr(self.ui, label_name)
+            label.setText(str(value))
+            if value != '/':
+                if value == min_lpips:
+                    label.setStyleSheet("color: green;")
+                elif value == max_lpips:
+                    label.setStyleSheet("color: red;")
+                else:
+                    label.setStyleSheet("color: white;")
+                    print(f"norm = {value}")
+
+        # Set maximum and minimum colors for ssim values
+        if ssim_values[0] == '/':
+            max_ssim = max(ssim_values[1:])
+            min_ssim = min(ssim_values[1:])
+        else:
+            max_ssim = max(ssim_values)
+            min_ssim = min(ssim_values)
+
+        for label_name, value in ssim_labels.items():
+            label = getattr(self.ui, label_name)
+            label.setText(str(value))
+            if value != '/':
+                if value == max_ssim:
+                    label.setStyleSheet("color: green;")
+                elif value == min_ssim:
+                    label.setStyleSheet("color: red;")
+                else:
+                    label.setStyleSheet("color: white;")
+                    print(f"norm = {value}")
+
+        # Set maximum and minimum colors for psnr values
+        if psnr_values[0] == '/':
+            max_psnr = max(psnr_values[1:])
+            min_psnr = min(psnr_values[1:])
+        else:
+            max_psnr = max(psnr_values)
+            min_psnr = min(psnr_values)
+
+        for label_name, value in psnr_labels.items():
+            label = getattr(self.ui, label_name)
+            label.setText(str(value))
+            if value != '/':
+                if value == max_psnr:
+                    label.setStyleSheet("color: green;")
+                    print(f"max = {value}")
+                elif value == min_psnr:
+                    label.setStyleSheet("color: red;")
+                    print(f"min = {value}")
+                else:
+                    label.setStyleSheet("color: white;")
+                    print(f"norm = {value}")
         self.loading_screen.stopLoading()
     # functions to enable or disable apply button and change its style
     def enableApplyFunc(self):

@@ -10,7 +10,9 @@ import matplotlib.patches as pchs
 import matplotlib.colors as mcolors
 import matplotlib.patheffects as path_effects
 from python_files.utils import cross_val
-import sys
+from PyQt5.QtCore import QThread, pyqtSignal
+from ..loading import LoadingScreen
+import threading
 
 class PlotWidget(QFrame):
     def __init__(self,data, parent=None):
@@ -25,8 +27,6 @@ class PlotWidget(QFrame):
         layout.addWidget(self.canvas)
         self.setLayout(layout)
 
-        # Create your plot using the figure object
-        self.plot(data)
 
     def plot(self, data):
         print(f"distribution {data}")
@@ -40,10 +40,10 @@ class PlotWidget(QFrame):
         # Extract the data for plotting
         x = data.iloc[0:half, 0]
         y = data.iloc[half:, 0]
-        colors = ['red', 'blue']
+        colors = ['mediumpurple', 'mediumaquamarine']
 
         # Plot the histograms
-        ax.hist([x, y], bins, alpha=0.5, color=colors, label=['matched', 'mismatched'])
+        ax.hist([x, y], bins, alpha=1, color=colors, label=['matched', 'mismatched'])
         ax.set_xlim(-0.3, 1)
         ax.set_xticks(np.arange(-1, 1, step=0.1))
         ax.legend(loc='upper right')
@@ -52,7 +52,7 @@ class PlotWidget(QFrame):
 
 
 class RocCurvePlotWidget(QFrame):
-    def __init__(self, data, parent=None):
+    def __init__(self, data, model, parent=None):
         super(RocCurvePlotWidget, self).__init__(parent)
 
         # Create a Figure object and a FigureCanvas
@@ -64,10 +64,8 @@ class RocCurvePlotWidget(QFrame):
         layout.addWidget(self.canvas)
         self.setLayout(layout)
 
-        # Create your plot using the figure object
-        self.plot(data)
 
-    def plot(self, data):
+    def plot(self, data,model):
         half = int(data.shape[0] / 2)
         y_pred = np.concatenate((np.zeros(half), np.ones(half)))
         fpr, tpr, thresholds = roc_curve(y_pred, data, pos_label=1)
@@ -78,11 +76,13 @@ class RocCurvePlotWidget(QFrame):
         ax = self.figure.add_subplot(111)
 
         # Plot the ROC curve
-        ax.plot(tpr, fpr)
-        ax.plot([0, 1], ls="--")
+        ax.plot(tpr, fpr, color='mediumpurple', label=model)
+        ax.plot([0, 1], ls="--", color='mediumaquamarine', label="random classifier")
         ax.set_title('Receiver Operating Characteristic')
         ax.set_ylabel('Correct acceptance')
         ax.set_xlabel('False acceptance')
+
+        ax.legend()
 
         # Draw the plot on the canvas
         self.canvas.draw()
@@ -90,7 +90,7 @@ class RocCurvePlotWidget(QFrame):
 class MagnitudePlotWidget(QFrame):
     def __init__(self,rest, parent=None):
         super(MagnitudePlotWidget, self).__init__(parent)
-
+        self.setFixedSize(1500, 400)
         # Create a Figure object and a FigureCanvas
         self.figure = Figure(figsize=(35, 5))
         self.canvas = FigureCanvas(self.figure)
@@ -99,9 +99,6 @@ class MagnitudePlotWidget(QFrame):
         layout = QVBoxLayout()
         layout.addWidget(self.canvas)
         self.setLayout(layout)
-
-        # Create your plot using the figure object
-        self.plot(model=rest)  # Default model is None
 
     def plot(self, model):
         print(model)
@@ -144,7 +141,7 @@ class MagnitudePlotWidget(QFrame):
                 axs[i].set_facecolor(pastel_yellow)
 
         # Adjust the spacing between subplots
-        self.figure.subplots_adjust(wspace=0.2)
+        self.figure.subplots_adjust(wspace=0.1)
 
         # Draw the plot on the canvas
         self.canvas.draw()
@@ -153,7 +150,7 @@ class MagnitudePlotWidget(QFrame):
 class SimilarityPlotWidget(QFrame):
     def __init__(self,model,rest, parent=None):
         super(SimilarityPlotWidget, self).__init__(parent)
-
+        self.setFixedSize(1100, 400)
         # Create a Figure objct and a FigureCanvas
         self.figure = Figure(figsize=(35, 5))
         self.canvas = FigureCanvas(self.figure)
@@ -163,8 +160,7 @@ class SimilarityPlotWidget(QFrame):
         layout.addWidget(self.canvas)
         self.setLayout(layout)
 
-        # Create your plot using the figure object
-        self.plot(model,rest)
+
 
     def plot(self,model,rest):
         data=pd.read_csv(r"data\files\simIndex_file.csv")
@@ -226,65 +222,46 @@ class RegressionPlotWidget(QFrame):
         self.fusiontype=fusiontype
         self.rec_model=rec_model
         self.rest_model=rest_model
-        # Create your plot using the figure object
 
-        self.plot(self.fusiontype,self.rec_model,self.rest_model)
+    def plot(self, fusiontype, rec_model, rest_model):
+        try:
+            self.thread = ProcessThread(fusiontype, rec_model, rest_model)
+            self.thread.finished.connect(self.handle_finished)
 
-    def init_elements(self,fusiontype,rec_model,rest_model):
-        self.directory = pd.read_csv(
-            rf"data\files\{fusiontype}_coefficients.csv")
-        #get column name in coefficient file
-        col = f"{fusiontype[0]}f_{rest_model[0].lower()}_{rest_model[1].lower()}_{rec_model.lower()}"
-        if not any(self.directory['name'].str.contains(col)):
-            col = f"{fusiontype[0]}f_{rest_model[1].lower()}_{rest_model[0].lower()}_{rec_model.lower()}"
-        #get the coefficients
-        coeff = self.directory[self.directory['name'] == col].reset_index(drop=True)
-        coeff = coeff.drop('name', axis=1)
+            # Start the thread
 
+            print("Current Thread Name 1:",threading.current_thread().name)
 
-        if fusiontype == "score":
-            xqlfw = pd.read_csv(r"data\files\xqlfw_scores.csv")
-            col1 = f"{rec_model.lower()}_{rest_model[0].lower()}"
-            col2 = f"{rec_model.lower()}_{rest_model[1].lower()}"
-            # get the data
-            data = pd.concat([xqlfw[col1], xqlfw[col2]], axis=1)
-        else:
-            print("hybrid fusion")
-            xqlfw = pd.read_csv(r"data\files\xqlfw_scores.csv")
-            ff = pd.read_csv(r"data\files\feature_fusion_scores.csv")
-            if len(rest_model)==2:#if there are 2 models in feature level fusion
-                col1 = f"ff_{rest_model[0].lower()}_{rest_model[1].lower()}_{rec_model.lower()}"
-                if col1 not in ff.columns:
-                    col1 = f"ff_{rest_model[1].lower()}_{rest_model[2].lower()}_{rec_model.lower()}"
-                rest_l2= [element for element in ["GFPGAN", "SGPN", "GPEN"] if element not in rest_model]
-                col2 = f"{rec_model.lower()}_{rest_l2[0].lower()}"
-            else:#all
-                col1=f"ff_all_{rec_model.lower()}"
-                col2=f"{rec_model.lower()}_gfpgan"
-            data = pd.concat([ff[col1], xqlfw[col2]], axis=1)
-        return coeff,data
-    def plot(self,fusiontype,rec_model,rest_model):
+            self.thread.start()
+            self.thread.wait()
+            print("Current Thread Name2:",threading.current_thread().name)
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+
+    def handle_finished(self, result):
+        print("name 3",threading.current_thread().name)
+        coeff, data, loading_screen = result
         self.figure.clear()
         # Set the width of the entire figure
         axs = self.figure.subplots(5, 2)
-        self.figure.subplots_adjust(top=0.95, bottom=0.05)
-        coeff,data=self.init_elements(fusiontype,rec_model,rest_model)
-        half=300
+        self.figure.subplots_adjust(top=0.92, bottom=0.08, hspace=0.4)
+        half = 300
         column_values = np.concatenate((np.ones(half), np.zeros(half)))
         colors = ['#0F9DE8' if label == 1 else '#660099' for label in column_values]
 
         for i, ax in enumerate(axs.flatten()):
-            _,test = cross_val(data,i)
+            _, test = cross_val(data, i)
             test['label'] = column_values
             columns = test.columns
-            print(columns)
             x_col = columns[0]  # Assuming the first column is for the x-axis
             y_col = columns[1]
-            print(x_col,y_col)
             test.plot.scatter(x=x_col, y=y_col, c=colors, ax=ax, label=None)
-            ax.set_xlabel(f"{rest_model[0]} scores")
-            if i==0 or i==5:
-                ax.set_ylabel(f"{rest_model[1]} scores")
+            ax.set_xlabel(f"{self.rest_model[0]} scores")
+            if i%2 == 0:
+                ax.set_ylabel(f"{self.rest_model[1]} scores")
+            else:
+                ax.set_ylabel("")
             ax.set_title(f'fold {i}')
 
             a = coeff.iloc[i, 0]
@@ -297,10 +274,66 @@ class RegressionPlotWidget(QFrame):
             s2_range = (-c - a * s1_range) / b
 
             ax.plot(s1_range, s2_range, 'r', label='f(s1, s2)' if i == 0 else None)
-            ax.legend()
+            if i == 0:
+                ax.legend()
 
             # Draw the plot on the canvas
             self.canvas.draw()
+            loading_screen.stopLoading()
+
+
+
+class ProcessThread(QThread):
+    finished = pyqtSignal(object)
+
+    def __init__(self, fusiontype,rec_model,rest_model):
+        super().__init__()
+        self.loading_screen = LoadingScreen()
+        self.loading_screen.startLoading()
+        print("name4 ", threading.current_thread().name)
+        self.fusiontype = fusiontype
+        self.rec_model = rec_model
+        self.rest_model = rest_model
+
+
+    def run(self):
+        print("name5 ", threading.current_thread().name)
+        fusiontype = self.fusiontype
+        rec_model = self.rec_model
+        rest_model = self.rest_model
+        self.directory = pd.read_csv(
+            rf"data\files\{fusiontype}_coefficients.csv")
+        # get column name in coefficient file
+        col = f"{fusiontype[0]}f_{rest_model[0].lower()}_{rest_model[1].lower()}_{rec_model.lower()}"
+        if not any(self.directory['name'].str.contains(col)):
+            col = f"{fusiontype[0]}f_{rest_model[1].lower()}_{rest_model[0].lower()}_{rec_model.lower()}"
+        # get the coefficients
+        coeff = self.directory[self.directory['name'] == col].reset_index(drop=True)
+        coeff = coeff.drop('name', axis=1)
+
+        if fusiontype == "score":
+            xqlfw = pd.read_csv(r"data\files\xqlfw_scores.csv")
+            col1 = f"{rec_model.lower()}_{rest_model[0].lower()}"
+            col2 = f"{rec_model.lower()}_{rest_model[1].lower()}"
+            # get the data
+            data = pd.concat([xqlfw[col1], xqlfw[col2]], axis=1)
+        else:
+            print("hybrid fusion")
+            xqlfw = pd.read_csv(r"data\files\xqlfw_scores.csv")
+            ff = pd.read_csv(r"data\files\feature_fusion_scores.csv")
+            if len(rest_model) == 2:  # if there are 2 models in feature level fusion
+                col1 = f"ff_{rest_model[0].lower()}_{rest_model[1].lower()}_{rec_model.lower()}"
+                if col1 not in ff.columns:
+                    col1 = f"ff_{rest_model[1].lower()}_{rest_model[2].lower()}_{rec_model.lower()}"
+                rest_l2 = [element for element in ["GFPGAN", "SGPN", "GPEN"] if element not in rest_model]
+                col2 = f"{rec_model.lower()}_{rest_l2[0].lower()}"
+            else:  # all
+                col1 = f"ff_all_{rec_model.lower()}"
+                col2 = f"{rec_model.lower()}_gfpgan"
+            data = pd.concat([ff[col1], xqlfw[col2]], axis=1)
+
+        result = coeff,data,self.loading_screen
+        self.finished.emit(result)
 
 if __name__ == '__main__':
     try:

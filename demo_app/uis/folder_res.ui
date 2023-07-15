@@ -209,7 +209,7 @@ background-color:rgba(47, 61, 78, 1);
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap resource="../resource.qrc">:/icon/images/details.png</pixmap>
+            <pixmap resource="../ressources.qrc">:/images/images/details.png</pixmap>
            </property>
           </widget>
          </item>
@@ -823,7 +823,7 @@ font: 75 10pt &quot;Georgia&quot;;</string>
                <string/>
               </property>
               <property name="pixmap">
-               <pixmap resource="../resource.qrc">:/icon/images/details.png</pixmap>
+               <pixmap resource="../ressources.qrc">:/images/images/details.png</pixmap>
               </property>
               <property name="scaledContents">
                <bool>true</bool>
@@ -1102,7 +1102,8 @@ background-color: rgb(47, 61, 78);</string>
   </layout>
  </widget>
  <resources>
-  <include location="../resource.qrc"/>
+  <include location="../ressources.qrc"/>
+  <include location="../ressources.qrc"/>
  </resources>
  <connections/>
 </ui>

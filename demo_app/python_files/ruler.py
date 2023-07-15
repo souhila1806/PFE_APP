@@ -7,7 +7,7 @@ from PyQt5.QtCore import Qt, QRectF
 class RulerWidget(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setMinimumSize(400, 90)
+        self.setMinimumSize(400, 100)
         self.score = 0.0
         self.threshold = 0.0
 
@@ -21,7 +21,7 @@ class RulerWidget(QWidget):
 
             # Add some space above the ruler
             ruler_top_padding = 50
-            ruler_height = height - 20 - ruler_top_padding
+            ruler_height = height - 30 - ruler_top_padding
             padding = 40  # Adjust the amount of padding as desired
 
             # Calculate the adjusted width and x positions
@@ -72,11 +72,18 @@ class RulerWidget(QWidget):
             painter.setPen(QPen(Qt.gray, 2))
             painter.drawLine(adjusted_threshold_x, ruler_top_padding, adjusted_threshold_x, ruler_top_padding + 10)
             painter.setPen(QPen(Qt.white, 2))
+            font = QFont()
+            font.setBold(True)
+            font.setPointSize(10)  # Adjust the point size as needed
+            painter.setFont(font)
             painter.drawText(int(adjusted_threshold_x - 15), ruler_top_padding - 20, f"THR")
             #painter.drawText(int(adjusted_threshold_x - 15), ruler_top_padding - 10, f"{self.threshold:.{2}f}")
 
             # Draw score indicator line
             painter.setPen(QPen(Qt.gray, 2))
+            font.setBold(False)
+            font.setPointSize(8)  # Adjust the point size as needed
+            painter.setFont(font)
             painter.drawLine(adjusted_score_x, ruler_top_padding + ruler_height, adjusted_score_x,
                              ruler_top_padding + ruler_height - 10)
             if self.score > self.threshold:
@@ -85,11 +92,16 @@ class RulerWidget(QWidget):
                 painter.setPen(QPen(Qt.red, 2))
             else:
                 painter.setPen(QPen(Qt.white, 2))
-
-            painter.drawText(int(adjusted_score_x - 15), ruler_top_padding + ruler_height + 20, f"SCR")
+            font.setBold(True)
+            font.setPointSize(10)  # Adjust the point size as needed
+            painter.setFont(font)
+            painter.drawText(int(adjusted_score_x - 15), ruler_top_padding + ruler_height + 30, f"SCR")
             #painter.drawText(int(adjusted_score_x - 15), ruler_top_padding + ruler_height + 30, f"{self.score:.{2}f}")
 
             painter.setPen(QPen(Qt.black, 1))
+            font.setBold(False)
+            font.setPointSize(8)  # Adjust the point size as needed
+            painter.setFont(font)
             graduation_spacing = adjusted_width / 20
             for i in range(21):
                 painter.setPen(Qt.white)

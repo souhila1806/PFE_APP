@@ -414,7 +414,7 @@ class Ui_FoldsVerifForm(object):
         self.label_3.setStyleSheet("background-color: \"transparent\";\n"
 "color: rgb(255, 255, 255);\n"
 "font: 12pt \"Georgia\";\n"
-"padding-top:20px")
+"")
         self.label_3.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_3.setObjectName("label_3")
         self.horizontalLayout_6.addWidget(self.label_3)
@@ -423,15 +423,14 @@ class Ui_FoldsVerifForm(object):
         self.FR.setStyleSheet("background-color: \"transparent\";\n"
 "color: rgb(255, 255, 255);\n"
 "font: 12pt \"Georgia\";\n"
-"padding-top:20px")
+"")
         self.FR.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.FR.setObjectName("FR")
         self.horizontalLayout_6.addWidget(self.FR)
         self.label_4 = QtWidgets.QLabel(self.horizontalFrame)
         self.label_4.setStyleSheet("background-color: \"transparent\";\n"
 "color: rgb(255, 255, 255);\n"
-"font: 12pt \"Georgia\";\n"
-"padding-top:20px")
+"font: 12pt \"Georgia\";")
         self.label_4.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_4.setObjectName("label_4")
         self.horizontalLayout_6.addWidget(self.label_4)
@@ -440,38 +439,34 @@ class Ui_FoldsVerifForm(object):
         self.FA.setStyleSheet("background-color: \"transparent\";\n"
 "color: rgb(255, 255, 255);\n"
 "font: 12pt \"Georgia\";\n"
-"padding-top:20px")
+"")
         self.FA.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.FA.setObjectName("FA")
         self.horizontalLayout_6.addWidget(self.FA)
         self.label_5 = QtWidgets.QLabel(self.horizontalFrame)
         self.label_5.setStyleSheet("background-color: \"transparent\";\n"
 "color: rgb(255, 255, 255);\n"
-"font: 12pt \"Georgia\";\n"
-"padding-top:20px")
+"font: 12pt \"Georgia\";")
         self.label_5.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_5.setObjectName("label_5")
         self.horizontalLayout_6.addWidget(self.label_5)
         self.accuracy = QtWidgets.QLabel(self.horizontalFrame)
         self.accuracy.setStyleSheet("background-color: \"transparent\";\n"
 "color: rgb(255, 255, 255);\n"
-"font: 12pt \"Georgia\";\n"
-"padding-top:20px")
+"font: 12pt \"Georgia\";")
         self.accuracy.setObjectName("accuracy")
         self.horizontalLayout_6.addWidget(self.accuracy)
         self.label_7 = QtWidgets.QLabel(self.horizontalFrame)
         self.label_7.setStyleSheet("background-color: \"transparent\";\n"
 "color: rgb(255, 255, 255);\n"
-"font: 12pt \"Georgia\";\n"
-"padding-top:20px")
+"font: 12pt \"Georgia\";")
         self.label_7.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_7.setObjectName("label_7")
         self.horizontalLayout_6.addWidget(self.label_7)
         self.threshold = QtWidgets.QLabel(self.horizontalFrame)
         self.threshold.setStyleSheet("background-color: \"transparent\";\n"
 "color: rgb(255, 255, 255);\n"
-"font: 10pt \"Georgia\";\n"
-"padding-top:20px")
+"font: 10pt \"Georgia\";")
         self.threshold.setObjectName("threshold")
         self.horizontalLayout_6.addWidget(self.threshold)
         self.verticalLayout_3.addWidget(self.horizontalFrame)
@@ -495,7 +490,7 @@ class Ui_FoldsVerifForm(object):
         self.label_9 = QtWidgets.QLabel(self.frame_2)
         self.label_9.setMinimumSize(QtCore.QSize(80, 80))
         self.label_9.setText("")
-        self.label_9.setPixmap(QtGui.QPixmap(":/icons/images/reglages.png"))
+        self.label_9.setPixmap(QtGui.QPixmap(":/images/images/reglages (1).png"))
         self.label_9.setAlignment(QtCore.Qt.AlignCenter)
         self.label_9.setObjectName("label_9")
         self.horizontalLayout_3.addWidget(self.label_9)

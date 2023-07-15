@@ -153,28 +153,31 @@ class Ui_Form(object):
         self.orginalImg = QtWidgets.QFrame(self.frame_3)
         self.orginalImg.setMinimumSize(QtCore.QSize(170, 170))
         self.orginalImg.setStyleSheet("background-color: rgba(168, 171, 179, 0.34);\n"
-"border-raidus:10px;")
+"border-radius: 20px;")
         self.orginalImg.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.orginalImg.setFrameShadow(QtWidgets.QFrame.Raised)
         self.orginalImg.setObjectName("orginalImg")
         self.horizontalLayout.addWidget(self.orginalImg)
         self.gfpganImg = QtWidgets.QFrame(self.frame_3)
         self.gfpganImg.setMinimumSize(QtCore.QSize(170, 170))
-        self.gfpganImg.setStyleSheet("background-color:rgba(168, 171, 179, 0.34);")
+        self.gfpganImg.setStyleSheet("background-color:rgba(168, 171, 179, 0.34);\n"
+"border-radius: 20px;")
         self.gfpganImg.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.gfpganImg.setFrameShadow(QtWidgets.QFrame.Raised)
         self.gfpganImg.setObjectName("gfpganImg")
         self.horizontalLayout.addWidget(self.gfpganImg)
         self.sgpnImg = QtWidgets.QFrame(self.frame_3)
         self.sgpnImg.setMinimumSize(QtCore.QSize(170, 170))
-        self.sgpnImg.setStyleSheet("background-color: rgba(168, 171, 179, 0.34);")
+        self.sgpnImg.setStyleSheet("background-color: rgba(168, 171, 179, 0.34);\n"
+"border-radius: 20px;")
         self.sgpnImg.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.sgpnImg.setFrameShadow(QtWidgets.QFrame.Raised)
         self.sgpnImg.setObjectName("sgpnImg")
         self.horizontalLayout.addWidget(self.sgpnImg)
         self.gpenImg = QtWidgets.QFrame(self.frame_3)
         self.gpenImg.setMinimumSize(QtCore.QSize(170, 170))
-        self.gpenImg.setStyleSheet("background-color:rgba(168, 171, 179, 0.34);")
+        self.gpenImg.setStyleSheet("background-color:rgba(168, 171, 179, 0.34);\n"
+"border-radius: 20px")
         self.gpenImg.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.gpenImg.setFrameShadow(QtWidgets.QFrame.Raised)
         self.gpenImg.setObjectName("gpenImg")
@@ -411,7 +414,6 @@ class Ui_Form(object):
         self.sspn.setText(_translate("Form", "-"))
         self.ppn.setText(_translate("Form", "-"))
         self.lppn.setText(_translate("Form", "-"))
-import resource_rc
 import ressources_rc
 
 

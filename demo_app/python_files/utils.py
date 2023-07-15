@@ -320,9 +320,10 @@ def get_data(fold, metric):
 
 def calculate_column_means(df, metric_type):
     means = df.mean().tolist()
+    print(metric_type)
     if metric_type == 'LPIPS':
-        min_index = means.index(min(means))
-        max_index= means.index(max(means))
+        max_index = means.index(min(means))
+        min_index = means.index(max(means))
         #return means, min_index,max_index
     else :
         max_index = means.index(max(means))

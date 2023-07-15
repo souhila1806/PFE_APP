@@ -128,7 +128,7 @@ class Ui_foldersRestoration(object):
         self.label_2 = QtWidgets.QLabel(self.up_menu)
         self.label_2.setMaximumSize(QtCore.QSize(50, 16777215))
         self.label_2.setText("")
-        self.label_2.setPixmap(QtGui.QPixmap(":/icon/images/details.png"))
+        self.label_2.setPixmap(QtGui.QPixmap(":/images/images/details.png"))
         self.label_2.setObjectName("label_2")
         self.horizontalLayout.addWidget(self.label_2)
         self.frame_3 = QtWidgets.QFrame(self.up_menu)
@@ -339,7 +339,7 @@ class Ui_foldersRestoration(object):
         self.icon1.setMaximumSize(QtCore.QSize(40, 30))
         self.icon1.setAutoFillBackground(False)
         self.icon1.setText("")
-        self.icon1.setPixmap(QtGui.QPixmap(":/icon/images/details.png"))
+        self.icon1.setPixmap(QtGui.QPixmap(":/images/images/details.png"))
         self.icon1.setScaledContents(True)
         self.icon1.setObjectName("icon1")
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.icon1)
@@ -454,7 +454,7 @@ class Ui_foldersRestoration(object):
         self.mean_sgpn.setText(_translate("foldersRestoration", "-"))
         self.label_8.setText(_translate("foldersRestoration", "GPEN: "))
         self.mean_gpen.setText(_translate("foldersRestoration", "-"))
-import resource_rc
+import ressources_rc
 
 
 if __name__ == "__main__":

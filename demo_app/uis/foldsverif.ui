@@ -947,7 +947,7 @@ font: 12pt &quot;Georgia&quot;;
                <string notr="true">background-color: &quot;transparent&quot;;
 color: rgb(255, 255, 255);
 font: 12pt &quot;Georgia&quot;;
-padding-top:20px</string>
+</string>
               </property>
               <property name="text">
                <string>False rejection:</string>
@@ -969,7 +969,7 @@ padding-top:20px</string>
                <string notr="true">background-color: &quot;transparent&quot;;
 color: rgb(255, 255, 255);
 font: 12pt &quot;Georgia&quot;;
-padding-top:20px</string>
+</string>
               </property>
               <property name="text">
                <string>-</string>
@@ -984,8 +984,7 @@ padding-top:20px</string>
               <property name="styleSheet">
                <string notr="true">background-color: &quot;transparent&quot;;
 color: rgb(255, 255, 255);
-font: 12pt &quot;Georgia&quot;;
-padding-top:20px</string>
+font: 12pt &quot;Georgia&quot;;</string>
               </property>
               <property name="text">
                <string>False Acceptance:</string>
@@ -1007,7 +1006,7 @@ padding-top:20px</string>
                <string notr="true">background-color: &quot;transparent&quot;;
 color: rgb(255, 255, 255);
 font: 12pt &quot;Georgia&quot;;
-padding-top:20px</string>
+</string>
               </property>
               <property name="text">
                <string>-</string>
@@ -1022,8 +1021,7 @@ padding-top:20px</string>
               <property name="styleSheet">
                <string notr="true">background-color: &quot;transparent&quot;;
 color: rgb(255, 255, 255);
-font: 12pt &quot;Georgia&quot;;
-padding-top:20px</string>
+font: 12pt &quot;Georgia&quot;;</string>
               </property>
               <property name="text">
                <string>Accuracy:</string>
@@ -1038,8 +1036,7 @@ padding-top:20px</string>
               <property name="styleSheet">
                <string notr="true">background-color: &quot;transparent&quot;;
 color: rgb(255, 255, 255);
-font: 12pt &quot;Georgia&quot;;
-padding-top:20px</string>
+font: 12pt &quot;Georgia&quot;;</string>
               </property>
               <property name="text">
                <string>-</string>
@@ -1051,8 +1048,7 @@ padding-top:20px</string>
               <property name="styleSheet">
                <string notr="true">background-color: &quot;transparent&quot;;
 color: rgb(255, 255, 255);
-font: 12pt &quot;Georgia&quot;;
-padding-top:20px</string>
+font: 12pt &quot;Georgia&quot;;</string>
               </property>
               <property name="text">
                <string>Threshold:</string>
@@ -1067,8 +1063,7 @@ padding-top:20px</string>
               <property name="styleSheet">
                <string notr="true">background-color: &quot;transparent&quot;;
 color: rgb(255, 255, 255);
-font: 10pt &quot;Georgia&quot;;
-padding-top:20px</string>
+font: 10pt &quot;Georgia&quot;;</string>
               </property>
               <property name="text">
                <string>-</string>
@@ -1150,7 +1145,7 @@ padding-top:20px</string>
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap resource="../ressources.qrc">:/icons/images/reglages.png</pixmap>
+            <pixmap resource="../ressources.qrc">:/images/images/reglages (1).png</pixmap>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>

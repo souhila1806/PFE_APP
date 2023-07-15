@@ -46,7 +46,7 @@ class ImageViewer(QtWidgets.QLabel):
         pixmap = QPixmap.fromImage(image).scaled(desired_width, desired_height, QtCore.Qt.KeepAspectRatio)
         self.setPixmap(pixmap)
 
-class DegradationThread(QThread):
+class ProcessThread(QThread):
     finished = pyqtSignal(object)
 
     def __init__(self, first_path, second_path, params):
@@ -146,8 +146,6 @@ class PairsVerificationClass(QtWidgets.QMainWindow):
         path2 = f"{randomline.loc['name2']}_{randomline.loc['image2']:04d}.png"
         return path1,path2
     def detection(self,rest):
-        loading = LoadingScreen()
-        loading.startLoading()
         first_path = self.photoViewerOne.imagePath
         second_path = self.photoViewerTwo.imagePath
         if rest != None:
@@ -155,15 +153,15 @@ class PairsVerificationClass(QtWidgets.QMainWindow):
             second_path=os.path.join(f"data\images\{self.currentdataset.upper()}_{rest.upper()}",second_path.split("\\")[-1])
         print(first_path,second_path)
         detector="MTCNN"
-        self.degradation_thread = DegradationThread(first_path,second_path, detector)
-        self.degradation_thread.finished.connect(self.handle_degradation_finished)
+        self.thread = ProcessThread(first_path,second_path, detector)
+        self.thread.finished.connect(self.handle_finished)
 
         # Start the thread
         self.loading_screen = LoadingScreen()
         self.loading_screen.startLoading()
-        self.degradation_thread.start()
+        self.thread.start()
 
-    def handle_degradation_finished(self, degraded_image):
+    def handle_finished(self, degraded_image):
         # set detected input image
         self.photoViewerOne.set_image(
             r"images\degradation_results\input_detected.jpg", False)

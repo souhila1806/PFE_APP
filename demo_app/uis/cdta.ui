@@ -183,8 +183,8 @@ QPushButton:hover{background-color:rgb(28, 142, 178);}</string>
                <string>Degradation</string>
               </property>
               <property name="icon">
-               <iconset>
-                <normaloff>:/icons/ajouter (1).png</normaloff>:/icons/ajouter (1).png</iconset>
+               <iconset resource="../ressources.qrc">
+                <normaloff>:/images/images/ajouter (1).png</normaloff>:/images/images/ajouter (1).png</iconset>
               </property>
               <property name="checkable">
                <bool>true</bool>
@@ -205,8 +205,8 @@ QPushButton:hover{background-color:rgb(28, 142, 178);}
                <string>Restoration</string>
               </property>
               <property name="icon">
-               <iconset>
-                <normaloff>:/icons/identifiant-du-visage 1.png</normaloff>:/icons/identifiant-du-visage 1.png</iconset>
+               <iconset resource="../ressources.qrc">
+                <normaloff>:/images/images/Correct.png</normaloff>:/images/images/Correct.png</iconset>
               </property>
               <property name="checkable">
                <bool>true</bool>
@@ -254,8 +254,8 @@ QPushButton:hover{background-color:rgb(28, 142, 178);}</string>
                <string>Verification</string>
               </property>
               <property name="icon">
-               <iconset>
-                <normaloff>:/icons/Correct.png</normaloff>:/icons/Correct.png</iconset>
+               <iconset resource="../ressources.qrc">
+                <normaloff>:/images/images/identifiant-du-visage 1.png</normaloff>:/images/images/identifiant-du-visage 1.png</iconset>
               </property>
               <property name="checkable">
                <bool>true</bool>
@@ -462,7 +462,7 @@ QPushButton:hover{background-color:rgb(28, 142, 178);}</string>
                   </size>
                  </property>
                  <property name="styleSheet">
-                  <string notr="true">background-color: rgb(36, 40, 59);</string>
+                  <string notr="true">background-color: rgb(47, 61, 78);</string>
                  </property>
                  <property name="frameShape">
                   <enum>QFrame::StyledPanel</enum>
@@ -498,12 +498,30 @@ QPushButton:hover{background-color:rgb(28, 142, 178);}</string>
                      </size>
                     </property>
                     <layout class="QHBoxLayout" name="horizontalLayout_3">
+                     <property name="leftMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="topMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="rightMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="bottomMargin">
+                      <number>0</number>
+                     </property>
                      <item>
-                      <widget class="QLabel" name="label_2">
+                      <widget class="QLabel" name="settigicon">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                         <horstretch>0</horstretch>
+                         <verstretch>15</verstretch>
+                        </sizepolicy>
+                       </property>
                        <property name="minimumSize">
                         <size>
-                         <width>50</width>
-                         <height>50</height>
+                         <width>80</width>
+                         <height>80</height>
                         </size>
                        </property>
                        <property name="maximumSize">
@@ -516,7 +534,7 @@ QPushButton:hover{background-color:rgb(28, 142, 178);}</string>
                         <string/>
                        </property>
                        <property name="pixmap">
-                        <pixmap resource="../ressources.qrc">:/icons/images/reglages.png</pixmap>
+                        <pixmap resource="../ressources.qrc">:/images/images/reglages (1).png</pixmap>
                        </property>
                        <property name="alignment">
                         <set>Qt::AlignCenter</set>
@@ -1438,7 +1456,7 @@ font: 75 24pt &quot;Georgia&quot;;</string>
  </widget>
  <resources>
   <include location="../ressources.qrc"/>
-  <include location="../resource.qrc"/>
+  <include location="../ressources.qrc"/>
  </resources>
  <connections>
   <connection>
