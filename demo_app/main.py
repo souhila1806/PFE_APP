@@ -6,6 +6,7 @@ from PyQt5 import QtWidgets
 from python_files.pages.imageRestorationClass import ImageRestorationClass
 from python_files.pages.foldsRestorationClass import FoldsRestorationClass
 import sys
+from PyQt5.QtGui import QIcon
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -14,6 +15,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.setFixedSize(1300, 850)
+        # Set the window title
+        self.setWindowTitle("G-Face+")
+        # Set the application icon (logo)
+        self.setWindowIcon(QIcon("images/Logo_notitle.png"))
 
         deg = DegPage(self)
         # PAGES
